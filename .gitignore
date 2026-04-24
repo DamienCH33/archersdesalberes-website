@@ -1,0 +1,49 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###
+
+###> doctrine ###
+/migrations/*~
+###< doctrine ###
+
+###> phpunit ###
+/phpunit.xml.local
+/.phpunit.result.cache
+###< phpunit ###
+
+###> node ###
+/node_modules/
+npm-debug.log
+yarn-error.log
+###< node ###
+
+###> IDE ###
+/.idea/
+/.vscode/
+/*.iml
+###< IDE ###
+
+###> OS ###
+.DS_Store
+Thumbs.db
+###< OS ###
+
+###> logs ###
+*.log
+###< logs ###
+
+###> uploads ###
+/public/uploads/*
+!/public/uploads/.gitkeep
+###< uploads ###
