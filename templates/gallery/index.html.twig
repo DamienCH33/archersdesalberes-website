@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Galerie - Compagnie des Archers des Albères
+{% endblock %}
+
+{% block body %}
+	<section class="hero" style="min-height: 300px; display: flex; align-items: center;">
+		<div class="hero-content">
+			<div class="hero-text">
+				<span class="hero-badge">📸 Nos albums photos</span>
+				<h1>La
+					<span class="gradient-text">Galerie</span>
+				</h1>
+				<p>Revivez les moments forts du club à travers nos albums photos.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container" style="max-width: 1200px; margin: 0 auto;">
+
+			{% if albums|length > 0 %}
+				<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+
+					{% for album in albums %}
+						<a href="{{ path('gallery_album', {slug: album.slug}) }}" style="text-decoration: none; color: inherit; display: block;">
+							<article
+								style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: all 0.3s; height: 100%;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 32px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)'">
+
+								{# Image de couverture #}
+								<div style="position: relative; height: 240px; background: linear-gradient(135deg, #E8F5E9, #C8E6C9); overflow: hidden;">
+									{% if album.coverImage %}
+										<img src="{{ asset('uploads/albums/' ~ album.coverImage) }}" alt="{{ album.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+									{% else %}
+										<div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 4rem; color: #2E7D32;">
+											📸
+										</div>
+									{% endif %}
+
+									{# Badge nombre de photos #}
+									<div style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); color: white; padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
+										📷
+										{{ album.photos|length }}
+									</div>
+								</div>
+
+								{# Contenu #}
+								<div style="padding: 1.5rem;">
+									<h3 style="color: #1B5E20; font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 700;">
+										{{ album.title }}
+									</h3>
+									<div style="display: flex; justify-content: space-between; align-items: center; color: #666; font-size: 0.9rem;">
+										<span>📅
+											{{ album.createdAt|date('d/m/Y') }}</span>
+										<span style="color: #2E7D32; font-weight: 600;">
+											Voir l'album
+										</span>
+									</div>
+								</div>
+							</article>
+						</a>
+					{% endfor %}
+
+				</div>
+
+			{% else %}
+				{# Aucun album #}
+				<div style="text-align: center; padding: 5rem 2rem; background: #F5F5F5; border-radius: 12px;">
+					<div style="font-size: 5rem; margin-bottom: 1rem;">📭</div>
+					<h3 style="color: #666; margin-bottom: 0.5rem; font-size: 1.5rem;">Aucun album pour le moment</h3>
+					<p style="color: #999;">Les premiers albums photos seront bientôt publiés !</p>
+				</div>
+			{% endif %}
+
+		</div>
+	</section>
+{% endblock %}

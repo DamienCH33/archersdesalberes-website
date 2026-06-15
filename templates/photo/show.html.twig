@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ photo.caption ?? 'Photo' }}
+	- Compagnie des Archers des Albères
+{% endblock %}
+
+{% block body %}
+	<section class="section" style="padding-top: 2rem;">
+		<div
+			class="container" style="max-width: 1100px; margin: 0 auto;">
+
+			{# Fil d'Ariane #}
+			<div style="margin-bottom: 2rem; font-size: 0.95rem;">
+				<a href="{{ path('app_gallery') }}" style="color: #2E7D32; text-decoration: none; font-weight: 600;">
+					📸 Galerie
+				</a>
+				{% if photo.album %}
+					<span style="color: #999; margin: 0 0.5rem;">›</span>
+					<a href="{{ path('gallery_album', {slug: photo.album.slug}) }}" style="color: #2E7D32; text-decoration: none; font-weight: 600;">
+						{{ photo.album.title }}
+					</a>
+				{% endif %}
+				<span style="color: #999; margin: 0 0.5rem;">›</span>
+				<span style="color: #666;">Photo</span>
+			</div>
+
+			{# Image principale #}
+			<div style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.12);">
+				<div style="background: #1a1a1a; display: flex; align-items: center; justify-content: center; min-height: 400px; max-height: 75vh;">
+					<img src="{{ asset('uploads/photos/' ~ photo.path) }}" alt="{{ photo.caption ?? photo.filename }}" style="max-width: 100%; max-height: 75vh; object-fit: contain; display: block;">
+				</div>
+
+				{# Infos sous la photo #}
+				<div style="padding: 2rem;">
+					{% if photo.caption %}
+						<h1 style="color: #1B5E20; font-size: 1.5rem; margin-bottom: 1rem; font-weight: 700;">
+							{{ photo.caption }}
+						</h1>
+					{% endif %}
+
+					<div style="display: flex; gap: 2rem; flex-wrap: wrap; color: #666; font-size: 0.95rem;">
+						{% if photo.album %}
+							<div>
+								<strong style="color: #2E7D32;">📁 Album :</strong>
+								<a href="{{ path('gallery_album', {slug: photo.album.slug}) }}" style="color: #2E7D32; text-decoration: none; font-weight: 600;">
+									{{ photo.album.title }}
+								</a>
+							</div>
+						{% endif %}
+						<div>
+							<strong style="color: #2E7D32;">📅 Ajoutée le :</strong>
+							{{ photo.createdAt|date('d/m/Y') }}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{# Navigation entre photos de l'album #}
+			{% if photo.album %}
+				{% set allPhotos = photo.album.photos|filter(p => p.id)|sort((a, b) => a.displayOrder <=> b.displayOrder) %}
+				{% set currentIndex = 0 %}
+				{% set prevPhoto = null %}
+				{% set nextPhoto = null %}
+				{% set found = false %}
+				{% for p in allPhotos %}
+					{% if found and nextPhoto is null %}
+						{% set nextPhoto = p %}
+					{% endif %}
+					{% if p.id == photo.id %}
+						{% set found = true %}
+					{% endif %}
+					{% if not found %}
+						{% set prevPhoto = p %}
+					{% endif %}
+				{% endfor %}
+
+				<div style="display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+					{% if prevPhoto %}
+						<a href="{{ path('photo_show', {id: prevPhoto.id}) }}" style="flex: 1; min-width: 200px; background: white; padding: 1rem 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); color: #2E7D32; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.75rem; transition: all 0.3s;" onmouseover="this.style.transform='translateX(-4px)'; this.style.boxShadow='0 4px 16px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)'">
+							← Photo précédente
+						</a>
+					{% else %}
+						<div style="flex: 1; min-width: 200px;"></div>
+					{% endif %}
+
+					<a href="{{ path('gallery_album', {slug: photo.album.slug}) }}" style="background: #2E7D32; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s;" onmouseover="this.style.background='#1B5E20'" onmouseout="this.style.background='#2E7D32'">
+						🗂️ Voir l'album
+					</a>
+
+					{% if nextPhoto %}
+						<a href="{{ path('photo_show', {id: nextPhoto.id}) }}" style="flex: 1; min-width: 200px; background: white; padding: 1rem 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); color: #2E7D32; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem; transition: all 0.3s;" onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 16px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)'">
+							Photo suivante →
+						</a>
+					{% else %}
+						<div style="flex: 1; min-width: 200px;"></div>
+					{% endif %}
+				</div>
+			{% endif %}
+
+		</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,162 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}{% endblock %}
+
+{% block main %}
+
+	<div class="welcome-banner">
+		<div class="welcome-content">
+			<h1>Tableau de bord</h1>
+			<h2>Bienvenue,
+				{{ app.user.fullName }}
+				!</h2>
+			<p>
+				<i class="fa fa-calendar"></i>
+				{{ 'now'|date('d/m/Y à H:i') }}
+			</p>
+		</div>
+	</div>
+
+	<div class="section-header">
+		<span class="section-icon">📊</span>
+		<h3>Statistiques du site</h3>
+	</div>
+
+	<div class="row mb-4">
+
+		<div class="col-md-3 mb-3">
+			<div class="stat-card">
+				<div class="stat-card-content">
+					<div class="stat-icon">📰</div>
+					<div class="stat-number">{{ stats.articles }}</div>
+					<div class="stat-label">Actualités</div>
+					<a href="{{ path('admin_article_index') }}" class="btn btn-light">Gérer</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3 mb-3">
+			<div class="stat-card purple">
+				<div class="stat-card-content">
+					<div class="stat-icon">📁</div>
+					<div class="stat-number">{{ stats.albums }}</div>
+					<div class="stat-label">Albums</div>
+					<a href="{{ path('admin_album_index') }}" class="btn btn-light">Gérer</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3 mb-3">
+			<div class="stat-card blue">
+				<div class="stat-card-content">
+					<div class="stat-icon">📸</div>
+					<div class="stat-number">{{ stats.photos }}</div>
+					<div class="stat-label">Photos</div>
+					<a href="{{ path('admin_photo_index') }}" class="btn btn-light">Gérer</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3 mb-3">
+			<div class="stat-card green">
+				<div class="stat-card-content">
+					<div class="stat-icon">🤝</div>
+					<div class="stat-number">{{ stats.partners }}</div>
+					<div class="stat-label">Partenaires</div>
+					<a href="{{ path('admin_partner_index') }}" class="btn btn-light">Gérer</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="section-header">
+		<span class="section-icon">⚡</span>
+		<h3>Actions rapides</h3>
+	</div>
+
+	<div class="dashboard-card">
+		<div class="action-grid">
+
+			<a href="{{ path('admin_article_new') }}" class="action-btn">
+				<i class="fa fa-plus"></i>
+				Nouvelle actualité
+			</a>
+
+			<a href="{{ path('admin_album_new') }}" class="action-btn">
+				<i class="fa fa-folder-plus"></i>
+				Nouvel album
+			</a>
+
+			<a href="{{ path('admin_photo_new') }}" class="action-btn">
+				<i class="fa fa-image"></i>
+				Ajouter une photo
+			</a>
+
+			<a href="{{ path('admin_team_member_index') }}" class="action-btn">
+				<i class="fa fa-users"></i>
+				Gérer l'équipe
+			</a>
+
+			<a href="{{ path('admin_partner_index') }}" class="action-btn">
+				<i class="fa fa-handshake"></i>
+				Gérer les partenaires
+			</a>
+
+			<a href="{{ path('app_home') }}" target="_blank" class="action-btn">
+				<i class="fa fa-eye"></i>
+				Voir le site
+			</a>
+
+		</div>
+	</div>
+
+	<div class="row mt-4">
+
+		<div class="col-md-6 mb-3">
+			<div class="dashboard-card">
+				<div class="section-header section-header-small">
+					<span>🔗</span>
+					<h3>Accès rapide</h3>
+				</div>
+
+				<div class="info-links">
+					<a href="{{ path('app_home') }}" target="_blank" class="info-link">Accueil</a>
+					<a href="{{ path('app_actualites') }}" target="_blank" class="info-link">Actualités</a>
+					<a href="{{ path('app_gallery') }}" target="_blank" class="info-link">Galerie</a>
+					<a href="{{ path('app_contact') }}" target="_blank" class="info-link">Contact</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 mb-3">
+			<div class="dashboard-card">
+				<div class="section-header section-header-small">
+					<span>⚙️</span>
+					<h3>Système</h3>
+				</div>
+
+				<table class="system-table">
+					<tr>
+						<td>Date</td>
+						<td>{{ 'now'|date('d/m/Y') }}</td>
+					</tr>
+					<tr>
+						<td>Heure</td>
+						<td>{{ 'now'|date('H:i:s') }}</td>
+					</tr>
+					<tr>
+						<td>Environnement</td>
+						<td>
+							<span class="env-badge {% if app.environment == 'prod' %}env-prod{% else %}env-dev{% endif %}">
+								{{ app.environment|upper }}
+							</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+	</div>
+
+{% endblock %}
