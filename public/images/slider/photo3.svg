@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600">
+  <!-- Fond dégradé -->
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A237E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#283593;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="spotlight">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <rect width="1200" height="600" fill="url(#bg3)"/>
+  
+  <!-- Projecteurs -->
+  <ellipse cx="300" cy="100" rx="200" ry="400" fill="url(#spotlight)"/>
+  <ellipse cx="600" cy="100" rx="200" ry="400" fill="url(#spotlight)"/>
+  <ellipse cx="900" cy="100" rx="200" ry="400" fill="url(#spotlight)"/>
+  
+  <!-- Podium -->
+  <!-- 2ème place -->
+  <rect x="250" y="350" width="150" height="150" fill="#C0C0C0" rx="5"/>
+  <text x="325" y="310" font-family="Arial" font-size="72" font-weight="bold" fill="#C0C0C0" text-anchor="middle">2</text>
+  
+  <!-- 1ère place (plus haut) -->
+  <rect x="525" y="300" width="150" height="200" fill="#FFD700" rx="5"/>
+  <text x="600" y="250" font-family="Arial" font-size="90" font-weight="bold" fill="#FFD700" text-anchor="middle">1</text>
+  
+  <!-- 3ème place -->
+  <rect x="800" y="400" width="150" height="100" fill="#CD7F32" rx="5"/>
+  <text x="875" y="365" font-family="Arial" font-size="72" font-weight="bold" fill="#CD7F32" text-anchor="middle">3</text>
+  
+  <!-- Archers sur podium (silhouettes simplifiées) -->
+  <!-- 2ème -->
+  <g transform="translate(325, 300)">
+    <circle cx="0" cy="0" r="20" fill="#FFFFFF"/>
+    <rect x="-10" y="20" width="20" height="40" rx="10" fill="#FFFFFF"/>
+  </g>
+  
+  <!-- 1er -->
+  <g transform="translate(600, 240)">
+    <circle cx="0" cy="0" r="25" fill="#FFFFFF"/>
+    <rect x="-12" y="25" width="24" height="50" rx="12" fill="#FFFFFF"/>
+    <!-- Coupe -->
+    <g transform="translate(0, -50)">
+      <rect x="-15" y="0" width="30" height="20" fill="#FFD700" rx="3"/>
+      <rect x="-20" y="20" width="40" height="8" fill="#FFD700"/>
+      <rect x="-3" y="28" width="6" height="15" fill="#FFD700"/>
+    </g>
+  </g>
+  
+  <!-- 3ème -->
+  <g transform="translate(875, 350)">
+    <circle cx="0" cy="0" r="20" fill="#FFFFFF"/>
+    <rect x="-10" y="20" width="20" height="40" rx="10" fill="#FFFFFF"/>
+  </g>
+  
+  <!-- Étoiles décoratives -->
+  <g fill="#FFD700" opacity="0.7">
+    <polygon points="100,50 110,80 140,85 115,105 120,135 100,120 80,135 85,105 60,85 90,80"/>
+    <polygon points="1100,80 1108,105 1133,109 1116,126 1120,151 1100,138 1080,151 1084,126 1067,109 1092,105"/>
+    <polygon points="150,450 157,470 177,473 162,487 166,507 150,496 134,507 138,487 123,473 143,470"/>
+    <polygon points="1050,480 1057,500 1077,503 1062,517 1066,537 1050,526 1034,537 1038,517 1023,503 1043,500"/>
+  </g>
+  
+  <!-- Texte -->
+  <text x="600" y="570" 
+        font-family="Arial, sans-serif" 
+        font-size="42" 
+        font-weight="bold" 
+        fill="#FFFFFF" 
+        text-anchor="middle">NOS CHAMPIONS • SAISON 2024-2025</text>
+</svg>

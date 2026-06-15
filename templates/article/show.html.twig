@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }} - Compagnie des Archers des Albères{% endblock %}
+
+{% block body %}
+{# HERO ARTICLE #}
+<section class="hero" style="min-height: 300px; display: flex; align-items: center;">
+    <div class="hero-content">
+        <div class="hero-text">
+            <span class="hero-badge" style="text-transform: uppercase;">
+                {{ article.category }}
+            </span>
+
+            <h1><span class="gradient-text">{{ article.title }}</span></h1>
+
+            <p style="color: #666; font-size: 1.1rem;">
+                Publié le {{ article.publishedAt|date('d/m/Y') }}
+            </p>
+
+            <div class="hero-cta">
+                <a href="{{ path('app_actualites') }}" class="btn-secondary">
+                    Retour aux actualités
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-logo">
+            {% if article.coverImage %}
+                <img src="{{ asset('uploads/articles/' ~ article.coverImage) }}" 
+                     alt="{{ article.title }}"
+                     style="width: 100%; height: auto; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            {% else %}
+                <img src="{{ asset('images/logoarcherie-transparent.png') }}" 
+                     alt="Logo"
+                     style="width: 280px; height: 280px; object-fit: contain;">
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{# CONTENU ARTICLE #}
+<section class="section">
+    <div class="container" style="max-width: 900px; margin: 0 auto;">
+
+        <div style="font-size: 1.1rem; line-height: 1.8; color: #333;">
+            {{ article.content|nl2br }}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600">
+  <!-- Fond dégradé -->
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C8E6C9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8F5E9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1200" height="600" fill="url(#bg5)"/>
+  
+  <!-- Motifs décoratifs (cibles en fond) -->
+  <g opacity="0.15">
+    <circle cx="150" cy="150" r="80" fill="none" stroke="#2E7D32" stroke-width="3"/>
+    <circle cx="150" cy="150" r="60" fill="none" stroke="#2E7D32" stroke-width="3"/>
+    <circle cx="150" cy="150" r="40" fill="none" stroke="#2E7D32" stroke-width="3"/>
+    
+    <circle cx="1050" cy="450" r="80" fill="none" stroke="#2E7D32" stroke-width="3"/>
+    <circle cx="1050" cy="450" r="60" fill="none" stroke="#2E7D32" stroke-width="3"/>
+    <circle cx="1050" cy="450" r="40" fill="none" stroke="#2E7D32" stroke-width="3"/>
+  </g>
+  
+  <!-- Grand logo central -->
+  <g transform="translate(600, 180)">
+    <!-- Arc stylisé -->
+    <path d="M -80 -50 Q -120 0 -120 50 Q -120 100 -80 150" 
+          fill="none" 
+          stroke="#2E7D32" 
+          stroke-width="15" 
+          stroke-linecap="round"/>
+    <line x1="-80" y1="-50" x2="-80" y2="150" stroke="#1B5E20" stroke-width="6"/>
+    
+    <!-- Flèche -->
+    <g transform="translate(-30, 50)">
+      <line x1="0" y1="0" x2="150" y2="0" stroke="#C62828" stroke-width="8"/>
+      <path d="M 150 0 L 170 -12 L 170 12 Z" fill="#C62828"/>
+      <path d="M 8 -10 L 0 0 L 8 10" fill="none" stroke="#FFD600" stroke-width="4"/>
+    </g>
+  </g>
+  
+  <!-- Titre principal -->
+  <text x="600" y="380" 
+        font-family="Arial, sans-serif" 
+        font-size="64" 
+        font-weight="bold" 
+        fill="#2E7D32" 
+        text-anchor="middle">REJOIGNEZ-NOUS !</text>
+  
+  <!-- Sous-titre -->
+  <text x="600" y="440" 
+        font-family="Arial, sans-serif" 
+        font-size="36" 
+        fill="#1B5E20" 
+        text-anchor="middle">Portes ouvertes tous les samedis</text>
+  
+  <!-- Call to action -->
+  <g transform="translate(600, 510)">
+    <rect x="-180" y="-35" width="360" height="70" rx="35" fill="#2E7D32"/>
+    <text x="0" y="10" 
+          font-family="Arial, sans-serif" 
+          font-size="32" 
+          font-weight="bold" 
+          fill="#FFFFFF" 
+          text-anchor="middle">ESSAI GRATUIT →</text>
+  </g>
+  
+  <!-- Icônes info -->
+  <g transform="translate(200, 500)">
+    <!-- Débutants bienvenus -->
+    <circle cx="0" cy="0" r="30" fill="#4CAF50"/>
+    <text x="0" y="8" font-size="28" fill="#FFF" text-anchor="middle" font-weight="bold">✓</text>
+    <text x="50" y="8" font-size="20" fill="#2E7D32" font-weight="600">Débutants bienvenus</text>
+  </g>
+  
+  <g transform="translate(600, 500)">
+    <!-- Tous âges -->
+    <circle cx="0" cy="0" r="30" fill="#4CAF50"/>
+    <text x="0" y="8" font-size="24" fill="#FFF" text-anchor="middle" font-weight="bold">👥</text>
+    <text x="50" y="8" font-size="20" fill="#2E7D32" font-weight="600">Tous âges</text>
+  </g>
+  
+  <g transform="translate(900, 500)">
+    <!-- Matériel fourni -->
+    <circle cx="0" cy="0" r="30" fill="#4CAF50"/>
+    <text x="0" y="8" font-size="24" fill="#FFF" text-anchor="middle" font-weight="bold">🏹</text>
+    <text x="50" y="8" font-size="20" fill="#2E7D32" font-weight="600">Matériel fourni</text>
+  </g>
+  
+  <!-- Confettis décoratifs -->
+  <g fill="#FFD600" opacity="0.6">
+    <circle cx="100" cy="100" r="8"/>
+    <circle cx="300" cy="80" r="6"/>
+    <circle cx="900" cy="120" r="7"/>
+    <circle cx="1100" cy="90" r="9"/>
+    <circle cx="150" cy="500" r="6"/>
+    <circle cx="1050" cy="520" r="8"/>
+  </g>
+</svg>
