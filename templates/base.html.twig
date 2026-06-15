@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Compagnie des Archers des Albères
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🏹</text></svg>">
+
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		{% endblock %}
+
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+
+		{% set frankenphpHotReload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
+		{% if frankenphpHotReload %}
+			<meta name="frankenphp-hot-reload:url" content="{{ frankenphpHotReload }}">
+			<script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
+			<script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
+		{% endif %}
+	</head>
+
+	<body>
+		<div
+			class="page-container">
+
+			{# SIDEBAR - Commune à toutes les pages #}
+			<aside class="sidebar">
+				<div class="sidebar-logo">
+					<div class="sidebar-logo-icon">
+						<img src="{{ asset('images/logoarcherie-transparent.png') }}" alt="Logo Archers">
+					</div>
+					<div class="sidebar-logo-text">Archers des Albères</div>
+				</div>
+
+				<nav class="sidebar-nav">
+					<a href="{{ path('app_home') }}" class="sidebar-link {{ app.request.get('_route') == 'app_home' ? 'active' : '' }}">Accueil</a>
+					<a href="{{ path('app_club') }}" class="sidebar-link {{ app.request.get('_route') == 'app_club' ? 'active' : '' }}">Le Club</a>
+					<a href="{{ path('app_actualites') }}" class="sidebar-link {{ app.request.get('_route') == 'app_actualites' ? 'active' : '' }}">Actualités</a>
+					<a href="{{ path('app_adhesion') }}" class="sidebar-link {{ app.request.get('_route') == 'app_adhesion' ? 'active' : '' }}">Adhésion</a>
+					<a href="{{ path('app_horaires') }}" class="sidebar-link {{ app.request.get('_route') == 'app_horaires' ? 'active' : '' }}">Horaires &
+																																																																																												                    Lieux</a>
+					<a href="{{ path('app_history') }}" class="sidebar-link {{ app.request.get('_route') == 'app_history' ? 'active' : '' }}">Histoire</a>
+					<a href="{{ path('app_gallery') }}" class="sidebar-link {{ app.request.get('_route') == 'app_gallery' ? 'active' : '' }}">Galerie photos</a>
+					<a href="{{ path('app_contact') }}" class="sidebar-link {{ app.request.get('_route') == 'app_contact' ? 'active' : '' }}">Nous
+																																																																																																                    contacter</a>
+				</nav>
+
+				<div class="sidebar-footer">
+					{% if app.user %}
+						<a href="{{ path('admin') }}" class="btn-sidebar">Administration</a>
+						<a href="{{ path('app_logout') }}" class="btn-sidebar" style="margin-top: 0.5rem; background: transparent; border: 2px solid rgba(255,255,255,0.3);">
+							Déconnexion
+						</a>
+					{% else %}
+						<a href="{{ path('app_login') }}" class="btn-sidebar">Se connecter</a>
+					{% endif %}
+				</div>
+			</aside>
+
+			{# CONTENU PRINCIPAL - Variable selon la page #}
+			<main class="main-content"> {% block body %}{% endblock %}
+
+				{# FOOTER - Commun à toutes les pages #}
+				<footer class="footer">
+					<div class="footer-grid">
+						<div class="footer-info">
+							<h4>Archers des Albères</h4>
+							<p style="color:rgba(255,255,255,0.7)">Depuis 1985</p>
+							<p>📍 Argelès-sur-Mer</p>
+							<p>📧
+								{{
+                            app.request.attributes.get('settings')['contact_email']|default('archersdesalberes@gmail.com')
+                            }}</p>
+							<p>📞
+								{{ app.request.attributes.get('settings')['contact_phone']|default('06 02 23 72 58') }}
+							</p>
+						</div>
+						<div>
+							<h4>Liens rapides</h4>
+							<div class="footer-links">
+								<a href="{{ path('app_club') }}">Le Club</a>
+								<a href="{{ path('app_adhesion') }}">Adhérer</a>
+								<a href="{{ path('app_horaires') }}">Horaires</a>
+								<a href="{{ path('app_contact') }}">Contact</a>
+								<a href="{{ path('app_actualites') }}">Actualités</a>
+							</div>
+						</div>
+						<div>
+							<h4>Nos partenaires</h4>
+							<div class="partners">
+								{% if partners is defined and partners|length > 0 %}
+									{% for partner in partners|slice(0, 4) %}
+										<div class="partner-box">
+											{% if partner.logo %}
+												<img src="{{ asset('uploads/partners/' ~ partner.logo) }}" alt="{{ partner.name }}" style="width:100%;height:100%;object-fit:contain;">
+											{% else %}
+												<div class="partner-label">🏛️
+													{{ partner.name }}</div>
+											{% endif %}
+										</div>
+									{% endfor %}
+								{% else %}
+									<div class="partner-box">🏛️ Mairie</div>
+									<div class="partner-box">🏢 Région</div>
+									<div class="partner-box">🎯 FFT Archerie</div>
+									<div class="partner-box">🏪 Commerces</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					<div class="footer-bottom">
+						©
+						{{ 'now'|date('Y') }}
+						Compagnie des Archers des Albères • Tous droits réservés
+					</div>
+				</footer>
+			</main>
+
+		</div>
+	</body>
+
+</html>

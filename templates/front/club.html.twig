@@ -1,0 +1,176 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Le Club - Compagnie des Archers des Albères
+{% endblock %}
+
+{% block body %}
+	<section class="hero" style="min-height: 300px; display: flex; align-items: center;">
+		<div class="hero-content">
+			<div class="hero-text">
+				<span class="hero-badge">🏹 Qui sommes-nous ?</span>
+				<h1>Le
+					<span class="gradient-text">Club</span>
+				</h1>
+				<p>Découvrez la Compagnie des Archers des Albères, ses activités et son esprit.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div
+			class="container" style="max-width: 900px; margin: 0 auto;">
+
+			{# Présentation #}
+			<div style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9); padding: 3rem; border-radius: 12px; margin-bottom: 4rem;">
+				<h2 style="color: #1B5E20; font-size: 2rem; margin-bottom: 1.5rem; text-align: center;">
+					Bienvenue aux Archers des Albères
+				</h2>
+				<p style="font-size: 1.2rem; color: #2E7D32; line-height: 1.8; text-align: center; margin-bottom: 1.5rem;">
+					La Compagnie des Archers des Albères est un club de tir à l'arc affilié à la 
+																				Fédération Française de Tir à l'Arc (FFTA), situé à Argelès-sur-Mer dans les Pyrénées-Orientales.
+				</p>
+				<p style="font-size: 1.1rem; color: #2E7D32; line-height: 1.8; text-align: center;">
+					Depuis 1985, nous partageons notre passion du tir à l'arc dans une ambiance conviviale 
+																				et familiale, accueillant archers débutants et confirmés de tous âges.
+				</p>
+			</div>
+
+			{# Activités - GRILLE 2x2 #}
+			<div class="section-header">
+				<h2 class="section-title">Nos activités</h2>
+			</div>
+
+			<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 4rem;">
+
+				<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #2E7D32; display: flex; flex-direction: column;">
+					<div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+					<h3 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.4rem;">Entraînements réguliers</h3>
+					<p style="color: #666; line-height: 1.6; margin-bottom: 1rem; flex: 1;">
+						Trois créneaux hebdomadaires (mardi, jeudi, samedi) pour progresser à votre rythme, 
+																								encadrés par des moniteurs diplômés. Débutants et confirmés s'entraînent ensemble 
+																								dans une ambiance conviviale.
+					</p>
+					<a href="{{ path('app_horaires') }}" style="color: #2E7D32; text-decoration: none; font-weight: 500;">
+						Voir les horaires
+					</a>
+				</div>
+
+				<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #1976D2; display: flex; flex-direction: column;">
+					<div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+					<h3 style="color: #1976D2; margin-bottom: 1rem; font-size: 1.4rem;">Compétitions</h3>
+					<p style="color: #666; line-height: 1.6; margin-bottom: 1rem; flex: 1;">
+						Participez aux championnats départementaux, régionaux et nationaux organisés par la FFTA. 
+																		Le club organise également ses propres tournois amicaux tout au long de l'année.
+					</p>
+					<span style="color: #1976D2; font-weight: 500;">
+						24 compétitions par an
+					</span>
+				</div>
+
+				<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #F57C00; display: flex; flex-direction: column;">
+					<div style="font-size: 3rem; margin-bottom: 1rem;">👥</div>
+					<h3 style="color: #F57C00; margin-bottom: 1rem; font-size: 1.4rem;">Initiation et découverte</h3>
+					<p style="color: #666; line-height: 1.6; margin-bottom: 1rem; flex: 1;">
+						Séances d'initiation gratuites pour découvrir le tir à l'arc. 
+																		Tout le matériel est fourni, venez simplement avec votre bonne humeur !
+					</p>
+					<span style="color: #F57C00; font-weight: 500;">
+						Essai gratuit et sans engagement
+					</span>
+				</div>
+
+				<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #7B1FA2; display: flex; flex-direction: column;">
+					<div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
+					<h3 style="color: #7B1FA2; margin-bottom: 1rem; font-size: 1.4rem;">Événements conviviaux</h3>
+					<p style="color: #666; line-height: 1.6; flex: 1;">
+						Sorties, repas, galette des rois, barbecue de fin d'année... 
+																														                    Le club organise régulièrement des moments de partage pour renforcer les liens entre archers.
+					</p>
+				</div>
+
+			</div>
+
+			{# Disciplines #}
+			<div class="section-header" style="margin-top: 4rem;">
+				<h2 class="section-title">Disciplines pratiquées</h2>
+			</div>
+
+			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+				<div style="background: linear-gradient(135deg, #E8F5E9, #ffffff); padding: 2rem; border-radius: 12px; text-align: center;">
+					<div style="font-size: 2.5rem; margin-bottom: 1rem;">🏹</div>
+					<h4 style="color: #2E7D32; margin-bottom: 0.5rem; font-size: 1.2rem;">Arc Classique</h4>
+					<p style="color: #666; font-size: 0.95rem;">L'arc olympique traditionnel</p>
+				</div>
+
+				<div style="background: linear-gradient(135deg, #E3F2FD, #ffffff); padding: 2rem; border-radius: 12px; text-align: center;">
+					<div style="font-size: 2.5rem; margin-bottom: 1rem;">⚙️</div>
+					<h4 style="color: #1976D2; margin-bottom: 0.5rem; font-size: 1.2rem;">Arc à Poulies</h4>
+					<p style="color: #666; font-size: 0.95rem;">Technologie et précision</p>
+				</div>
+
+				<div style="background: linear-gradient(135deg, #FFF3E0, #ffffff); padding: 2rem; border-radius: 12px; text-align: center;">
+					<div style="font-size: 2.5rem; margin-bottom: 1rem;">🪵</div>
+					<h4 style="color: #F57C00; margin-bottom: 0.5rem; font-size: 1.2rem;">Arc Nu</h4>
+					<p style="color: #666; font-size: 0.95rem;">Simplicité et instinct</p>
+				</div>
+
+				<div style="background: linear-gradient(135deg, #F3E5F5, #ffffff); padding: 2rem; border-radius: 12px; text-align: center;">
+					<div style="font-size: 2.5rem; margin-bottom: 1rem;">🌳</div>
+					<h4 style="color: #7B1FA2; margin-bottom: 0.5rem; font-size: 1.2rem;">Tir Nature</h4>
+					<p style="color: #666; font-size: 0.95rem;">Parcours en extérieur</p>
+				</div>
+			</div>
+
+			{# Infrastructures #}
+			<div class="section-header" style="margin-top: 4rem;">
+				<h2 class="section-title">Nos installations</h2>
+			</div>
+
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
+				<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+					<h4 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.3rem;">🏛️ Salle couverte</h4>
+					<ul style="list-style: none; padding: 0; color: #666; line-height: 2;">
+						<li>✓ Tir en intérieur jusqu'à 18m</li>
+						<li>✓ 10 pas de tir</li>
+						<li>✓ Chauffage et éclairage</li>
+						<li>✓ Vestiaires disponibles</li>
+					</ul>
+				</div>
+
+				<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+					<h4 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.3rem;">🌲 Terrain extérieur</h4>
+					<ul style="list-style: none; padding: 0; color: #666; line-height: 2;">
+						<li>✓ Distances jusqu'à 70m</li>
+						<li>✓ 12 pas de tir</li>
+						<li>✓ Parcours nature</li>
+						<li>✓ Cadre naturel exceptionnel</li>
+					</ul>
+				</div>
+			</div>
+
+			{# Matériel #}
+			<div style="background: #F5F5F5; padding: 3rem; border-radius: 12px; margin-bottom: 4rem; text-align: center;">
+				<div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+				<h3 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.8rem;">Matériel fourni</h3>
+				<p style="color: #666; line-height: 1.8; max-width: 600px; margin: 0 auto;">
+					Le club met à disposition de ses adhérents tout le matériel nécessaire : 
+																									                arcs de différentes puissances, flèches, carquois, protections (plastron, palette, bracelet). 
+																									                Vous pouvez également utiliser votre propre matériel.
+				</p>
+			</div>
+
+			{# CTA #}
+			<div style="background: linear-gradient(135deg, #2E7D32, #4CAF50); padding: 3rem; border-radius: 12px; text-align: center; color: white;">
+				<h3 style="font-size: 2rem; margin-bottom: 1rem;">Envie de rejoindre l'aventure ?</h3>
+				<p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+					Que vous soyez débutant ou archer confirmé, vous êtes les bienvenus !
+				</p>
+				<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+					<a href="{{ path('app_adhesion') }}" class="btn-primary" style="background: white; color: #2E7D32;">Adhérer</a>
+					<a href="{{ path('app_contact') }}" class="btn-secondary" style="background: transparent; border-color: white; color: white;">Essai gratuit</a>
+				</div>
+			</div>
+
+		</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualités - Compagnie des Archers des Albères
+{% endblock %}
+
+{% block body %}
+	<section class="hero" style="min-height: 300px; display: flex; align-items: center;">
+		<div class="hero-content">
+			<div class="hero-text">
+				<span class="hero-badge">📰 Dernières nouvelles</span>
+				<h1>
+					<span class="gradient-text">Actualités</span>
+					du club</h1>
+				<p>Retrouvez toutes les actualités, résultats et événements de la Compagnie des Archers des Albères.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div
+			class="container" style="max-width: 1100px; margin: 0 auto;">
+
+			{# Filtres par catégorie #}
+			<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+				<a href="{{ path('app_actualites', {category: 'all'}) }}" class="btn-secondary" style="padding: 0.8rem 1.5rem; {{ currentCategory == 'all' ? 'background: #2E7D32; color: white;' : '' }}">
+					Toutes
+				</a>
+				<a href="{{ path('app_actualites', {category: 'podium'}) }}" class="btn-secondary" style="padding: 0.8rem 1.5rem; {{ currentCategory == 'podium' ? 'background: #2E7D32; color: white;' : '' }}">
+					🏆 Podiums
+				</a>
+				<a href="{{ path('app_actualites', {category: 'evenement'}) }}" class="btn-secondary" style="padding: 0.8rem 1.5rem; {{ currentCategory == 'evenement' ? 'background: #2E7D32; color: white;' : '' }}">
+					🎉 Événements
+				</a>
+				<a href="{{ path('app_actualites', {category: 'club'}) }}" class="btn-secondary" style="padding: 0.8rem 1.5rem; {{ currentCategory == 'club' ? 'background: #2E7D32; color: white;' : '' }}">
+					📢 Vie du club
+				</a>
+				<a href="{{ path('app_actualites', {category: 'info'}) }}" class="btn-secondary" style="padding: 0.8rem 1.5rem; {{ currentCategory == 'info' ? 'background: #2E7D32; color: white;' : '' }}">
+					ℹ️ Infos
+				</a>
+				<a href="{{ path('app_actualites', {category: 'photos'}) }}" class="btn-secondary" style="padding: 0.8rem 1.5rem; {{ currentCategory == 'photos' ? 'background: #2E7D32; color: white;' : '' }}">
+					📸 Galerie
+				</a>
+			</div>
+
+			{# Liste des actualités #}
+			{% if articles|length > 0 %}
+				<div style="display: grid; gap: 2rem; margin-bottom: 3rem;">
+
+					{% for article in articles %}
+						<div
+							style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; display: grid; grid-template-columns: 250px 1fr; transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 16px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'">
+
+							{# Image #}
+							<div style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9); display: flex; align-items: center; justify-content: center;">
+								{% if article.coverImage %}
+									<img src="{{ asset('uploads/articles/' ~ article.coverImage) }}" alt="{{ article.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+								{% else %}
+									<div style="font-size: 4rem; color: #2E7D32;">
+										{% if article.category == 'podium' %}🏆
+											{% elseif article.category == 'evenement' %}🎉
+											{% elseif article.category == 'photos' %}📸
+											{% elseif article.category == 'club' %}📢
+											{% else %}ℹ️
+										{% endif %}
+									</div>
+								{% endif %}
+							</div>
+
+							{# Contenu #}
+							<div style="padding: 2rem;">
+								<div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+									<span style="background: #E8F5E9; color: #2E7D32; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; text-transform: uppercase;">
+										{{ article.category }}
+									</span>
+									<span style="color: #999; font-size: 0.9rem;">
+										📅
+										{{ article.publishedAt|date('d/m/Y') }}
+									</span>
+								</div>
+
+								<h3 style="color: #1B5E20; margin-bottom: 1rem; font-size: 1.5rem;">
+									<a href="{{ path('app_article_show', {slug: article.slug}) }}" style="color: inherit; text-decoration: none;">
+										{{ article.title }}
+									</a>
+								</h3>
+
+								<p style="color: #666; line-height: 1.6; margin-bottom: 1.5rem;">
+									{{ article.content|striptags|slice(0, 150) }}
+									{% if article.content|length > 150 %}...
+									{% endif %}
+								</p>
+
+								<a href="{{ path('app_article_show', {slug: article.slug}) }}" style="color: #2E7D32; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;">
+									Lire la suite
+								</a>
+							</div>
+						</div>
+					{% endfor %}
+
+				</div>
+
+				{# Pagination #}
+				{% if totalPages > 1 %}
+					<div
+						style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 3rem;">
+
+						{# Bouton Précédent #}
+						{% if currentPage > 1 %}
+							<a href="{{ path('app_actualites', {category: currentCategory, page: currentPage - 1}) }}" style="padding: 0.8rem 1.2rem; border: 2px solid #2E7D32; background: white; color: #2E7D32; border-radius: 8px; text-decoration: none; font-weight: 500;">
+								Précédent
+							</a>
+						{% else %}
+							<span style="padding: 0.8rem 1.2rem; border: 2px solid #E0E0E0; background: white; border-radius: 8px; color: #999;">
+								Précédent
+							</span>
+						{% endif %}
+
+						{# Numéros de page #}
+						{% for page in 1..totalPages %}
+							{% if page == currentPage %}
+								<span style="padding: 0.8rem 1.2rem; border: 2px solid #2E7D32; background: #2E7D32; color: white; border-radius: 8px; font-weight: 500;">
+									{{ page }}
+								</span>
+							{% else %}
+								<a href="{{ path('app_actualites', {category: currentCategory, page: page}) }}" style="padding: 0.8rem 1.2rem; border: 2px solid #E0E0E0; background: white; color: #2E7D32; border-radius: 8px; text-decoration: none; font-weight: 500;">
+									{{ page }}
+								</a>
+							{% endif %}
+						{% endfor %}
+
+						{# Bouton Suivant #}
+						{% if currentPage < totalPages %}
+							<a href="{{ path('app_actualites', {category: currentCategory, page: currentPage + 1}) }}" style="padding: 0.8rem 1.2rem; border: 2px solid #2E7D32; background: white; color: #2E7D32; border-radius: 8px; text-decoration: none; font-weight: 500;">
+								Suivant
+							</a>
+						{% else %}
+							<span style="padding: 0.8rem 1.2rem; border: 2px solid #E0E0E0; background: white; border-radius: 8px; color: #999;">
+								Suivant
+							</span>
+						{% endif %}
+
+					</div>
+				{% endif %}
+
+			{% else %}
+				{# Aucun article trouvé #}
+				<div style="text-align: center; padding: 4rem 2rem; background: #F5F5F5; border-radius: 12px;">
+					<div style="font-size: 4rem; margin-bottom: 1rem;">📭</div>
+					<h3 style="color: #666; margin-bottom: 0.5rem;">Aucune actualité trouvée</h3>
+					<p style="color: #999;">Revenez plus tard ou explorez d'autres catégories.</p>
+				</div>
+			{% endif %}
+
+			{# Restez connecté #}
+			<div style="background: linear-gradient(135deg, #2E7D32, #4CAF50); padding: 3rem; border-radius: 12px; text-align: center; color: white; margin-top: 5rem;">
+				<h3 style="font-size: 2rem; margin-bottom: 1rem;">Restez connecté</h3>
+				<p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">
+					Suivez-nous sur les réseaux ou contactez-nous directement
+				</p>
+				<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+					<a href="#" target="_blank" rel="noopener" style="background: white; color: #2E7D32; padding: 1rem 1.8rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+						📘 Facebook
+					</a>
+					<a href="#" target="_blank" rel="noopener" style="background: white; color: #2E7D32; padding: 1rem 1.8rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+						📷 Instagram
+					</a>
+					<a href="{{ path('app_contact') }}" style="background: transparent; color: white; padding: 1rem 1.8rem; border: 2px solid white; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+						✉️ Nous contacter
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</section>
+{% endblock %}
