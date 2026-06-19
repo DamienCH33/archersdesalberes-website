@@ -8,50 +8,31 @@
 	<section class="hero">
 		<div class="hero-content">
 			<div class="hero-text">
-				<span class="hero-badge">🏹 Argelès-sur-Mer · Depuis 1985</span>
 				<h1>Compagnie des
 					<span class="gradient-text">Archers des Albères</span>
 				</h1>
 				<p>Un club convivial et professionnel au pied des Pyrénées.<br>
 					Du débutant au compétiteur, tous les niveaux sont les bienvenus.</p>
-				<div class="hero-cta">
-					<a href="{{ path('app_club') }}" class="btn-primary">Découvrir le club</a>
-					<a href="{{ path('app_contact') }}" class="btn-secondary">Essai gratuit</a>
-				</div>
 			</div>
 			<div class="hero-logo">
 				<img src="{{ asset('images/logoarcherie-transparent.png') }}" alt="Compagnie des Archers des Albères">
 			</div>
 		</div>
 	</section>
-
-	{# STATS SECTION #}
-	<section class="stats">
-		<div class="container">
-			<div class="section-header">
-				<h2 class="section-title">Le club en chiffres</h2>
-				<p class="section-subtitle">Une communauté passionnée et dynamique</p>
-			</div>
-			<div class="stats-grid">
-				<div class="stat-card">
-					<div class="stat-number">{{ stats.membres }}</div>
-					<div class="stat-label">Membres actifs</div>
-				</div>
-				<div class="stat-card">
-					<div class="stat-number">{{ stats.annees }}</div>
-					<div class="stat-label">Années d'existence</div>
-				</div>
-				<div class="stat-card">
-					<div class="stat-number">{{ stats.competitions }}</div>
-					<div class="stat-label">Compétitions par an</div>
-				</div>
-				<div class="stat-card">
-					<div class="stat-number">{{ stats.podiums }}</div>
-					<div class="stat-label">Podiums cette année</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	{# Présentation #}
+	<div style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9); padding: 3rem; border-radius: 12px; margin-bottom: 4rem;">
+		<h2 style="color: #1B5E20; font-size: 2rem; margin-bottom: 1.5rem; text-align: center;">
+			Bienvenue
+		</h2>
+		<p style="font-size: 1.2rem; color: #2E7D32; line-height: 1.8; text-align: center; margin-bottom: 1.5rem;">
+			La Compagnie des Archers des Albères est un club de tir à l'arc affilié à la 
+			Fédération Française de Tir à l'Arc (FFTA), situé à Sorède dans les Pyrénées-Orientales.
+		</p>
+		<p style="font-size: 1.1rem; color: #2E7D32; line-height: 1.8; text-align: center;">
+			Depuis 1991, nous partageons notre passion du tir à l'arc dans une ambiance conviviale 
+			et familiale, accueillant archers débutants et confirmés de tous âges.
+		</p>
+	</div>
 
 	{# SLIDER MODERNE #}
 	<section class="section" style="padding-top: 0;">
@@ -103,122 +84,110 @@
 			</div>
 		</div>
 	</section>
+	{# Disciplines #}
+	<div class="section-header" style="margin-top: 4rem;">
+		<h2 class="section-title">Disciplines pratiquées</h2>
+	</div>
 
-	{# ÉQUIPE #}
-	{% if equipe is defined and equipe|length > 0 %}
-		<section class="section">
-			<div class="section-header">
-				<h2 class="section-title">L'Équipe</h2>
-				<p class="section-subtitle">Les personnes qui font vivre le club</p>
-			</div>
-			<div class="equipe-grid">
-				{% for membre in equipe %}
-					<div class="equipe-card">
-						<div class="equipe-avatar">
-							{% if membre.avatar %}
-								<img src="{{ asset('uploads/team/' ~ membre.avatar) }}" alt="{{ membre.fullName }}">
-							{% endif %}
-						</div>
-						<div>
-							<div class="equipe-name">{{ membre.fullName }}</div>
-							<div class="equipe-role">{{ membre.role }}</div>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-		</section>
-	{% endif %}
-
-	{# GALERIE #}
-	{% if galerie is defined and galerie|length > 0 %}
-		<section class="galerie">
-			<div class="section-header">
-				<h2 class="section-title">Galerie</h2>
-				<p class="section-subtitle">Le club en images</p>
-			</div>
-			<div class="galerie-grid">
-				{% for album in galerie %}
-					<a href="{{ path('gallery_album', {slug: album.slug}) }}" class="galerie-item">
-						<div class="galerie-img">
-							{% if album.coverImage %}
-								<img src="{{ asset('uploads/albums/' ~ album.coverImage) }}" alt="{{ album.title }}" style="width: 100%; height: 100%; object-fit: cover;">
-							{% endif %}
-						</div>
-					</a>
-				{% endfor %}
-			</div>
-		</section>
-	{% endif %}
-
-	{# ACTUALITÉS #}
-	{% if actualites is defined and actualites|length > 0 %}
-		<section class="actualites">
-			<div class="section-header">
-				<h2 class="section-title">Actualités</h2>
-				<p class="section-subtitle">Dernières nouvelles</p>
-			</div>
-			<div
-				class="actu-grid">
-				{# Colonne 1 #}
-				<div class="actu-column">
-					{% for actualite in actualites|slice(0, 3) %}
-						<div class="actu-item">
-							<div class="actu-date">
-								<div class="actu-day">{{ actualite.publishedAt|date('d') }}</div>
-								<div class="actu-month">{{ actualite.publishedAt|date('M') }}</div>
-							</div>
-							<div class="actu-content">
-								<span class="actu-category">{{ actualite.category|upper }}</span>
-								<h3 class="actu-title">{{ actualite.title }}</h3>
-								<p class="actu-text">{{ actualite.content|striptags|slice(0, 80) }}...</p>
-								<a href="{{ path('app_article_show', {slug: actualite.slug}) }}" class="actu-link">
-									Lire la suite →
-								</a>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-
-				{# Colonne 2 #}
-				<div class="actu-column">
-					{% for actualite in actualites|slice(3, 3) %}
-						<div class="actu-item">
-							<div class="actu-date">
-								<div class="actu-day">{{ actualite.publishedAt|date('d') }}</div>
-								<div class="actu-month">{{ actualite.publishedAt|date('M') }}</div>
-							</div>
-							<div class="actu-content">
-								<span class="actu-category">{{ actualite.category|upper }}</span>
-								<h3 class="actu-title">{{ actualite.title }}</h3>
-								<p class="actu-text">{{ actualite.content|striptags|slice(0, 80) }}...</p>
-								<a href="{{ path('app_article_show', {slug: actualite.slug}) }}" class="actu-link">
-									Lire la suite →
-								</a>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-
-			<div class="actu-see-all" style="text-align: center; margin-top: 3rem;">
-				<a href="{{ path('app_actualites') }}" class="btn-primary">
-					Voir toutes les actualités
-				</a>
-			</div>
-		</section>
-	{% endif %}
-
-	{# CTA FINAL #}
-	<section class="cta-final">
-		<h2>Prêt à tirer vos premières flèches ?</h2>
-		<p>
-			Venez découvrir le tir à l'arc lors d'une séance d'initiation gratuite. 											      Tout le matériel est fourni, il ne vous reste qu'à venir.
-		</p>
-		<div class="cta-final-buttons">
-			<a href="{{ path('app_contact') }}" class="btn-primary">Prendre contact</a>
-			<a href="{{ path('app_adhesion') }}" class="btn-secondary">Voir les tarifs</a>
+	<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+		<div style="background: linear-gradient(135deg, #E8F5E9, #ffffff); padding: 2rem; border-radius: 12px; text-align: center;">
+			<div style="font-size: 2.5rem; margin-bottom: 1rem;">🏹</div>
+			<h4 style="color: #2E7D32; margin-bottom: 0.5rem; font-size: 1.2rem;">Arc Classique</h4>
+			<p style="color: #666; font-size: 0.95rem;">L'arc olympique traditionnel</p>
 		</div>
-	</section>
+
+		<div style="background: linear-gradient(135deg, #E3F2FD, #ffffff); padding: 2rem; border-radius: 12px; text-align: center;">
+			<div style="font-size: 2.5rem; margin-bottom: 1rem;">⚙️</div>
+			<h4 style="color: #1976D2; margin-bottom: 0.5rem; font-size: 1.2rem;">Arc à Poulies</h4>
+			<p style="color: #666; font-size: 0.95rem;">Technologie et précision</p>
+		</div>
+
+		<div style="background: linear-gradient(135deg, #FFF3E0, #ffffff); padding: 2rem; border-radius: 12px; text-align: center;">
+			<div style="font-size: 2.5rem; margin-bottom: 1rem;">🪵</div>
+			<h4 style="color: #F57C00; margin-bottom: 0.5rem; font-size: 1.2rem;">Arc Nu</h4>
+			<p style="color: #666; font-size: 0.95rem;">Simplicité et instinct</p>
+		</div>
+	</div>
+	{# Activités - GRILLE 2x2 #}
+	<div class="section-header">
+		<h2 class="section-title">Nos activités</h2>
+	</div>
+
+	<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 4rem;">
+
+		<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #2E7D32; display: flex; flex-direction: column;">
+			<div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+			<h3 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.4rem;">Entraînements réguliers</h3>
+			<p style="color: #666; line-height: 1.6; margin-bottom: 1rem; flex: 1;">
+				Trois créneaux hebdomadaires (mardi, jeudi, samedi) pour progresser à votre rythme, 
+																																																																												encadrés par des moniteurs diplômés. Débutants et confirmés s'entraînent ensemble 
+																																																																												dans une ambiance conviviale.
+			</p>
+
+		</div>
+
+		<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #1976D2; display: flex; flex-direction: column;">
+			<div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+			<h3 style="color: #1976D2; margin-bottom: 1rem; font-size: 1.4rem;">Compétitions</h3>
+			<p style="color: #666; line-height: 1.6; margin-bottom: 1rem; flex: 1;">
+				Participez aux championnats départementaux, régionaux et nationaux organisés par la FFTA. 
+																																																																						Le club organise également ses propres tournois amicaux tout au long de l'année.
+			</p>
+
+		</div>
+
+		<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #F57C00; display: flex; flex-direction: column;">
+			<div style="font-size: 3rem; margin-bottom: 1rem;">👥</div>
+			<h3 style="color: #F57C00; margin-bottom: 1rem; font-size: 1.4rem;">Initiation et découverte</h3>
+			<p style="color: #666; line-height: 1.6; margin-bottom: 1rem; flex: 1;">
+				Séances d'initiation gratuites pour découvrir le tir à l'arc. 
+																																																																						Tout le matériel est fourni, venez simplement avec votre bonne humeur !
+			</p>
+
+		</div>
+
+		<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #7B1FA2; display: flex; flex-direction: column;">
+			<div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
+			<h3 style="color: #7B1FA2; margin-bottom: 1rem; font-size: 1.4rem;">Événements conviviaux</h3>
+			<p style="color: #666; line-height: 1.6; flex: 1;">
+				Sorties, repas, galette des rois, barbecue de fin d'année... 
+																																																																																		                    Le club organise régulièrement des moments de partage pour renforcer les liens entre archers.
+			</p>
+		</div>
+
+	</div>
+
+	{# Infrastructures #}
+	<div class="section-header" style="margin-top: 4rem;">
+		<h2 class="section-title">Nos installations</h2>
+	</div>
+
+	<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
+		<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+			<h4 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.3rem;">🏛️ Salle couverte</h4>
+			<ul style="list-style: none; padding: 0; color: #666; line-height: 2;">
+				<li>✓ Tir en intérieur jusqu'à 18m</li>
+			</ul>
+		</div>
+
+		<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+			<h4 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.3rem;">🌲 Terrain extérieur</h4>
+			<ul style="list-style: none; padding: 0; color: #666; line-height: 2;">
+				<li>✓ Distances jusqu'à 70m</li>
+				<li>✓ Pas de tir couvert</li>
+			</ul>
+		</div>
+	</div>
+	{# Matériel #}
+	<div style="background: #F5F5F5; padding: 3rem; border-radius: 12px; margin-bottom: 4rem; text-align: center;">
+		<div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+		<h3 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.8rem;">Matériel fourni</h3>
+		<p style="color: #666; line-height: 1.8; max-width: 600px; margin: 0 auto;">
+			Le club met à disposition de ses adhérents tout le matériel nécessaire : 
+																		arcs de différentes puissances, flèches, carquois, protections (plastron, palette, bracelet). 
+																		Vous pouvez également utiliser votre propre matériel.
+		</p>
+	</div>
 {% endblock %}
 
 {# JAVASCRIPT DU SLIDER #}

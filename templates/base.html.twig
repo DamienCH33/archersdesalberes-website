@@ -43,15 +43,14 @@
 
 				<nav class="sidebar-nav">
 					<a href="{{ path('app_home') }}" class="sidebar-link {{ app.request.get('_route') == 'app_home' ? 'active' : '' }}">Accueil</a>
-					<a href="{{ path('app_club') }}" class="sidebar-link {{ app.request.get('_route') == 'app_club' ? 'active' : '' }}">Le Club</a>
 					<a href="{{ path('app_actualites') }}" class="sidebar-link {{ app.request.get('_route') == 'app_actualites' ? 'active' : '' }}">Actualités</a>
 					<a href="{{ path('app_adhesion') }}" class="sidebar-link {{ app.request.get('_route') == 'app_adhesion' ? 'active' : '' }}">Adhésion</a>
 					<a href="{{ path('app_horaires') }}" class="sidebar-link {{ app.request.get('_route') == 'app_horaires' ? 'active' : '' }}">Horaires &
-																																																																																												                    Lieux</a>
+																																																																																																								                    Lieux</a>
 					<a href="{{ path('app_history') }}" class="sidebar-link {{ app.request.get('_route') == 'app_history' ? 'active' : '' }}">Histoire</a>
 					<a href="{{ path('app_gallery') }}" class="sidebar-link {{ app.request.get('_route') == 'app_gallery' ? 'active' : '' }}">Galerie photos</a>
 					<a href="{{ path('app_contact') }}" class="sidebar-link {{ app.request.get('_route') == 'app_contact' ? 'active' : '' }}">Nous
-																																																																																																                    contacter</a>
+																																																																																																												                    contacter</a>
 				</nav>
 
 				<div class="sidebar-footer">
@@ -87,7 +86,6 @@
 						<div>
 							<h4>Liens rapides</h4>
 							<div class="footer-links">
-								<a href="{{ path('app_club') }}">Le Club</a>
 								<a href="{{ path('app_adhesion') }}">Adhérer</a>
 								<a href="{{ path('app_horaires') }}">Horaires</a>
 								<a href="{{ path('app_contact') }}">Contact</a>

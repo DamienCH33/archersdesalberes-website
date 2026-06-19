@@ -1,144 +1,119 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Adhésion - Compagnie des Archers des Albères{% endblock %}
+{% block title %}Adhésion - Compagnie des Archers des Albères
+{% endblock %}
 
 {% block body %}
-{% set mois = 'now'|date('n') %}
-{% set annee = 'now'|date('Y') %}
-{% set saison = mois >= 9 ? annee ~ '-' ~ (annee + 1) : (annee - 1) ~ '-' ~ annee %}
+	{% set mois = 'now'|date('n') %}
+	{% set annee = 'now'|date('Y') %}
+	{% set saison = mois >= 5 ? annee ~ '-' ~ (annee + 1) : (annee - 1) ~ '-' ~ annee %}
 
-<section class="hero" style="min-height: 300px; display: flex; align-items: center;">
-    <div class="hero-content">
-        <div class="hero-text">
-            <span class="hero-badge">💳 Rejoignez-nous</span>
-            <h1>Adhésion <span class="gradient-text">{{ saison }}</span></h1>
-            <p>Devenez membre de notre club et pratiquez le tir à l'arc dans une ambiance conviviale.</p>
-        </div>
-    </div>
-</section>
+	<section class="hero" style="min-height: 300px; display: flex; align-items: center;">
+		<div class="hero-content">
+			<div class="hero-text">
+				<h1>Adhésion
+					<span class="gradient-text">{{ saison }}</span>
+				</h1>
+				<p>Devenez membre de notre club et pratiquez le tir à l'arc dans une ambiance conviviale.</p>
+			</div>
+		</div>
+	</section>
 
-<section class="section">
-    <div class="container" style="max-width: 900px; margin: 0 auto;">
-        
-        {# Tarifs #}
-        <div class="section-header">
-            <h2 class="section-title">Tarifs</h2>
-            <p class="section-subtitle">Cotisations annuelles saison {{ saison }}</p>
-        </div>
+	<section class="section">
+		<div
+			class="container" style="max-width: 900px; margin: 0 auto;">
 
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 4rem;">
-            <div style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <h3 style="color: #2E7D32; font-size: 1.5rem; margin-bottom: 1rem;">Adultes</h3>
-                <div style="font-size: 2.5rem; font-weight: bold; color: #1B5E20; margin-bottom: 0.5rem;">180€</div>
-                <p style="color: #558B2F;">À partir de 18 ans</p>
-                <ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #2E7D32;">
-                    <li style="padding: 0.5rem 0;">✓ Licence FFTA</li>
-                    <li style="padding: 0.5rem 0;">✓ Assurance</li>
-                    <li style="padding: 0.5rem 0;">✓ Accès illimité</li>
-                    <li style="padding: 0.5rem 0;">✓ Prêt de matériel</li>
-                </ul>
-            </div>
+			{# Tarifs #}
+			<div class="section-header">
+				<h2 class="section-title">Tarifs</h2>
+				<p class="section-subtitle">Cotisations annuelles saison
+					{{ saison }}</p>
+			</div>
 
-            <div style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <h3 style="color: #1976D2; font-size: 1.5rem; margin-bottom: 1rem;">Jeunes</h3>
-                <div style="font-size: 2.5rem; font-weight: bold; color: #0D47A1; margin-bottom: 0.5rem;">120€</div>
-                <p style="color: #1565C0;">De 12 à 17 ans</p>
-                <ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #1976D2;">
-                    <li style="padding: 0.5rem 0;">✓ Licence FFTA</li>
-                    <li style="padding: 0.5rem 0;">✓ Assurance</li>
-                    <li style="padding: 0.5rem 0;">✓ Encadrement adapté</li>
-                    <li style="padding: 0.5rem 0;">✓ Prêt de matériel</li>
-                </ul>
-            </div>
+			<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 4rem;">
+				<div style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+					<h3 style="color: #2E7D32; font-size: 1.5rem; margin-bottom: 1rem;">Adultes</h3>
+					<div style="font-size: 2rem; font-weight: bold; color: #1B5E20; margin-bottom: 0.5rem;">Licence FFTA : 135€</div>
+					<ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #2E7D32;">
+						<li style="padding: 0.5rem 0;">Tarif 2ème membre : 130€</li>
+						<li style="padding: 0.5rem 0;">Tarif 3ème membre :125€</li>
+					</li>
+				</ul>
+			</div>
 
-            <div style="background: linear-gradient(135deg, #FFF3E0, #FFE0B2); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <h3 style="color: #F57C00; font-size: 1.5rem; margin-bottom: 1rem;">Découverte</h3>
-                <div style="font-size: 2.5rem; font-weight: bold; color: #E65100; margin-bottom: 0.5rem;">Gratuit</div>
-                <p style="color: #EF6C00;">Première séance</p>
-                <ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #F57C00;">
-                    <li style="padding: 0.5rem 0;">✓ Sans engagement</li>
-                    <li style="padding: 0.5rem 0;">✓ Prêt de matériel</li>
-                    <li style="padding: 0.5rem 0;">✓ Encadrement</li>
-                    <li style="padding: 0.5rem 0;">✓ Sur réservation</li>
-                </ul>
-            </div>
+			<div style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+				<h3 style="color: #1976D2; font-size: 1.5rem; margin-bottom: 1rem;">Jeunes</h3>
+				<div style="font-size: 1.5rem; font-weight: bold; color: #0D47A1; margin-bottom: 0.5rem;">Licence FFTA jeune : 108€</div>
+				<p style="color: #1565C0;">(Jusqu’à 19 ans)</p>
+				<ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #1976D2;">
+					<li style="padding: 0.5rem 0;">Tarif 2ème membre : 103€</li>
+					<li style="padding: 0.5rem 0;">Tarif 3ème membre :98€</li>
+				</ul>
+			</div>
 
-            <div style="background: linear-gradient(135deg, #F3E5F5, #E1BEE7); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <h3 style="color: #7B1FA2; font-size: 1.5rem; margin-bottom: 1rem;">Famille</h3>
-                <div style="font-size: 2.5rem; font-weight: bold; color: #4A148C; margin-bottom: 0.5rem;">280€</div>
-                <p style="color: #6A1B9A;">2 adultes + enfants</p>
-                <ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #7B1FA2;">
-                    <li style="padding: 0.5rem 0;">✓ Licences FFTA</li>
-                    <li style="padding: 0.5rem 0;">✓ Assurance</li>
-                    <li style="padding: 0.5rem 0;">✓ Tarif préférentiel</li>
-                    <li style="padding: 0.5rem 0;">✓ Prêt de matériel</li>
-                </ul>
-            </div>
-        </div>
+			<div style="background: linear-gradient(135deg, #FFF3E0, #FFE0B2); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+				<h3 style="color: #F57C00; font-size: 1.5rem; margin-bottom: 1rem;">Licence FFTA découverte</h3>
+				<p style="color: #EF6C00;">(Avril – Septembre)</p>
+				<ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #F57C00;">
+					<li style="padding: 0.5rem 0;">Tarif : 50 €</li>
+				</ul>
+			</div>
 
-        {# Documents à fournir #}
-        <div class="section-header" style="margin-top: 4rem;">
-            <h2 class="section-title">Documents à fournir</h2>
-        </div>
+			<div style="background: linear-gradient(135deg, #F3E5F5, #E1BEE7); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+				<h3 style="color: #7B1FA2; font-size: 1.5rem; margin-bottom: 1rem;">Matériel</h3>
+				<ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #7B1FA2;">
+					<li style="padding: 0.5rem 0;">Location arc club :40€</li>
+					<li style="padding: 0.5rem 0;">Caution arc club : 150€</li>
+				</ul>
+			</div>
+		</div>
 
-        <div style="background: #F5F5F5; padding: 2rem; border-radius: 12px; margin-bottom: 3rem;">
-            <ul style="list-style: none; padding: 0; font-size: 1.1rem; line-height: 2;">
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid #E0E0E0;">📋 Formulaire d'inscription complété</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid #E0E0E0;">🏥 Certificat médical de non contre-indication</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid #E0E0E0;">📸 Photo d'identité</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid #E0E0E0;">🆔 Copie pièce d'identité (mineur : copie livret de famille)</li>
-                <li style="padding: 0.5rem 0;">💳 Règlement (chèque, espèces ou virement)</li>
-            </ul>
-        </div>
+		{# Documents à fournir #}
+		<div class="section-header" style="margin-top: 4rem;">
+			<h2 class="section-title">Documents à fournir</h2>
+		</div>
 
-        {# Avantages #}
-        <div class="section-header" style="margin-top: 4rem;">
-            <h2 class="section-title">Les avantages de l'adhésion</h2>
-        </div>
+		<div style="background: #F5F5F5; padding: 2rem; border-radius: 12px; margin-bottom: 3rem;">
+			<ul style="list-style: none; padding: 0; font-size: 1.1rem; line-height: 2;">
+				<li style="padding: 0.5rem 0; border-bottom: 1px solid #E0E0E0;">Formulaire d'inscription complété</li>
+				<li style="padding: 0.5rem 0; border-bottom: 1px solid #E0E0E0;">Questionnaire de santé rempli et certificat médical si nécessaire</li>
+				<li style="padding: 0.5rem 0; border-bottom: 1px solid #E0E0E0;">Règlement intérieur signé
+				</li>
+				<li style="padding: 0.5rem 0;">Paiement par chèque ou espèces uniquement</li>
+			</ul>
+		</div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-            <div style="text-align: center; padding: 1.5rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
-                <h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Matériel fourni</h4>
-                <p style="color: #666;">Arcs, flèches et équipements de protection</p>
-            </div>
-            <div style="text-align: center; padding: 1.5rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">👨‍🏫</div>
-                <h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Encadrement qualifié</h4>
-                <p style="color: #666;">Entraîneurs diplômés FFTA</p>
-            </div>
-            <div style="text-align: center; padding: 1.5rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
-                <h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Compétitions</h4>
-                <p style="color: #666;">Accès aux tournois départementaux et régionaux</p>
-            </div>
-            <div style="text-align: center; padding: 1.5rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
-                <h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Convivialité</h4>
-                <p style="color: #666;">Rejoignez une communauté passionnée</p>
-            </div>
-            <div style="text-align: center; padding: 1.5rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🏹</div>
-                <h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Installations dédiées</h4>
-                <p style="color: #666;">Salle d'entraînement et terrain extérieur</p>
-            </div>
-            <div style="text-align: center; padding: 1.5rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
-                <h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Événements du club</h4>
-                <p style="color: #666;">Stages, galas et sorties entre adhérents</p>
-            </div>
-        </div>
+		{# Avantages #}
+		<div class="section-header" style="margin-top: 4rem;">
+			<h2 class="section-title">Les avantages de l'adhésion</h2>
+		</div>
 
-        {# CTA #}
-        <div style="background: linear-gradient(135deg, #2E7D32, #4CAF50); padding: 3rem; border-radius: 12px; text-align: center; color: white; margin-top: 4rem;">
-            <h3 style="font-size: 2rem; margin-bottom: 1rem;">Prêt à nous rejoindre ?</h3>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Contactez-nous pour plus d'informations ou venez nous rencontrer lors de nos entraînements.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="{{ path('app_contact') }}" class="btn-primary" style="background: white; color: #2E7D32;">Nous contacter</a>
-                <a href="{{ path('app_horaires') }}" class="btn-secondary" style="border-color: white; color: white;">Voir les horaires</a>
-            </div>
-        </div>
-
-    </div>
-</section>
-{% endblock %}
+		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+			<div style="text-align: center; padding: 1.5rem;">
+				<div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+				<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Matériel fourni</h4>
+				<p style="color: #666;">Arcs, flèches et équipements de protection</p>
+			</div>
+			<div style="text-align: center; padding: 1.5rem;">
+				<div style="font-size: 3rem; margin-bottom: 1rem;">👨‍🏫</div>
+				<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Encadrement qualifié</h4>
+				<p style="color: #666;">Encadrants diplômés FFTA</p>
+			</div>
+			<div style="text-align: center; padding: 1.5rem;">
+				<div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+				<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Compétitions</h4>
+				<p style="color: #666;">Accès aux tournois départementaux et régionaux</p>
+			</div>
+			<div style="text-align: center; padding: 1.5rem;">
+				<div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
+				<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Convivialité</h4>
+				<p style="color: #666;">Rejoignez une communauté passionnée</p>
+			</div>
+			<div style="text-align: center; padding: 1.5rem;">
+				<div style="font-size: 3rem; margin-bottom: 1rem;">🏹</div>
+				<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Installations dédiées</h4>
+				<p style="color: #666;">Salle d'entraînement et terrain extérieur</p>
+			</div>
+		</div>
+	</div>
+</section>{% endblock %}

@@ -1,141 +1,105 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact - Compagnie des Archers des Albères{% endblock %}
+{% block title %}Contact - Compagnie des Archers des Albères
+{% endblock %}
 
 {% block body %}
-<section class="hero" style="min-height: 300px; display: flex; align-items: center;">
-    <div class="hero-content">
-        <div class="hero-text">
-            <span class="hero-badge">📧 Contactez-nous</span>
-            <h1>Nous <span class="gradient-text">contacter</span></h1>
-            <p>Une question ? Un projet ? Besoin d'informations ? Nous sommes là pour vous répondre.</p>
-        </div>
-    </div>
-</section>
+	<section class="hero" style="min-height: 300px; display: flex; align-items: center;">
+		<div class="hero-content">
+			<div class="hero-text">
+				<h1>Nous
+					<span class="gradient-text">contacter</span>
+				</h1>
+				<p>Une question ? Besoin d'informations ? Nous sommes là pour vous répondre.</p>
+			</div>
+		</div>
+	</section>
 
-<section class="section">
-    <div class="container" style="max-width: 1100px; margin: 0 auto;">
+	<section class="section">
+		<div class="container" style="max-width: 1100px; margin: 0 auto;">
 
-        <div style="margin-bottom: 4rem;">
-            <div class="section-header" style="margin-bottom: 2rem;">
-                <h2 class="section-title" style="font-size: 1.8rem; display: block;">Coordonnées</h2>
-                <p class="section-subtitle" style="display: block; margin-top: 0.5rem;">Contactez-nous directement</p>
-            </div>
+			<div style="margin-bottom: 4rem;">
+				<div class="section-header" style="margin-bottom: 2rem;">
+					<h2 class="section-title" style="font-size: 1.8rem; display: block;">Coordonnées</h2>
+					<p class="section-subtitle" style="display: block; margin-top: 0.5rem;">
+						<strong>Privilégier l’e-mail</strong>
+					</p>
+				</div>
 
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+				<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
 
-                <div style="background: linear-gradient(135deg, #E8F5E9, #ffffff); padding: 2rem; border-radius: 12px; border-left: 4px solid #2E7D32;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">📧</div>
-                    <h4 style="color: #2E7D32; margin-bottom: 0.5rem; font-size: 1.2rem;">Email</h4>
-                    <a href="mailto:archersdesalberes@gmail.com" style="color: #1B5E20; font-size: 1.1rem; text-decoration: none;">
-                        archersdesalberes@gmail.com
-                    </a>
-                </div>
+					<div style="background: linear-gradient(135deg, #E8F5E9, #ffffff); padding: 2rem; border-radius: 12px; border-left: 4px solid #2E7D32;">
+						<div style="font-size: 2rem; margin-bottom: 1rem;">📧</div>
+						<h4 style="color: #2E7D32; margin-bottom: 0.5rem; font-size: 1.2rem;">Email</h4>
+						<a href="mailto:archersdesalberes@gmail.com" style="color: #1B5E20; font-size: 1.1rem; text-decoration: none;">
+							archersdesalberes@gmail.com
+						</a>
 
-                <div style="background: linear-gradient(135deg, #E3F2FD, #ffffff); padding: 2rem; border-radius: 12px; border-left: 4px solid #1976D2;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">📞</div>
-                    <h4 style="color: #1976D2; margin-bottom: 0.5rem; font-size: 1.2rem;">Téléphone</h4>
-                    <a href="tel:0602237258" style="color: #0D47A1; font-size: 1.1rem; text-decoration: none;">
-                        06 02 23 72 58
-                    </a>
-                    <p style="color: #666; margin-top: 0.5rem; font-size: 0.95rem;">Du lundi au vendredi, 9h-18h</p>
-                </div>
+					</div>
 
-                <div style="background: linear-gradient(135deg, #FFF3E0, #ffffff); padding: 2rem; border-radius: 12px; border-left: 4px solid #F57C00;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">📍</div>
-                    <h4 style="color: #F57C00; margin-bottom: 0.5rem; font-size: 1.2rem;">Adresse</h4>
-                    <p style="color: #333; font-size: 1.05rem; line-height: 1.6;">
-                        Gymnase Municipal<br>
-                        Avenue du Vallespir<br>
-                        66700 Argelès-sur-Mer
-                    </p>
-                </div>
+					<div style="background: linear-gradient(135deg, #E3F2FD, #ffffff); padding: 2rem; border-radius: 12px; border-left: 4px solid #1976D2;">
+						<div style="font-size: 2rem; margin-bottom: 1rem;">📞</div>
+						<h4 style="color: #1976D2; margin-bottom: 0.5rem; font-size: 1.2rem;">Téléphone</h4>
+						<a href="tel:0602237258" style="color: #0D47A1; font-size: 1.1rem; text-decoration: none;">
+							06 02 23 72 58
+						</a>
+						<p style="color: #666; margin-top: 0.5rem; font-size: 0.95rem;">Du lundi au vendredi, 9h-18h</p>
+					</div>
 
-                <div style="background: linear-gradient(135deg, #F3E5F5, #ffffff); padding: 2rem; border-radius: 12px; border-left: 4px solid #7B1FA2;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">🕐</div>
-                    <h4 style="color: #7B1FA2; margin-bottom: 0.5rem; font-size: 1.2rem;">Horaires d'accueil</h4>
-                    <p style="color: #333; font-size: 1.05rem; line-height: 1.8;">
-                        <strong>Mardi & Jeudi :</strong> 18h00 - 20h00<br>
-                        <strong>Samedi :</strong> 14h00 - 17h00
-                    </p>
-                    <a href="{{ path('app_horaires') }}" style="color: #7B1FA2; font-size: 0.95rem; text-decoration: none; margin-top: 0.5rem; display: inline-block;">
-                        Voir tous les horaires →
-                    </a>
-                </div>
 
-            </div>
-        </div>
+				</div>
+			</div>
+			{# FAQ rapide #}
+			<div class="section-header" style="margin-top: 5rem;">
+				<h2 class="section-title">Questions fréquentes</h2>
+			</div>
 
-        {# Réseaux sociaux #}
-        <div class="section-header" style="margin-top: 4rem;">
-            <h2 class="section-title" style="display: block;">Suivez-nous</h2>
-            <p class="section-subtitle" style="display: block; margin-top: 0.5rem;">Restez informé de notre actualité</p>
-        </div>
+			<div style="display: grid; gap: 1.5rem; max-width: 800px; margin: 0 auto 3rem;">
+				<details style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; cursor: pointer;">
+					<summary style="font-weight: 600; color: #2E7D32; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+						Comment s'inscrire ?
+						<span style="font-size: 1.5rem;">+</span>
+					</summary>
+					<p style="color: #666; margin-top: 1rem; line-height: 1.6;">
+						Venez nous rencontrer lors d'un entraînement ou contactez-nous par email. 
+																								Imprimez le dossier d’inscription.
+					</p>
+				</details>
 
-        <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 3rem; flex-wrap: wrap;">
-            <a href="#" style="background: #1877F2; color: white; padding: 1.5rem 3rem; border-radius: 12px; text-decoration: none; display: flex; align-items: center; gap: 1rem; font-size: 1.1rem; font-weight: 500; transition: transform 0.3s;" 
-               onmouseover="this.style.transform='translateY(-3px)'" 
-               onmouseout="this.style.transform='translateY(0)'">
-                <span style="font-size: 1.5rem;">📘</span> Facebook
-            </a>
-            <a href="#" style="background: #E4405F; color: white; padding: 1.5rem 3rem; border-radius: 12px; text-decoration: none; display: flex; align-items: center; gap: 1rem; font-size: 1.1rem; font-weight: 500; transition: transform 0.3s;" 
-               onmouseover="this.style.transform='translateY(-3px)'" 
-               onmouseout="this.style.transform='translateY(0)'">
-                <span style="font-size: 1.5rem;">📷</span> Instagram
-            </a>
-        </div>
+				<details style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; cursor: pointer;">
+					<summary style="font-weight: 600; color: #2E7D32; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+						Faut-il son propre matériel ?
+						<span style="font-size: 1.5rem;">+</span>
+					</summary>
+					<p style="color: #666; margin-top: 1rem; line-height: 1.6;">
+						Non ! Le club met à disposition tout le matériel nécessaire (arcs, flèches, protections). 
+																																																												                    Vous n'avez besoin que d'une tenue de sport confortable.
+					</p>
+				</details>
 
-        {# FAQ rapide #}
-        <div class="section-header" style="margin-top: 5rem;">
-            <h2 class="section-title">Questions fréquentes</h2>
-        </div>
+				<details style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; cursor: pointer;">
+					<summary style="font-weight: 600; color: #2E7D32; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+						À partir de quel âge peut-on pratiquer ?
+						<span style="font-size: 1.5rem;">+</span>
+					</summary>
+					<p style="color: #666; margin-top: 1rem; line-height: 1.6;">
+						Le tir à l'arc est accessible dès 8 ans. Nous accueillons les archers de tous âges, 
+																																																												                    des enfants aux seniors, avec un encadrement adapté à chaque niveau.
+					</p>
+				</details>
 
-        <div style="display: grid; gap: 1.5rem; max-width: 800px; margin: 0 auto 3rem;">
-            <details style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; cursor: pointer;">
-                <summary style="font-weight: 600; color: #2E7D32; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; align-items: center;">
-                    Comment s'inscrire ?
-                    <span style="font-size: 1.5rem;">+</span>
-                </summary>
-                <p style="color: #666; margin-top: 1rem; line-height: 1.6;">
-                    Venez nous rencontrer lors d'un entraînement ou contactez-nous par email. 
-                    Nous vous fournirons le dossier d'inscription et toutes les informations nécessaires.
-                </p>
-            </details>
+				<details style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; cursor: pointer;">
+					<summary style="font-weight: 600; color: #2E7D32; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+						Peut-on faire un essai avant de s'inscrire ?
+						<span style="font-size: 1.5rem;">+</span>
+					</summary>
+					<p style="color: #666; margin-top: 1rem; line-height: 1.6;">
+						Absolument ! La première séance est gratuite et sans engagement. 
+						Contactez-nous pour réserver votre créneau d'essai.
+					</p>
+				</details>
+			</div>
 
-            <details style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; cursor: pointer;">
-                <summary style="font-weight: 600; color: #2E7D32; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; align-items: center;">
-                    Faut-il son propre matériel ?
-                    <span style="font-size: 1.5rem;">+</span>
-                </summary>
-                <p style="color: #666; margin-top: 1rem; line-height: 1.6;">
-                    Non ! Le club met à disposition tout le matériel nécessaire (arcs, flèches, protections). 
-                    Vous n'avez besoin que d'une tenue de sport confortable.
-                </p>
-            </details>
-
-            <details style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; cursor: pointer;">
-                <summary style="font-weight: 600; color: #2E7D32; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; align-items: center;">
-                    À partir de quel âge peut-on pratiquer ?
-                    <span style="font-size: 1.5rem;">+</span>
-                </summary>
-                <p style="color: #666; margin-top: 1rem; line-height: 1.6;">
-                    Le tir à l'arc est accessible dès 7-8 ans. Nous accueillons les archers de tous âges, 
-                    des enfants aux seniors, avec un encadrement adapté à chaque niveau.
-                </p>
-            </details>
-
-            <details style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; cursor: pointer;">
-                <summary style="font-weight: 600; color: #2E7D32; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; align-items: center;">
-                    Peut-on faire un essai avant de s'inscrire ?
-                    <span style="font-size: 1.5rem;">+</span>
-                </summary>
-                <p style="color: #666; margin-top: 1rem; line-height: 1.6;">
-                    Absolument ! La première séance est gratuite et sans engagement. 
-                    Contactez-nous pour réserver votre créneau d'essai.
-                </p>
-            </details>
-        </div>
-
-    </div>
-</section>
+		</div>
+	</section>
 {% endblock %}

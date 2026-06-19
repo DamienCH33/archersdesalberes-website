@@ -4,10 +4,13 @@
 {% endblock %}
 
 {% block body %}
+	{% set mois = 'now'|date('n') %}
+	{% set annee = 'now'|date('Y') %}
+	{% set saison = mois >= 5 ? annee ~ '-' ~ (annee + 1) : (annee - 1) ~ '-' ~ annee %}
+
 	<section class="hero" style="min-height: 300px; display: flex; align-items: center;">
 		<div class="hero-content">
 			<div class="hero-text">
-				<span class="hero-badge">📅 Entraînements</span>
 				<h1>Horaires &
 					<span class="gradient-text">Lieux</span>
 				</h1>
@@ -23,17 +26,17 @@
 			{# Horaires #}
 			<div class="section-header">
 				<h2 class="section-title">Horaires d'entraînement</h2>
-				<p class="section-subtitle">Saison 2025-2026</p>
+				<p class="section-subtitle">{{ saison }}</p>
 			</div>
 
 			<div
 				style="
-																																																																																																																																																																																				display: grid;
-																																																																																																																																																																																				grid-template-columns: 1fr 2px 1fr 2px 1fr;
-																																																																																																																																																																																				gap: 2rem;
-																																																																																																																																																																																				margin-bottom: 4rem;
-																																																																																																																																																																																				align-items: stretch;
-																																																																																																																																																																																				">
+																																																																																					display: grid;
+																																																																																					grid-template-columns: 1fr 2px 1fr 2px 1fr;
+																																																																																					gap: 2rem;
+																																																																																					margin-bottom: 4rem;
+																																																																																					align-items: stretch;
+																																																																																					">
 				{# ========== COLONNE Jeunes débutants ========== #}
 				<div>
 					<div style="text-align: center; margin-bottom: 1.5rem; padding: 1rem; background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border-radius: 12px;">
@@ -66,7 +69,7 @@
 				{# ========== COLONNE Jeunes confirmés ========== #}
 				<div>
 					<div style="text-align: center; margin-bottom: 1.5rem; padding: 1rem; background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border-radius: 12px;">
-						<h3 style="color: #E65100; font-size: 1.6rem; margin: 0;">Jeunes confirmés</h3>
+						<h3 style="color: #5100e6d2; font-size: 1.6rem; margin: 0;">Jeunes confirmés</h3>
 					</div>
 
 					<div
@@ -146,13 +149,13 @@
 			{# Section Banyuls-sur-Mer #}
 
 			<div style="
-																																																																										background: linear-gradient(135deg, #E3F2FD, #F8FBFF);
-																																																																						padding: 1.5rem;
-																																																																						border-radius: 12px;
-																																																																						margin-bottom: 4rem;
-																																																																						border-left: 5px solid #1976D2;
-																																																																						box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-																																																																						">
+																																																																																																																																																															background: linear-gradient(135deg, #E3F2FD, #F8FBFF);
+																																																																																																																																																											padding: 1.5rem;
+																																																																																																																																																											border-radius: 12px;
+																																																																																																																																																											margin-bottom: 4rem;
+																																																																																																																																																											border-left: 5px solid #1976D2;
+																																																																																																																																																											box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+																																																																																																																																																											">
 				<div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
 					<h3 style="margin:0; color:#1976D2; font-size:1.3rem;">
 						Section de Banyuls-sur-Mer
@@ -178,18 +181,14 @@
 				<p style="font-size: 1.2rem; color: #333; margin-bottom: 1rem;">
 					<strong>Salle polyvalente 1er étage :</strong><br>
 					Place Jean Rolland<br>
-					66700 Banyuls-sur-Mer
+					66740 Saint-Genis Des Fontaines
 				</p>
 				<p style="color: #666; margin-bottom: 1.5rem;">
 					🚗 Parking gratuit disponible<br>
-					♿ Accès PMR
 				</p>
 				<div style="border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-					<iframe src="https://www.google.com/maps?q=Gymnase+Municipal+Avenue+du+Vallespir+66700+Argeles-sur-Mer&output=embed" width="100%" height="350" style="border:0; display: block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte Gymnase Municipal Argelès-sur-Mer"></iframe>
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1148.274940717713!2d2.9217390348348142!3d42.54292503904275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b07797575b280f%3A0x5c681d0436fb9ede!2sCompagnie%20des%20Archers%20des%20Alb%C3%A8res!5e1!3m2!1sfr!2sfr!4v1781614838545!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 				</div>
-				<a href="https://www.google.com/maps/dir/?api=1&destination=Gymnase+Municipal+Avenue+du+Vallespir+66700+Argeles-sur-Mer" target="_blank" rel="noopener" style="display: inline-block; margin-top: 1rem; color: #2E7D32; text-decoration: none; font-weight: 600;">
-					🧭 Obtenir l'itinéraire
-				</a>
 			</div>
 
 			{# Terrain extérieur avec sa carte #}
@@ -203,62 +202,26 @@
 				</p>
 				<p style="color: #666; margin-bottom: 1.5rem;">
 					🚗 Parking gratuit<br>
-					🌲 En pleine nature
+					🌲 En pleine nature<br>
+					♿ Accès PMR
 				</p>
 				<div style="border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
 					<iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d676.8936836851399!2d2.961361068250648!3d42.538570641903405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDLCsDMyJzE5LjgiTiAywrA1Nyc0Mi42IkU!5e0!3m2!1sfr!2sfr!4v1781532741413!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 				</div>
-				<a href="https://www.google.com/maps/dir/?api=1&destination=Chemin+de+Taxo+d'Avall+66700+Argeles-sur-Mer" target="_blank" rel="noopener" style="display: inline-block; margin-top: 1rem; color: #1976D2; text-decoration: none; font-weight: 600;">
-					🧭 Obtenir l'itinéraire
-				</a>
 			</div>
 
 			{# Salle BANYULS/MER #}
 			<div style="background: #F5F5F5; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
 				<h3 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.5rem;">SALLE BANYULS/MER</h3>
 				<p style="font-size: 1.2rem; color: #333; margin-bottom: 1rem;">
-					<strong>Salle Bartisol :</strong><br>
+					<strong>Salle Bartissol :</strong><br>
 					19 rue des angles<br>
 					66700 Banyuls-sur-Mer
-				</p>
-				<p style="color: #666; margin-bottom: 1.5rem;">
-					🚗 Parking gratuit disponible<br>
-					♿ Accès PMR
 				</p>
 				<div style="border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
 					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5885.012877374496!2d3.121824112854808!3d42.480784827343854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12ba7fbb2e4f45b7%3A0x6646268c45004ca2!2sSalle%20Polyvalente%20Bartissol!5e0!3m2!1sfr!2sfr!4v1781531797985!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 				</div>
 			</div>
-			{# Infos pratiques #}
-			<h2 class="section-title">Informations pratiques</h2>
-			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-				<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-					<div style="font-size: 2.5rem; margin-bottom: 1rem;">🎯</div>
-					<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Matériel fourni</h4>
-					<p style="color: #666;">Arcs, flèches et protections disponibles pour tous les adhérents</p>
-				</div>
-				<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-					<div style="font-size: 2.5rem; margin-bottom: 1rem;">👕</div>
-					<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Tenue conseillée</h4>
-					<p style="color: #666;">Vêtements confortables et chaussures de sport fermées</p>
-				</div>
-				<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-					<div style="font-size: 2.5rem; margin-bottom: 1rem;">📞</div>
-					<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Contact</h4>
-					<p style="color: #666;">Pour toute question, contactez-nous au 06 02 23 72 58</p>
-				</div>
-			</div>
-
-			{# CTA #}
-			<div style="background: linear-gradient(135deg, #2E7D32, #4CAF50); padding: 3rem; border-radius: 12px; text-align: center; color: white; margin-top: 4rem;">
-				<h3 style="font-size: 2rem; margin-bottom: 1rem;">Première visite ?</h3>
-				<p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-					N'hésitez pas à venir nous rencontrer lors d'un entraînement.<br>
-					Essai gratuit et sans engagement !
-				</p>
-				<a href="{{ path('app_contact') }}" class="btn-primary" style="background: white; color: #2E7D32;">Nous contacter</a>
-			</div>
-
 		</div>
 	</section>
 {% endblock %}

@@ -73,12 +73,6 @@ class PageController extends AbstractController
         return $this->render('front/history.html.twig');
     }
 
-    #[Route('/club', name: 'app_club')]
-    public function club(): Response
-    {
-        return $this->render('front/club.html.twig');
-    }
-
     #[Route('/article/{slug}', name: 'app_article_show')]
     public function articleShow(string $slug, ArticleRepository $articleRepository): Response
     {
