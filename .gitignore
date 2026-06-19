@@ -47,3 +47,10 @@ Thumbs.db
 /public/uploads/*
 !/public/uploads/.gitkeep
 ###< uploads ###
+###> generated ###
+/config/reference.php
+###< generated ###
+
+###> generated ###
+/config/reference.php
+###< generated ###
