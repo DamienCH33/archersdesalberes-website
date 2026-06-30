@@ -29,20 +29,12 @@ class DashboardController extends AbstractDashboardController
 
     public function index(): Response
     {
-        $conn = $this->userRepository->getEntityManager()->getConnection();
-
-        $adminsCount = $conn->fetchOne("
-            SELECT COUNT(*)
-            FROM \"user\"
-            WHERE roles::text LIKE '%ROLE_ADMIN%'
-        ");
-
         $stats = [
             'articles' => $this->articleRepository->count([]),
             'partners' => $this->partnerRepository->count([]),
             'photos'   => $this->photoRepository->count([]),
             'albums'   => $this->albumRepository->count([]),
-            'admins'   => (int) $adminsCount,
+            'admins'   => $this->userRepository->count([]),
         ];
 
         return $this->render('admin/dashboard.html.twig', [
@@ -56,8 +48,7 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('<img src="/images/logoarcherie-transparent.png" style="width: 40px; height: 40px; object-fit: contain;">')
             ->setFaviconPath('images/logoarcherie-transparent.png')
             ->setTranslationDomain('admin')
-            ->setDefaultColorScheme('dark')
-            ->disableDarkMode();
+            ->setDefaultColorScheme('dark');
     }
 
     public function configureUserMenu(UserInterface $user): UserMenu
@@ -85,8 +76,8 @@ class DashboardController extends AbstractDashboardController
         ]);
 
         yield MenuItem::section('Le Club');
-        yield MenuItem::linkToRoute('Chiffres clés', 'fa fa-chart-line', 'admin_club_stat_index');
-        yield MenuItem::linkToRoute('Équipe', 'fa fa-users', 'admin_team_member_index');
+        yield MenuItem::linkToRoute('Tarification', 'fa fa-euro-sign', 'admin_tarif_index');
+        yield MenuItem::linkToRoute('Histoire du club', 'fa fa-book', 'admin_club_history_index');
         yield MenuItem::linkToRoute('Partenaires', 'fa fa-handshake', 'admin_partner_index');
 
         yield MenuItem::section('Administration');
