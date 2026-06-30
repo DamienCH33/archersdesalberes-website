@@ -1,1198 +1,366 @@
-/*  ADMIN.CSS - EasyAdmin custom theme (DARK MODE ONLY)
+/*  ADMIN.CSS — Thème EasyAdmin 5 (sombre verrouillé, recoloré en vert)
     Projet : Archers des Albères
 
-    SOMMAIRE :
-    1.  Variables
-    2.  Global layout & background
-    3.  Sidebar : conteneur + logo
-    4.  Sidebar : liens du menu (texte, icônes, sections)
-    5.  Sidebar : hover & item actif
-    6.  Header
-    7.  Locale switcher + dark mode toggle (cachés)
-    8.  Welcome banner
-    9.  Section headers
-    10. Dashboard cards
-    11. Stat cards
-    12. Quick actions
-    13. Info links
-    14. System table & badges
-    15. Buttons
-    16. Tables (datagrid) + toggles "Publié"
-    17. Search input
-    18. Pagination
-    19. Misc
+    MÉTHODE (≠ ancienne version) :
+    EasyAdmin 5 est basé sur Bootstrap 5.3. Le sombre est appliqué via la classe
+    `.ea-dark-scheme` sur <body>, et TOUT le thème est piloté par des variables CSS.
+    On ne se bat donc pas avec `!important` sur des sélecteurs devinés (= ce qui
+    cassait avant, en plus de cibler des classes EA4 inexistantes en EA5).
+    On se contente de REDÉFINIR les variables d'EA5 sous `.ea-dark-scheme`.
+    Comme ce fichier est chargé APRÈS le CSS d'EA (via configureAssets), nos
+    valeurs gagnent à spécificité égale — sans `!important`.
+
+    Ce fichier contient :
+      1. Tokens verts (source unique)
+      2. Override des variables EA5 -> thème vert
+      3. 1 petit ajout : hover discret sur le menu (EA5 n'en met pas)
+      4. CSS des widgets maison du dashboard (welcome-banner, stat-card, etc.)
+
+    NB : le bloc public `.album-*` / `.lightbox` N'EST PAS ici — il est en thème
+    clair et va dans public/css/style.css. Je l'ai retiré (il n'a rien à faire
+    dans le thème admin).
 */
 
-/* 1. VARIABLES */
-
+/* ============================================================
+   1. TOKENS VERTS (source unique, réutilisés partout)
+   ============================================================ */
 :root {
-    --color-primary: #66bb6a;
-    --color-primary-dark: #2e7d32;
-    --color-primary-light: #81c784;
+    --ar-green: #66bb6a;
+    --ar-green-light: #81c784;
+    --ar-green-lighter: #a5d6a7;
+    --ar-green-dark: #2e7d32;
+    --ar-green-darker: #1b5e20;
 
-    --body-bg: #0a1f0d;
-    --card-bg: #1e2e22;
-    --text: #e8f5e9;
+    --ar-text: #e8f5e9;
+    --ar-text-muted: #c8e6c9;
 
-    --sidebar-bg: linear-gradient(180deg, #1b3a1f, #0f2f14);
-    --sidebar-text: #e8f5e9;
-    --sidebar-text-muted: #81c784;
-    --sidebar-hover: rgba(129, 199, 132, 0.15);
-    --sidebar-active: rgba(129, 199, 132, 0.25);
+    --ar-bg: #0a1f0d;
+    --ar-bg-2: #122e16;
+    --ar-sidebar: #0f2f14;
+    --ar-surface: #1e2e22;
+    --ar-surface-2: #1b3a1f;
+    --ar-surface-3: #243528;
+
+    --ar-border: rgba(129, 199, 132, 0.18);
+    --ar-border-soft: rgba(129, 199, 132, 0.1);
+    --ar-hover: rgba(129, 199, 132, 0.12);
+
+    --ar-radius: 8px;
+    --ar-radius-lg: 16px;
+    --ar-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    --ar-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --ar-grad-deep: linear-gradient(135deg, #1b5e20, #2e7d32);
+    --ar-grad-primary: linear-gradient(135deg, #2e7d32, #66bb6a);
 }
 
-/* 2. GLOBAL LAYOUT & BACKGROUND */
+/* ============================================================
+   2. OVERRIDE DES VARIABLES EA5 -> THÈME VERT
+   (tous ces noms existent dans le bloc .ea-dark-scheme d'EA5)
+   ============================================================ */
+.ea-dark-scheme {
+    /* --- Accent & liens (étaient bleus) --- */
+    --color-primary: var(--ar-green-light);
+    --link-color: var(--ar-green-light);
+    --link-color-rgb: 129, 199, 132;
 
-.ea-app,
-.ea-app #main,
-.ea-app .content-wrapper {
-    background: linear-gradient(135deg, #0a1f0d, #122e16) !important;
+    /* --- Fonds généraux --- */
+    --body-bg: var(--ar-bg);
+    --content-bg: var(--ar-bg-2);
+    --primary-bg: #2e4a32;
+    --secondary-bg: var(--ar-surface-2);
+    --tertiary-bg: var(--ar-bg-2);
+
+    /* --- Texte --- */
+    --text-color: var(--ar-text);
+    --text-color-rgb: 232, 245, 233;
+    --text-color-dark: #ffffff;
+    --text-color-light: var(--ar-text-muted);
+    --text-primary-color: var(--ar-text);
+    --text-secondary-color: var(--ar-text-muted);
+    --text-tertiary-color: var(--ar-green-lighter);
+
+    /* --- Bordures --- */
+    --border-primary-color: var(--ar-border);
+    --border-secondary-color: var(--ar-border-soft);
+    --content-section-border-color: var(--ar-border);
+    --content-top-border-color: var(--ar-border);
+
+    /* --- Sidebar / menu --- */
+    --sidebar-bg: var(--ar-sidebar);
+    --sidebar-border-color: var(--ar-border);
+    --sidebar-logo-color: var(--ar-text);
+    --sidebar-menu-color: var(--ar-text);
+    --sidebar-menu-icon-color: var(--ar-text-muted);
+    --sidebar-menu-header-color: var(--ar-green-light);
+    --sidebar-menu-submenu-color: var(--ar-text-muted);
+    --sidebar-menu-active-item-bg: var(--ar-green-dark); /* était gris clair */
+    --sidebar-menu-active-item-color: #ffffff;
+    --sidebar-menu-badge-bg: var(--ar-surface-2);
+    --sidebar-menu-badge-color: var(--ar-text-muted);
+
+    /* --- Boutons primaires (étaient bleus) --- */
+    --button-focus-outline-color: rgba(102, 187, 106, 0.55);
+    --button-primary-bg: var(--ar-green-dark);
+    --button-primary-color: #ffffff;
+    --button-primary-icon-color: rgba(255, 255, 255, 0.9);
+    --button-primary-border-color: rgba(255, 255, 255, 0.15);
+    --button-primary-hover-bg: #388e3c;
+    --button-primary-hover-color: #ffffff;
+    --button-primary-hover-border-color: rgba(255, 255, 255, 0.2);
+    --button-primary-active-bg: #43a047;
+    --button-primary-active-color: #ffffff;
+
+    /* --- Tableaux (datagrid) --- */
+    --table-thead-color: var(--ar-text);
+    --table-cell-color: var(--ar-text);
+    --table-cell-border-color: var(--ar-border-soft);
+    --table-hover-cell-bg: var(--ar-hover);
+
+    /* --- Pagination (était bleue) --- */
+    --pagination-active-bg: var(--ar-green-dark);
+    --pagination-active-color: #ffffff;
+    --pagination-hover-border-color: var(--ar-green);
+
+    /* --- Formulaires --- */
+    --form-label-color: var(--ar-text);
+    --form-control-bg: var(--ar-bg-2);
+    --form-input-text-color: var(--ar-text);
+    --form-input-border-color: rgba(129, 199, 132, 0.25);
+    --form-input-hover-border-color: var(--ar-green);
+    --form-input-group-text-bg: var(--ar-surface-2);
+    --form-input-group-text-border-color: var(--ar-border);
+
+    /* --- Switch "Publié" + cases à cocher (étaient bleus) --- */
+    --form-switch-checked-bg: var(--ar-green-dark);
+    --form-type-check-input-checked-bg: var(--ar-green-dark);
+
+    /* --- Éditeur de texte riche (toolbar) --- */
+    --form-type-text-editor-toolbar-bg: var(--ar-surface-2);
+
+    /* --- Autocomplétion EA5 (champs d'association : Album, Photos...) --- */
+    --form-type-autocomplete-dropdown-bg: var(--ar-surface-2);
+    --form-type-autocomplete-dropdown-input-wrapper-bg: var(--ar-bg-2);
+    --form-type-autocomplete-dropdown-active-item-bg: var(--ar-hover);
+    --form-type-autocomplete-multi-item-bg: var(--ar-green-dark);
+
+    /* --- Menus déroulants d'actions --- */
+    --dropdown-bg: var(--ar-bg-2);
+    --dropdown-border-color: var(--ar-border);
+    --dropdown-color: var(--ar-text-muted);
+    --dropdown-link-color: var(--ar-text-muted);
+    --dropdown-link-hover-bg: var(--ar-hover);
+
+    /* --- Modale (confirmation de suppression) --- */
+    --modal-bg: var(--ar-surface);
+    --modal-header-bg: var(--ar-bg-2);
+    --modal-footer-bg: var(--ar-surface-2);
+
+    /* --- Popover --- */
+    --popover-bg: var(--ar-bg-2);
+    --popover-border-color: var(--ar-border);
+
+    /* --- Divers --- */
+    --resize-handler-hover-bg: var(--ar-green);
 }
 
-.ea-app .content-header {
-    background: var(--body-bg) !important;
+/* ============================================================
+   3. PETIT AJOUT : hover discret sur les items de menu
+   EA5 ne met PAS de fond au survol dans la sidebar étendue.
+   (pas de margin -> aucun saut de mise en page)
+   ============================================================ */
+.ea-dark-scheme
+    #main-menu
+    .menu
+    .menu-item:not(.active)
+    .menu-item-contents:hover {
+    background: var(--ar-hover);
+    border-radius: var(--ar-radius);
 }
 
-/* 3. SIDEBAR : CONTENEUR + LOGO */
-
-.ea-app .sidebar,
-.ea-sidebar,
-#main-sidebar,
-.sidebar {
-    background: linear-gradient(180deg, #1b3a1f, #0f2f14) !important;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.4);
-}
-
-/* Logo : centrage + dimensions */
-.sidebar .main-header,
-.main-header .navbar,
-#header-logo,
-.ea-sidebar .sidebar-header,
-.ea-app .sidebar .sidebar-header,
-#main-sidebar .logo,
-#main-sidebar .sidebar-header,
-.sidebar .logo,
-.sidebar .sidebar-header,
-header.logo,
-.main-sidebar > header {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important;
-    text-align: center !important;
-    padding: 1.5rem 0 1rem !important;
-}
-
-#header-logo a.logo .logo-custom img,
-.main-header .logo-custom img,
-.sidebar a.logo img,
-.ea-sidebar .sidebar-header img,
-.ea-app .sidebar .sidebar-header img,
-#main-sidebar img,
-.sidebar img,
-header.logo img,
-.main-sidebar header img {
-    width: 90px !important;
-    height: 90px !important;
-    max-width: 90px !important;
-    max-height: 90px !important;
-    object-fit: contain !important;
-    display: block !important;
-    margin: 0 auto !important;
-    filter: drop-shadow(0 0 8px rgba(129, 199, 132, 0.3));
-}
-
-/* Encadrement subtil du bloc logo */
-#main-sidebar header.logo,
-.sidebar header.logo {
-    background: rgba(129, 199, 132, 0.08);
-    border-bottom: 1px solid rgba(129, 199, 132, 0.2);
-}
-
-/* Suppression du carré au survol du logo */
-.sidebar .main-header,
-.sidebar .main-header:hover,
-.sidebar .main-header .navbar,
-.sidebar #header-logo,
-.sidebar #header-logo:hover,
-.sidebar a.logo,
-.sidebar a.logo:hover,
-.sidebar a.logo:focus,
-.sidebar a.logo:active,
-.main-header a.logo,
-.main-header a.logo:hover,
-.main-header a.logo:focus,
-.main-header .navbar a.logo,
-.main-header .navbar a.logo:hover,
-.ea-sidebar .sidebar-header a,
-.ea-sidebar .sidebar-header a:hover,
-.ea-sidebar .sidebar-header a:focus,
-#main-sidebar .sidebar-header a,
-#main-sidebar .sidebar-header a:hover,
-#main-sidebar .sidebar-header a:focus,
-header.logo a,
-header.logo a:hover,
-header.logo a:focus {
-    background: transparent !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-    border-bottom: none !important;
-    border-radius: 0 !important;
-    outline: none !important;
-}
-
-/* 4. SIDEBAR : LIENS DU MENU */
-
-.ea-sidebar a,
-.ea-sidebar .main-menu a,
-.ea-sidebar .nav-link,
-.ea-sidebar li a,
-.ea-app .sidebar a,
-.ea-app .sidebar .main-menu a,
-#main-sidebar a,
-.sidebar a {
-    color: #e8f5e9 !important;
-    font-size: 1rem !important;
-    font-weight: 500 !important;
-}
-
-/* Icônes du menu */
-.ea-sidebar a i,
-.ea-sidebar .main-menu a i,
-.ea-sidebar .nav-icon,
-.ea-app .sidebar a i,
-#main-sidebar a i,
-.sidebar a i {
-    color: #c8e6c9 !important;
-    opacity: 1 !important;
-    font-size: 1.1rem !important;
-}
-
-/* Titres de section (CONTENU, LE CLUB, ADMINISTRATION) */
-.ea-sidebar .menu-header,
-.ea-sidebar .main-menu .menu-header,
-.ea-app .sidebar .menu-header,
-#main-sidebar .menu-header,
-.sidebar .menu-header {
-    color: #81c784 !important;
-    font-size: 0.78rem !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1.5px !important;
-    font-weight: 700 !important;
-    border-top: 1px solid rgba(129, 199, 132, 0.15);
-    padding-top: 1rem !important;
-    margin-top: 0.5rem;
-}
-
-#main-sidebar .menu-header:first-of-type,
-.sidebar .menu-header:first-of-type {
-    border-top: none !important;
-    padding-top: 0.5rem !important;
-}
-
-/* 5. SIDEBAR : HOVER & ITEM ACTIF */
-
-#main-sidebar a:hover,
-.sidebar a:hover {
-    background: rgba(129, 199, 132, 0.12) !important;
-    color: #ffffff !important;
-    border-radius: 8px !important;
-    margin: 0 0.5rem;
-    transition: all 0.2s ease;
-}
-
-/* Item actif (ciblage HTML réel : .menu-item.active > .menu-item-contents) */
-.menu .menu-item.active > .menu-item-contents,
-#main-menu .menu-item.active > .menu-item-contents,
-#main-sidebar a.active,
-#main-sidebar .menu-item.active a,
-.sidebar a.active {
-    background: linear-gradient(135deg, #1b5e20, #2e7d32) !important;
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    border-left: 4px solid #66bb6a !important;
-    border-radius: 0 8px 8px 0 !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.menu .menu-item.active > .menu-item-contents .menu-icon,
-.menu .menu-item.active > .menu-item-contents .menu-icon i,
-.menu .menu-item.active > .menu-item-contents .menu-item-label {
-    color: #ffffff !important;
-}
-
-/* 6. HEADER */
-
-.ea-app .content-header,
-.ea-app .navbar,
-.ea-app .main-header,
-.ea-header,
-header[data-controller],
-#main-header,
-main > header:first-child {
-    border-bottom: 2px solid #66bb6a !important;
-    background: rgba(15, 47, 20, 0.5) !important;
-    backdrop-filter: blur(8px);
-}
-
-/* 7. LOCALE SWITCHER + DARK MODE TOGGLE (cachés) */
-
-/* Locale switcher */
-.ea-app .user-menu-wrapper .locale-switcher,
-.ea-app .user-menu select[name="ea-locale"],
-.ea-app #locale-switcher,
-.ea-app .dropdown-menu .locale-switcher,
-.ea-app [data-ea-locale],
-.ea-app .dropdown-menu .form-group:has(select[name*="locale"]),
-.ea-app .dropdown-menu div:has(> select[name*="locale"]) {
-    display: none !important;
-}
-
-/* Switch clair/sombre dans le user menu */
-.ea-app .dropdown-menu [data-ea-color-scheme-toggler],
-.ea-app .dropdown-menu .color-scheme-toggler,
-.ea-app .dropdown-menu form[action*="color-scheme"],
-.ea-app .dropdown-menu .dropdown-item:has(input[name*="color-scheme"]),
-.ea-app .dropdown-menu .dropdown-item:has(button[name*="color-scheme"]),
-.ea-app .user-menu-wrapper [data-ea-color-scheme-toggler] {
-    display: none !important;
-}
-
-/* Barre de recherche (header global) */
-aside.content-top.ea-search-enabled .content-search,
-.content-top .content-search,
-form.form-action-search,
-.content-search {
-    display: none !important;
-}
-
-/* Avatar + nom utilisateur (header haut à droite) */
-.navbar-custom-menu,
-.navbar-custom-menu .user-menu-wrapper,
-.dropdown.user-menu-wrapper,
-.user-menu-wrapper {
-    display: none !important;
-}
-
-/* Si la barre de recherche disparaît, l'aside content-top devient inutile */
-aside.content-top.ea-search-enabled {
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    min-height: 0 !important;
-}
-
-/* 8. WELCOME BANNER */
+/* ============================================================
+   4. WIDGETS MAISON DU DASHBOARD
+   (classes de templates/admin/dashboard.html.twig — pas du EA,
+    donc vrai CSS nécessaire ; pas besoin de !important)
+   ============================================================ */
 
 .welcome-banner {
-    background: linear-gradient(135deg, #1b5e20, #2e7d32) !important;
-    color: white;
+    background: var(--ar-grad-deep);
+    color: #ffffff;
     padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(129, 199, 132, 0.2);
+    border-radius: var(--ar-radius-lg);
+    box-shadow: var(--ar-shadow-lg);
+    border: 1px solid var(--ar-border);
+    margin-bottom: 1.5rem;
 }
-
 .welcome-banner h1,
 .welcome-banner h2,
 .welcome-banner p,
-.welcome-banner p i {
-    color: #ffffff !important;
+.welcome-content,
+.welcome-content * {
+    color: #ffffff;
 }
-
-/* 9. SECTION HEADERS */
-
-.section-header {
-    border-bottom: 2px solid #66bb6a !important;
-    margin: 2rem 0 1rem;
-    padding-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.section-header h3 {
-    color: #e8f5e9 !important;
-}
-
-.section-header-small {
-    margin: 0 0 1rem;
-}
-
-/* Titres principaux du contenu (H1, H2 des pages liste/édition) */
-.ea-content h1,
-.ea-content h2,
-.ea-content .content-header-title,
-.ea-content .title,
-.ea-content .page-title,
-main h1,
-main h2,
-.content-header h1 {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-/* 10. DASHBOARD CARDS */
 
 .dashboard-card {
-    background: rgba(30, 46, 34, 0.85) !important;
-    backdrop-filter: blur(10px);
-    padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid rgba(129, 199, 132, 0.15);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    background: var(--ar-surface);
+    padding: 1.75rem;
+    border-radius: var(--ar-radius-lg);
+    border: 1px solid var(--ar-border);
+    box-shadow: var(--ar-shadow);
+    height: 100%;
 }
 
-/* 11. STAT CARDS */
-
+/* --- Stat cards --- */
 .stat-card {
-    padding: 2rem 1.5rem;
-    border-radius: 16px;
-    color: white;
+    padding: 1.75rem 1.5rem;
+    border-radius: var(--ar-radius-lg);
+    color: #ffffff;
     text-align: center;
-    background: linear-gradient(135deg, #1b5e20, #2e7d32) !important;
-    border: 1px solid rgba(129, 199, 132, 0.25);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    background: var(--ar-grad-deep);
+    border: 1px solid var(--ar-border);
+    box-shadow: var(--ar-shadow);
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
-    cursor: pointer;
+    height: 100%;
 }
-
 .stat-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--ar-shadow-lg);
 }
-
 .stat-card.purple {
-    background: linear-gradient(135deg, #4a148c, #6a1b9a) !important;
-    border-color: rgba(186, 104, 200, 0.25);
+    background: linear-gradient(135deg, #4a148c, #6a1b9a);
 }
-
 .stat-card.blue {
-    background: linear-gradient(135deg, #0d47a1, #1565c0) !important;
-    border-color: rgba(100, 181, 246, 0.25);
+    background: linear-gradient(135deg, #0d47a1, #1565c0);
 }
-
 .stat-card.green {
-    background: linear-gradient(135deg, #1b5e20, #388e3c) !important;
-    border-color: rgba(129, 199, 132, 0.25);
+    background: linear-gradient(135deg, #1b5e20, #388e3c);
 }
 
+.stat-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .stat-icon {
-    font-size: 2.5rem !important;
+    font-size: 2.25rem;
     margin-bottom: 0.5rem;
+    color: #ffffff;
 }
-
 .stat-number {
-    font-size: 2.5rem !important;
+    font-size: 2.25rem;
     font-weight: 700;
-    line-height: 1.2;
-    color: #ffffff !important;
+    line-height: 1.1;
+    color: #ffffff;
 }
-
 .stat-label {
-    font-size: 1.1rem !important;
+    font-size: 1.05rem;
     font-weight: 500;
     margin-bottom: 0.8rem;
-    color: #ffffff !important;
+    color: #ffffff;
 }
 
-.stat-card .btn-light,
-.stat-card a.btn {
-    background: rgba(255, 255, 255, 0.2) !important;
-    border: 2px solid #ffffff !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    font-size: 1rem !important;
-    padding: 0.5rem 1.2rem !important;
-    border-radius: 8px;
-    transition: background 0.2s;
+.stat-card .btn,
+.stat-card .btn-light {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: var(--ar-radius);
+    transition: background 0.2s ease;
+}
+.stat-card .btn:hover,
+.stat-card .btn-light:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
 }
 
-.stat-card .btn-light:hover,
-.stat-card a.btn:hover {
-    background: rgba(255, 255, 255, 0.35) !important;
-    color: #ffffff !important;
+/* --- Section headers --- */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 2px solid var(--ar-green);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+}
+.section-header.section-header-small {
+    margin: 0 0 1rem;
+}
+.section-header h2,
+.section-header h3 {
+    color: var(--ar-text);
+    margin: 0;
+}
+.section-icon {
+    color: var(--ar-green-light);
 }
 
-/* 12. QUICK ACTIONS */
-
+/* --- Quick actions --- */
 .action-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     gap: 1rem;
 }
-
 .action-btn {
-    background: rgba(129, 199, 132, 0.08) !important;
-    border: 2px solid #66bb6a !important;
-    color: #c8e6c9 !important;
+    display: block;
+    text-align: center;
+    text-decoration: none;
     padding: 1rem;
     border-radius: 10px;
-    text-decoration: none;
-    text-align: center;
     font-weight: 500;
-    backdrop-filter: blur(8px);
+    background: rgba(129, 199, 132, 0.08);
+    border: 1px solid var(--ar-green);
+    color: var(--ar-text-muted);
     transition: all 0.2s ease;
 }
-
 .action-btn:hover {
-    background: #66bb6a !important;
-    color: #0a1f0d !important;
+    background: var(--ar-green);
+    color: var(--ar-bg);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(102, 187, 106, 0.4);
+    box-shadow: 0 6px 16px rgba(102, 187, 106, 0.35);
 }
 
-/* 13. INFO LINKS */
-
+/* --- Info links --- */
+.info-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
 .info-link {
     display: block;
-    padding: 0.8rem;
-    color: #81c784 !important;
-    text-decoration: none;
+    padding: 0.7rem 0.8rem;
     border-radius: 6px;
-    transition: background 0.2s;
+    color: var(--ar-green-light);
+    text-decoration: none;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
 }
-
 .info-link:hover {
-    background: rgba(129, 199, 132, 0.1) !important;
-    color: #c8e6c9 !important;
+    background: rgba(129, 199, 132, 0.1);
+    color: var(--ar-text-muted);
 }
 
-/* 14. SYSTEM TABLE & BADGES */
-
+/* --- System table + env badges --- */
 .system-table {
     width: 100%;
 }
-
 .system-table td {
-    padding: 0.6rem 0;
-    color: #c8e6c9;
+    padding: 0.55rem 0;
+    color: var(--ar-text-muted);
 }
-
 .env-badge {
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 600;
 }
-
 .env-badge.env-prod {
-    background: rgba(46, 125, 50, 0.3) !important;
-    color: #81c784 !important;
+    background: rgba(46, 125, 50, 0.3);
+    color: var(--ar-green-light);
 }
-
 .env-badge.env-dev {
-    background: rgba(230, 81, 0, 0.25) !important;
-    color: #ffab91 !important;
-}
-
-/* 15. BUTTONS */
-
-.ea-app .btn-primary,
-.btn-primary,
-.action-new,
-a.btn-primary,
-button.btn-primary {
-    background: linear-gradient(135deg, #2e7d32, #66bb6a) !important;
-    border: none !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    border-radius: 8px !important;
-    padding: 0.5rem 1.2rem !important;
-    box-shadow: 0 2px 8px rgba(102, 187, 106, 0.3);
-    transition: all 0.2s ease;
-}
-
-.btn-primary:hover,
-.action-new:hover,
-a.btn-primary:hover,
-button.btn-primary:hover {
-    background: linear-gradient(135deg, #66bb6a, #81c784) !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(102, 187, 106, 0.5);
-    color: #ffffff !important;
-}
-
-/* 16. TABLES + TOGGLES "PUBLIÉ" */
-
-.ea-content table,
-table.datagrid,
-.table {
-    background: #1e2e22 !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
-    border: 1px solid rgba(129, 199, 132, 0.1);
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
-}
-
-.ea-content table thead th,
-table.datagrid thead th {
-    background: linear-gradient(180deg, #2e7d32, #1b5e20) !important;
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    border-bottom: 2px solid #81c784 !important;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-    padding: 0.9rem 1rem !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-/* Liens de tri (titres de colonnes cliquables) */
-.ea-content table thead th a,
-.ea-content table thead th .column-label,
-table.datagrid thead th a {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-}
-
-/* Icônes de tri (flèches haut/bas) */
-.ea-content table thead th i,
-table.datagrid thead th i {
-    color: #c8e6c9 !important;
-    opacity: 0.9 !important;
-}
-
-.ea-content table tbody tr,
-table.datagrid tbody tr {
-    background: #1e2e22 !important;
-    transition: background 0.15s ease;
-}
-
-.ea-content table tbody tr:nth-child(even),
-table.datagrid tbody tr:nth-child(even) {
-    background: #243528 !important;
-}
-
-.ea-content table tbody tr:hover,
-table.datagrid tbody tr:hover {
-    background: rgba(102, 187, 106, 0.12) !important;
-}
-
-.ea-content table tbody td,
-table.datagrid tbody td {
-    color: #e8f5e9 !important;
-    border-bottom: 1px solid rgba(129, 199, 132, 0.08) !important;
-    padding: 0.85rem 1rem !important;
-}
-
-.ea-content table tbody tr:last-child td,
-table.datagrid tbody tr:last-child td {
-    border-bottom: none !important;
-}
-
-.ea-content table tbody td a {
-    color: #81c784 !important;
-}
-
-.ea-content table tbody td a:hover {
-    color: #c8e6c9 !important;
-}
-
-/* Toggles "Publié" Bootstrap 5 */
-.ea-content input[type="checkbox"][role="switch"]:checked,
-.ea-content .form-check-input:checked,
-.ea-content .form-switch .form-check-input:checked,
-.ea-content td input[type="checkbox"]:checked,
-table.datagrid .form-check-input:checked,
-table.datagrid input[type="checkbox"][role="switch"]:checked {
-    background-color: #66bb6a !important;
-    border-color: #66bb6a !important;
-}
-
-.ea-content input[type="checkbox"][role="switch"]:focus,
-.ea-content .form-check-input:focus,
-.ea-content .form-switch .form-check-input:focus,
-table.datagrid input[type="checkbox"][role="switch"]:focus {
-    border-color: #81c784 !important;
-    box-shadow: 0 0 0 0.25rem rgba(102, 187, 106, 0.25) !important;
-}
-
-/* 17. SEARCH INPUT */
-
-.form-search input,
-input[type="search"] {
-    background: rgba(30, 46, 34, 0.8) !important;
-    border: 2px solid rgba(129, 199, 132, 0.3) !important;
-    color: #e8f5e9 !important;
-    border-radius: 8px !important;
-    transition: border-color 0.2s ease;
-}
-
-.form-search input:focus,
-input[type="search"]:focus {
-    border-color: #66bb6a !important;
-    box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.2) !important;
-    outline: none !important;
-}
-
-/* 18. PAGINATION */
-
-.pagination .page-item.active .page-link {
-    background: #66bb6a !important;
-    border-color: #66bb6a !important;
-    color: #0a1f0d !important;
-}
-
-.pagination .page-link {
-    background: transparent !important;
-    color: #81c784 !important;
-    border-color: rgba(129, 199, 132, 0.2) !important;
-}
-
-.pagination .page-link:hover {
-    background: rgba(129, 199, 132, 0.1) !important;
-    color: #c8e6c9 !important;
-}
-
-/* 19. MISC */
-
-input[type="checkbox"]:checked {
-    accent-color: #66bb6a !important;
-}
-
-/* 20. PANNEAUX DE FORMULAIRE (FormField::addPanel) */
-
-.ea-content .form-panel,
-.ea-content fieldset.form-panel {
-    background: rgba(30, 46, 34, 0.6) !important;
-    border: 1px solid rgba(129, 199, 132, 0.2) !important;
-    border-radius: 12px !important;
-    padding: 1.5rem !important;
-    margin-bottom: 1.5rem !important;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.ea-content .form-panel-header,
-.ea-content .form-panel legend,
-.ea-content fieldset.form-panel legend {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    font-size: 1.1rem !important;
-    border-bottom: 2px solid #66bb6a !important;
-    padding-bottom: 0.6rem !important;
-    margin-bottom: 1rem !important;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-.ea-content .form-panel-header i,
-.ea-content .form-panel legend i {
-    color: #81c784 !important;
-}
-
-/* 21. ICÔNES DES ACTIONS (modifier / supprimer dans la liste) */
-
-.ea-content table td .actions a,
-.ea-content table td .dropdown-item,
-.ea-content .action-edit,
-.ea-content .action-delete,
-.ea-content .action-detail {
-    color: #c8e6c9 !important;
-    transition: color 0.2s ease;
-}
-
-.ea-content .action-edit:hover {
-    color: #81c784 !important;
-}
-
-.ea-content .action-delete:hover {
-    color: #ff8a80 !important;
-}
-
-/* 22. FORMULAIRES (création / édition) */
-
-/* Labels des champs (Titre, URL, Catégorie, Contenu...) */
-.ea-content form label,
-.ea-content .form-label,
-.ea-content .form-group label,
-.ea-content .form-group > label,
-.ea-edit form label,
-.ea-new form label,
-form .form-label,
-.field-collection-item label,
-fieldset label {
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    font-size: 0.95rem !important;
-    margin-bottom: 0.4rem !important;
-    opacity: 1 !important;
-}
-
-/* Astérisque rouge des champs requis */
-.ea-content form label .required,
-.ea-content .form-label.required::after,
-.ea-content label.required::after {
-    color: #ff8a80 !important;
-}
-
-/* Textes d'aide sous les champs (genre "Le titre de l'actualité") */
-.ea-content form .form-help,
-.ea-content form .help-text,
-.ea-content .form-text,
-.ea-content small.form-text,
-.ea-content .field-description,
-form .form-text,
-form small {
-    color: #a5d6a7 !important;
-    opacity: 0.95 !important;
-    font-size: 0.85rem !important;
-}
-
-/* Légendes / fieldsets */
-.ea-content fieldset legend,
-.ea-content .form-fieldset-title,
-.ea-content .form-tabs-tablist .nav-link {
-    color: #c8e6c9 !important;
-    font-weight: 700 !important;
-}
-
-/* Onglets actifs des formulaires */
-.ea-content .form-tabs-tablist .nav-link.active {
-    color: #ffffff !important;
-    background: rgba(102, 187, 106, 0.15) !important;
-    border-color: #66bb6a !important;
-}
-
-/* Champs texte / textarea / select */
-.ea-content form input[type="text"],
-.ea-content form input[type="email"],
-.ea-content form input[type="url"],
-.ea-content form input[type="number"],
-.ea-content form input[type="password"],
-.ea-content form input[type="date"],
-.ea-content form input[type="datetime-local"],
-.ea-content form input[type="time"],
-.ea-content form textarea,
-.ea-content form select,
-.ea-content .form-control,
-.ea-content .form-select {
-    background: #243528 !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(129, 199, 132, 0.3) !important;
-    border-radius: 8px !important;
-}
-
-.ea-content form input:focus,
-.ea-content form textarea:focus,
-.ea-content form select:focus,
-.ea-content .form-control:focus,
-.ea-content .form-select:focus {
-    background: #2a3d2e !important;
-    border-color: #66bb6a !important;
-    box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.2) !important;
-    color: #ffffff !important;
-}
-
-/* Placeholders */
-.ea-content form input::placeholder,
-.ea-content form textarea::placeholder {
-    color: rgba(200, 230, 201, 0.5) !important;
-}
-
-/* Champ readonly (URL générée auto) */
-.ea-content form input[readonly],
-.ea-content form input:read-only {
-    background: #1a2820 !important;
-    color: #c8e6c9 !important;
-    cursor: not-allowed;
-}
-
-/* Éditeur WYSIWYG (toolbar + zone) */
-.ea-content .trix-toolbar,
-.ea-content trix-toolbar {
-    background: #2e4a32 !important;
-    border: 1px solid rgba(129, 199, 132, 0.3) !important;
-    border-radius: 8px 8px 0 0 !important;
-}
-
-.ea-content .trix-toolbar .trix-button,
-.ea-content trix-toolbar button {
-    color: #e8f5e9 !important;
-    background: transparent !important;
-}
-
-.ea-content .trix-toolbar .trix-button:hover,
-.ea-content trix-toolbar button:hover {
-    background: rgba(129, 199, 132, 0.15) !important;
-}
-
-.ea-content trix-editor,
-.ea-content .trix-content {
-    background: #243528 !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(129, 199, 132, 0.3) !important;
-    border-top: none !important;
-    border-radius: 0 0 8px 8px !important;
-    min-height: 150px !important;
-}
-
-/* Input file (Choisir un fichier) */
-.ea-content form input[type="file"],
-.ea-content .form-control-file,
-.ea-content .ea-fileupload .input-group {
-    background: #243528 !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(129, 199, 132, 0.3) !important;
-    border-radius: 8px !important;
-}
-
-.ea-content .ea-fileupload .input-group-text,
-.ea-content .ea-fileupload .btn,
-.ea-content .ea-fileupload button,
-.ea-content .input-group .btn-secondary,
-.ea-content .input-group-append .btn {
-    background: #2e4a32 !important;
-    color: #ffffff !important;
-    border-color: rgba(129, 199, 132, 0.3) !important;
-}
-
-/* Icônes (dossier, cadenas, etc.) à côté des inputs */
-.ea-content .form-widget i,
-.ea-content .input-group i,
-.ea-content .input-group svg,
-.ea-content .input-group-text i,
-.ea-content .input-group-text svg,
-.ea-content button.btn-secondary i,
-.ea-content button.btn-secondary svg {
-    color: #c8e6c9 !important;
-    fill: #c8e6c9 !important;
-    opacity: 1 !important;
-}
-
-/* Texte "Choisir un fichier" placeholder */
-.ea-content .ea-fileupload .form-control,
-.ea-content input[type="file"]::file-selector-button {
-    color: #ffffff !important;
-    background: #243528 !important;
-}
-
-/* Quand aucun fichier choisi */
-.ea-content .ea-fileupload .input-group .form-control[readonly],
-.ea-content .ea-fileupload input[readonly] {
-    color: rgba(200, 230, 201, 0.6) !important;
-    background: #1a2820 !important;
-}
-
-/* Toggle "Publié" dans formulaire */
-.ea-content .form-switch label,
-.ea-content .form-check label {
-    color: #ffffff !important;
-}
-
-/* Toggle off (background gris foncé visible) */
-.ea-content .form-switch .form-check-input:not(:checked),
-.ea-content input[type="checkbox"][role="switch"]:not(:checked) {
-    background-color: #4a5d4f !important;
-    border-color: #6b7d70 !important;
-}
-
-/* Boutons "Créer et ajouter" / "Enregistrer" en haut à droite */
-.ea-content .form-actions,
-.ea-content .global-actions {
-    gap: 0.5rem;
-}
-
-.ea-content .btn-secondary,
-.ea-content button.btn-secondary,
-.ea-content a.btn-secondary {
-    background: rgba(129, 199, 132, 0.1) !important;
-    color: #ffffff !important;
-    border: 1px solid #66bb6a !important;
-    font-weight: 600 !important;
-}
-
-.ea-content .btn-secondary:hover {
-    background: rgba(129, 199, 132, 0.25) !important;
-    color: #ffffff !important;
-}
-
-/* Date picker icône */
-.ea-content input[type="date"]::-webkit-calendar-picker-indicator,
-.ea-content input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-    filter: invert(1) brightness(1.5);
-    cursor: pointer;
-}
-/* =========================================================
-   ALBUM SHOW — Page galerie photos d'un album
-   À ajouter à la fin de public/css/style.css
-   ========================================================= */
-
-.album-hero {
-    min-height: 280px;
-    display: flex;
-    align-items: center;
-    padding: 3rem 0;
-    background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%);
-}
-
-.album-back-link {
-    color: #2e7d32;
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    transition: gap 0.2s ease;
-}
-
-.album-back-link:hover {
-    gap: 0.75rem;
-    color: #1b5e20;
-}
-
-.album-badge {
-    display: inline-block;
-    padding: 0.4rem 1rem;
-    background: rgba(46, 125, 50, 0.1);
-    color: #2e7d32;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.album-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    margin: 0 0 1rem;
-    line-height: 1.2;
-}
-
-.album-meta {
-    color: #666;
-    font-size: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.album-meta-separator {
-    opacity: 0.5;
-}
-
-.album-section {
-    padding: 3rem 0;
-}
-
-.photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
-}
-
-.photo-item {
-    position: relative;
-    aspect-ratio: 1;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    background: #f5f5f5;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-    border: none;
-    padding: 0;
-    width: 100%;
-}
-
-.photo-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.photo-item:focus-visible {
-    outline: 3px solid #2e7d32;
-    outline-offset: 3px;
-}
-
-.photo-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-    display: block;
-}
-
-.photo-item:hover img {
-    transform: scale(1.05);
-}
-
-.photo-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to bottom,
-        transparent 50%,
-        rgba(0, 0, 0, 0.75)
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
-    align-items: flex-end;
-    padding: 1rem;
-}
-
-.photo-item:hover .photo-overlay,
-.photo-item:focus .photo-overlay {
-    opacity: 1;
-}
-
-.photo-overlay p,
-.photo-overlay span {
-    color: white;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin: 0;
-    text-align: left;
-}
-
-.photo-overlay span {
-    font-weight: 600;
-}
-
-.album-empty {
-    text-align: center;
-    padding: 5rem 2rem;
-    background: #f5f5f5;
-    border-radius: 12px;
-}
-
-.album-empty-icon {
-    font-size: 5rem;
-    margin-bottom: 1rem;
-}
-
-.album-empty h3 {
-    color: #666;
-    margin: 0 0 0.5rem;
-}
-
-.album-empty p {
-    color: #666;
-    margin: 0;
-}
-
-/* LIGHTBOX */
-.lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lightbox[hidden] {
-    display: none;
-}
-
-.lightbox-close,
-.lightbox-btn {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    z-index: 10;
-}
-
-.lightbox-close:hover,
-.lightbox-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: scale(1.1);
-}
-
-.lightbox-close {
-    top: 1.5rem;
-    right: 1.5rem;
-}
-.lightbox-prev {
-    left: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.lightbox-next {
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.lightbox-prev:hover {
-    transform: translateY(-50%) scale(1.1);
-}
-.lightbox-next:hover {
-    transform: translateY(-50%) scale(1.1);
-}
-
-.lightbox-content {
-    max-width: 90vw;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.lightbox-content img {
-    max-width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-}
-
-.lightbox-caption {
-    color: white;
-    text-align: center;
-    font-size: 1rem;
-    max-width: 600px;
-    line-height: 1.5;
-}
-
-.lightbox-counter {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
-    font-weight: 500;
-}
-
-@media (max-width: 768px) {
-    .photo-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 0.5rem;
-    }
-    .lightbox-close,
-    .lightbox-btn {
-        width: 40px;
-        height: 40px;
-    }
-    .lightbox-close {
-        top: 1rem;
-        right: 1rem;
-    }
-    .lightbox-prev {
-        left: 0.5rem;
-    }
-    .lightbox-next {
-        right: 0.5rem;
-    }
+    background: rgba(230, 81, 0, 0.25);
+    color: #ffab91;
 }
