@@ -4,6 +4,7 @@
 namespace App\Controller\Front;
 
 use App\Repository\ArticleRepository;
+use App\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,9 +13,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class PageController extends AbstractController
 {
     #[Route('/adhesion', name: 'app_adhesion')]
-    public function adhesion(): Response
+    public function adhesion(TarifRepository $tarifRepository): Response
     {
-        return $this->render('front/adhesion.html.twig');
+        return $this->render('front/adhesion.html.twig', ['tarifs' => $tarifRepository->findBy(
+            [],
+            ['position' => 'ASC']
+        )]);
     }
 
     #[Route('/horaires', name: 'app_horaires')]
@@ -68,9 +72,11 @@ class PageController extends AbstractController
     }
 
     #[Route('/history', name: 'app_history')]
-    public function history(): Response
+    public function history(\App\Repository\ClubHistoryRepository $repo): Response
     {
-        return $this->render('front/history.html.twig');
+        return $this->render('front/history.html.twig', [
+            'history' => $repo->getSingle(),
+        ]);
     }
 
     #[Route('/article/{slug}', name: 'app_article_show')]

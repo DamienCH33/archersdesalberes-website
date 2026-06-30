@@ -30,90 +30,156 @@
 					{{ saison }}</p>
 			</div>
 
-			<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 4rem;">
+			<div
+				style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 4rem;">
+
+				{# Adultes #}
 				<div style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-					<h3 style="color: #2E7D32; font-size: 1.5rem; margin-bottom: 1rem;">Adultes</h3>
-					<div style="font-size: 2rem; font-weight: bold; color: #1B5E20; margin-bottom: 0.5rem;">Licence FFTA : 135€</div>
-					<ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #2E7D32;">
-						<li style="padding: 0.5rem 0;">Tarif 2ème membre : 130€</li>
-						<li style="padding: 0.5rem 0;">Tarif 3ème membre :125€</li>
-					</li>
-				</ul>
+					<h3 style="color: #2E7D32; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;">Adultes</h3>
+					{% for t in tarifs|filter(t => t.category == 'adultes' and t.featured) %}
+						<div style="font-size: 1.5rem; font-weight: 700; color: #1B5E20; margin-bottom: 0.5rem;">{{ t.label }}
+							:
+							{{ t.price|number_format(0, ',', ' ') }}
+							€</div>
+					{% endfor %}
+					<ul style="list-style: none; padding: 0; margin-top: 1.25rem; color: #2E7D32;">
+						{% for t in tarifs|filter(t => t.category == 'adultes' and not t.featured) %}
+							<li style="font-size: 1rem; padding: 0.5rem 0;">{{ t.label }}
+								:
+								{{ t.price|number_format(0, ',', ' ') }}
+								€</li>
+						{% endfor %}
+					</ul>
+				</div>
+
+				{# Jeunes #}
+				<div style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+					<h3 style="color: #1976D2; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;">Jeunes</h3>
+					{% for t in tarifs|filter(t => t.category == 'jeunes' and t.featured) %}
+						<div style="font-size: 1.5rem; font-weight: 700; color: #0D47A1; margin-bottom: 0.5rem;">{{ t.label }}
+							:
+							{{ t.price|number_format(0, ',', ' ') }}
+							€</div>
+					{% endfor %}
+					<p style="font-size: 0.95rem; color: #1565C0; margin: 0.25rem 0 0;">(Jusqu'à 19 ans)</p>
+					<ul style="list-style: none; padding: 0; margin-top: 1.25rem; color: #1976D2;">
+						{% for t in tarifs|filter(t => t.category == 'jeunes' and not t.featured) %}
+							<li style="font-size: 1rem; padding: 0.5rem 0;">{{ t.label }}
+								:
+								{{ t.price|number_format(0, ',', ' ') }}
+								€</li>
+						{% endfor %}
+					</ul>
+				</div>
+
+				{# Licence découverte #}
+				<div style="background: linear-gradient(135deg, #FFF3E0, #FFE0B2); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+					<h3 style="color: #F57C00; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;">Licence FFTA découverte</h3>
+					<p style="font-size: 0.95rem; color: #EF6C00; margin: 0 0 0.5rem;">(Avril – Septembre)</p>
+					<ul style="list-style: none; padding: 0; margin-top: 1.25rem; color: #F57C00;">
+						{% for t in tarifs|filter(t => t.category == 'decouverte') %}
+							<li style="font-size: 1rem; padding: 0.5rem 0;">{{ t.label }}
+								:
+								{{ t.price|number_format(0, ',', ' ') }}
+								€</li>
+						{% endfor %}
+					</ul>
+				</div>
+
+				{# Matériel #}
+				<div style="background: linear-gradient(135deg, #F3E5F5, #E1BEE7); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+					<h3 style="color: #7B1FA2; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;">Matériel</h3>
+					<ul style="list-style: none; padding: 0; margin-top: 1.25rem; color: #7B1FA2;">
+						{% for t in tarifs|filter(t => t.category == 'materiel') %}
+							<li style="font-size: 1rem; padding: 0.5rem 0;">{{ t.label }}
+								:
+								{{ t.price|number_format(0, ',', ' ') }}
+								€</li>
+						{% endfor %}
+					</ul>
+				</div>
+
 			</div>
 
-			<div style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-				<h3 style="color: #1976D2; font-size: 1.5rem; margin-bottom: 1rem;">Jeunes</h3>
-				<div style="font-size: 1.5rem; font-weight: bold; color: #0D47A1; margin-bottom: 0.5rem;">Licence FFTA jeune : 108€</div>
-				<p style="color: #1565C0;">(Jusqu’à 19 ans)</p>
-				<ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #1976D2;">
-					<li style="padding: 0.5rem 0;">Tarif 2ème membre : 103€</li>
-					<li style="padding: 0.5rem 0;">Tarif 3ème membre :98€</li>
-				</ul>
+			{# Documents à fournir #}
+			<div class="section-header" style="margin-top: 4rem;">
+				<h2 class="section-title">Documents à fournir</h2>
 			</div>
 
-			<div style="background: linear-gradient(135deg, #FFF3E0, #FFE0B2); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-				<h3 style="color: #F57C00; font-size: 1.5rem; margin-bottom: 1rem;">Licence FFTA découverte</h3>
-				<p style="color: #EF6C00;">(Avril – Septembre)</p>
-				<ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #F57C00;">
-					<li style="padding: 0.5rem 0;">Tarif : 50 €</li>
-				</ul>
+			<div
+				style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; align-items: start; margin-bottom: 3rem;">
+
+				{# À fournir #}
+				<div style="background: #F5F5F5; padding: 2rem; border-radius: 12px;">
+					<h3 style="color: #1B5E20; font-size: 1.2rem; margin-bottom: 1rem;">📋 À fournir</h3>
+					<ul style="list-style: none; padding: 0; margin: 0; font-size: 1.05rem;">
+						<li style="display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.7rem 0; border-bottom: 1px solid #E0E0E0; color: #333;">
+							<span style="color: #2E7D32; font-weight: 700;">✓</span>
+							Formulaire d'inscription complété</li>
+						<li style="display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.7rem 0; border-bottom: 1px solid #E0E0E0; color: #333;">
+							<span style="color: #2E7D32; font-weight: 700;">✓</span>
+							Questionnaire de santé rempli et certificat médical si nécessaire</li>
+						<li style="display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.7rem 0; border-bottom: 1px solid #E0E0E0; color: #333;">
+							<span style="color: #2E7D32; font-weight: 700;">✓</span>
+							Règlement intérieur signé</li>
+						<li style="display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.7rem 0; color: #333;">
+							<span style="color: #2E7D32; font-weight: 700;">✓</span>
+							Paiement par chèque ou espèces uniquement</li>
+					</ul>
+				</div>
+
+				{# À télécharger #}
+				<div style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9); padding: 2rem; border-radius: 12px;">
+					<h3 style="color: #1B5E20; font-size: 1.2rem; margin-bottom: 1rem;">📥 À télécharger</h3>
+					<a href="{{ asset('documents/formulaire-inscription.pdf') }}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; background: #fff; color: #2E7D32; font-weight: 600; padding: 0.85rem 1rem; border-radius: 8px; text-decoration: none; margin-bottom: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+						<span>Formulaire d'inscription</span>
+						<span>⬇</span>
+					</a>
+					<a href="{{ asset('documents/questionnaire-sante.pdf') }}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; background: #fff; color: #2E7D32; font-weight: 600; padding: 0.85rem 1rem; border-radius: 8px; text-decoration: none; margin-bottom: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+						<span>Questionnaire de santé</span>
+						<span>⬇</span>
+					</a>
+					<a href="{{ asset('documents/reglement-interieur.pdf') }}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; background: #fff; color: #2E7D32; font-weight: 600; padding: 0.85rem 1rem; border-radius: 8px; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+						<span>Règlement intérieur</span>
+						<span>⬇</span>
+					</a>
+				</div>
+
 			</div>
 
-			<div style="background: linear-gradient(135deg, #F3E5F5, #E1BEE7); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-				<h3 style="color: #7B1FA2; font-size: 1.5rem; margin-bottom: 1rem;">Matériel</h3>
-				<ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #7B1FA2;">
-					<li style="padding: 0.5rem 0;">Location arc club :40€</li>
-					<li style="padding: 0.5rem 0;">Caution arc club : 150€</li>
-				</ul>
+			{# Avantages #}
+			<div class="section-header" style="margin-top: 4rem;">
+				<h2 class="section-title">Les avantages de l'adhésion</h2>
 			</div>
+
+			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+				<div style="text-align: center; padding: 1.5rem;">
+					<div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+					<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Matériel fourni</h4>
+					<p style="color: #666;">Arcs, flèches et équipements de protection</p>
+				</div>
+				<div style="text-align: center; padding: 1.5rem;">
+					<div style="font-size: 3rem; margin-bottom: 1rem;">👨‍🏫</div>
+					<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Encadrement qualifié</h4>
+					<p style="color: #666;">Encadrants diplômés FFTA</p>
+				</div>
+				<div style="text-align: center; padding: 1.5rem;">
+					<div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+					<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Compétitions</h4>
+					<p style="color: #666;">Accès aux tournois départementaux et régionaux</p>
+				</div>
+				<div style="text-align: center; padding: 1.5rem;">
+					<div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
+					<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Convivialité</h4>
+					<p style="color: #666;">Rejoignez une communauté passionnée</p>
+				</div>
+				<div style="text-align: center; padding: 1.5rem;">
+					<div style="font-size: 3rem; margin-bottom: 1rem;">🏹</div>
+					<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Installations dédiées</h4>
+					<p style="color: #666;">Salle d'entraînement et terrain extérieur</p>
+				</div>
+			</div>
+
 		</div>
-
-		{# Documents à fournir #}
-		<div class="section-header" style="margin-top: 4rem;">
-			<h2 class="section-title">Documents à fournir</h2>
-		</div>
-
-		<div style="background: #F5F5F5; padding: 2rem; border-radius: 12px; margin-bottom: 3rem;">
-			<ul style="list-style: none; padding: 0; font-size: 1.1rem; line-height: 2;">
-				<li style="padding: 0.5rem 0; border-bottom: 1px solid #E0E0E0;">Formulaire d'inscription complété</li>
-				<li style="padding: 0.5rem 0; border-bottom: 1px solid #E0E0E0;">Questionnaire de santé rempli et certificat médical si nécessaire</li>
-				<li style="padding: 0.5rem 0; border-bottom: 1px solid #E0E0E0;">Règlement intérieur signé
-				</li>
-				<li style="padding: 0.5rem 0;">Paiement par chèque ou espèces uniquement</li>
-			</ul>
-		</div>
-
-		{# Avantages #}
-		<div class="section-header" style="margin-top: 4rem;">
-			<h2 class="section-title">Les avantages de l'adhésion</h2>
-		</div>
-
-		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-			<div style="text-align: center; padding: 1.5rem;">
-				<div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
-				<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Matériel fourni</h4>
-				<p style="color: #666;">Arcs, flèches et équipements de protection</p>
-			</div>
-			<div style="text-align: center; padding: 1.5rem;">
-				<div style="font-size: 3rem; margin-bottom: 1rem;">👨‍🏫</div>
-				<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Encadrement qualifié</h4>
-				<p style="color: #666;">Encadrants diplômés FFTA</p>
-			</div>
-			<div style="text-align: center; padding: 1.5rem;">
-				<div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
-				<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Compétitions</h4>
-				<p style="color: #666;">Accès aux tournois départementaux et régionaux</p>
-			</div>
-			<div style="text-align: center; padding: 1.5rem;">
-				<div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
-				<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Convivialité</h4>
-				<p style="color: #666;">Rejoignez une communauté passionnée</p>
-			</div>
-			<div style="text-align: center; padding: 1.5rem;">
-				<div style="font-size: 3rem; margin-bottom: 1rem;">🏹</div>
-				<h4 style="color: #2E7D32; margin-bottom: 0.5rem;">Installations dédiées</h4>
-				<p style="color: #666;">Salle d'entraînement et terrain extérieur</p>
-			</div>
-		</div>
-	</div>
-</section>{% endblock %}
+	</section>
+{% endblock %}

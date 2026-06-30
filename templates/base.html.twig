@@ -46,11 +46,11 @@
 					<a href="{{ path('app_actualites') }}" class="sidebar-link {{ app.request.get('_route') == 'app_actualites' ? 'active' : '' }}">Actualités</a>
 					<a href="{{ path('app_adhesion') }}" class="sidebar-link {{ app.request.get('_route') == 'app_adhesion' ? 'active' : '' }}">Adhésion</a>
 					<a href="{{ path('app_horaires') }}" class="sidebar-link {{ app.request.get('_route') == 'app_horaires' ? 'active' : '' }}">Horaires &
-																																																																																																								                    Lieux</a>
+																																										Lieux</a>
 					<a href="{{ path('app_history') }}" class="sidebar-link {{ app.request.get('_route') == 'app_history' ? 'active' : '' }}">Histoire</a>
 					<a href="{{ path('app_gallery') }}" class="sidebar-link {{ app.request.get('_route') == 'app_gallery' ? 'active' : '' }}">Galerie photos</a>
 					<a href="{{ path('app_contact') }}" class="sidebar-link {{ app.request.get('_route') == 'app_contact' ? 'active' : '' }}">Nous
-																																																																																																												                    contacter</a>
+																																																																																																																																																																														                    contacter</a>
 				</nav>
 
 				<div class="sidebar-footer">
@@ -73,14 +73,17 @@
 					<div class="footer-grid">
 						<div class="footer-info">
 							<h4>Archers des Albères</h4>
-							<p style="color:rgba(255,255,255,0.7)">Depuis 1985</p>
-							<p>📍 Argelès-sur-Mer</p>
+							<p style="color:rgba(255,255,255,0.7)">Depuis 1991</p>
+							<p>Sorède</p>
 							<p>📧
-								{{
-                            app.request.attributes.get('settings')['contact_email']|default('archersdesalberes@gmail.com')
-                            }}</p>
+								{{ app.request.attributes.get('settings')['contact_email']|default('archersdesalberes@gmail.com') }}</p>
 							<p>📞
-								{{ app.request.attributes.get('settings')['contact_phone']|default('06 02 23 72 58') }}
+								{{ app.request.attributes.get('settings')['contact_phone']|default('06 02 23 72 58') }}</p>
+							<p>
+								<a href="{{ asset('documents/statuts.pdf') }}" target="_blank">📄 Statuts de l'association</a>
+							</p>
+							<p>
+								<a href="https://www.facebook.com/Archers.de.sorede/" target="_blank" rel="noopener">📘 Facebook</a>
 							</p>
 						</div>
 						<div>

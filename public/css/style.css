@@ -829,7 +829,22 @@ body:not(.ea-app) .section-subtitle {
     background: var(--blanc);
     color: var(--vert-principal);
 }
-
+.history-content {
+    max-width: 760px;
+    margin: 0 auto 4rem;
+    color: #444;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    text-align: left;
+}
+.history-content p,
+.history-content div {
+    margin-bottom: 1.25rem;
+}
+.history-content p:last-child,
+.history-content div:last-child {
+    margin-bottom: 0;
+}
 /* ========================================
    FOOTER
    ======================================== */

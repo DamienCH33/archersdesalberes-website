@@ -30,145 +30,92 @@
 			</div>
 
 			<div
-				style="
-																																																																																					display: grid;
-																																																																																					grid-template-columns: 1fr 2px 1fr 2px 1fr;
-																																																																																					gap: 2rem;
-																																																																																					margin-bottom: 4rem;
-																																																																																					align-items: stretch;
-																																																																																					">
-				{# ========== COLONNE Jeunes débutants ========== #}
-				<div>
-					<div style="text-align: center; margin-bottom: 1.5rem; padding: 1rem; background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border-radius: 12px;">
-						<h3 style="color: #E65100; font-size: 1.6rem; margin: 0;">Jeunes débutants</h3>
+				style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; align-items: start;">
+
+				{# ===== Jeunes débutants — BLEU ===== #}
+				<div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+					<div style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB); padding: 1.25rem; text-align: center;">
+						<h3 style="color: #0D47A1; font-size: 1.4rem; margin: 0;">Jeunes débutants</h3>
 					</div>
+					<div style="padding: 1.25rem; display: grid; gap: 1rem;">
+						<div style="border-left: 4px solid #1976D2; background: #F8FBFF; border-radius: 10px; padding: 1rem 1.25rem;">
+							<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+								<span style="font-weight: 700; color: #0D47A1; font-size: 1.1rem;">Mercredi</span>
+								<span style="font-weight: 700; color: #0D47A1;">🕒 14h30 – 16h00</span>
+							</div>
+							<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
+								<span>❄️ Hiver — en salle</span>
+								<span>☀️ Été — sur le terrain</span>
+							</div>
+						</div>
+					</div>
+				</div>
 
+				{# ===== Jeunes confirmés — AMBRE ===== #}
+				<div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+					<div style="background: linear-gradient(135deg, #FFF3E0, #FFE0B2); padding: 1.25rem; text-align: center;">
+						<h3 style="color: #E65100; font-size: 1.4rem; margin: 0;">Jeunes confirmés</h3>
+					</div>
+					<div style="padding: 1.25rem; display: grid; gap: 1rem;">
+						<div style="border-left: 4px solid #F57C00; background: #FFFAF3; border-radius: 10px; padding: 1rem 1.25rem;">
+							<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+								<span style="font-weight: 700; color: #E65100; font-size: 1.1rem;">Mercredi</span>
+								<span style="font-weight: 700; color: #E65100;">🕒 16h30 – 18h00</span>
+							</div>
+							<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
+								<span>❄️ Hiver — en salle</span>
+								<span>☀️ Été — sur le terrain</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{# ===== Adultes — VERT ===== #}
+				<div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+					<div style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9); padding: 1.25rem; text-align: center;">
+						<h3 style="color: #1B5E20; font-size: 1.4rem; margin: 0;">Adultes</h3>
+					</div>
 					<div
-						style="display: grid; gap: 1.5rem;">
-
+						style="padding: 1.25rem; display: grid; gap: 1rem;">
 						{# Mercredi #}
-						<div style="background: linear-gradient(135deg, #E8F5E9, #ffffff); padding: 1.5rem; border-radius: 12px; border-left: 5px solid #2E7D32;">
-							<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-								<div>
-									<h4 style="color: #2E7D32; font-size: 1.3rem; margin-bottom: 0.3rem;">Mercredi</h4>
-									<p style="color: #666; font-size: 0.95rem;">❄️ Hiver : En salle</p>
-									<p style="color: #666; font-size: 0.95rem;">☀️ Été : Sur le terrain
-									</p>
+						<div style="border-left: 4px solid #2E7D32; background: #F5FBF6; border-radius: 10px; padding: 1rem 1.25rem;">
+							<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+								<span style="font-weight: 700; color: #1B5E20; font-size: 1.1rem;">Mercredi</span>
+								<span style="font-weight: 700; color: #1B5E20;">🕒 18h30 – 20h00</span>
+							</div>
+							<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
+								<span>❄️ Hiver — en salle</span>
+								<span>☀️ Été — sur le terrain</span>
+							</div>
+						</div>
+						{# Vendredi (horaires différents selon la saison) #}
+						<div style="border-left: 4px solid #2E7D32; background: #F5FBF6; border-radius: 10px; padding: 1rem 1.25rem;">
+							<div style="font-weight: 700; color: #1B5E20; font-size: 1.1rem; margin-bottom: 0.75rem;">Vendredi</div>
+							<div style="display: flex; flex-direction: column; gap: 0.5rem; color: #555; font-size: 0.95rem;">
+								<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
+									<span>❄️ Hiver — salle</span>
+									<strong style="color: #1B5E20;">🕒 18h30 – 20h00</strong>
 								</div>
-								<div style="text-align: right;">
-									<div style="font-size: 1.4rem; font-weight: bold; color: #1B5E20;">🕒 14h30 – 16h00</div>
+								<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
+									<span>☀️ Été — terrain</span>
+									<strong style="color: #1B5E20;">🕒 17h30 – 19h00</strong>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				{# ========== BARRE SÉPARATRICE ========== #}
-				<div style="padding-left: 2rem; border-left: 2px solid #2E7D32;"></div>
-
-				{# ========== COLONNE Jeunes confirmés ========== #}
-				<div>
-					<div style="text-align: center; margin-bottom: 1.5rem; padding: 1rem; background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border-radius: 12px;">
-						<h3 style="color: #5100e6d2; font-size: 1.6rem; margin: 0;">Jeunes confirmés</h3>
-					</div>
-
-					<div
-						style="display: grid; gap: 1.5rem;">
-						{# Mercredi #}
-						<div style="background: linear-gradient(135deg, #E8F5E9, #ffffff); padding: 1.5rem; border-radius: 12px; border-left: 5px solid #2E7D32;">
-							<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-								<div>
-									<h4 style="color: #2E7D32; font-size: 1.3rem; margin-bottom: 0.3rem;">Mercredi</h4>
-									<p style="color: #666; font-size: 0.95rem;">❄️ Hiver : En salle</p>
-									<p style="color: #666; font-size: 0.95rem;">☀️ Été : Sur le terrain
-									</p>
-								</div>
-								<div style="text-align: right;">
-									<div style="font-size: 1.4rem; font-weight: bold; color: #1B5E20;">🕒 16h30 – 18h00</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{# ========== BARRE SÉPARATRICE ========== #}
-				<div style="padding-left: 2rem; border-left: 2px solid #2E7D32;"></div>
-
-				{# ========== COLONNE ADULTES ========== #}
-				<div>
-					<div style="text-align: center; margin-bottom: 1.5rem; padding: 1rem; background: linear-gradient(135deg, #E8F5E9, #C8E6C9); border-radius: 12px;">
-						<h3 style="color: #1B5E20; font-size: 1.6rem; margin: 0;">Adultes</h3>
-					</div>
-
-					<div
-						style="display: grid; gap: 1.5rem;">
-
-						{# Mercredi - Adultes #}
-						<div style="background: linear-gradient(135deg, #E8F5E9, #ffffff); padding: 1.5rem; border-radius: 12px; border-left: 5px solid #2E7D32;">
-							<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-								<div>
-									<h4 style="color: #2E7D32; font-size: 1.3rem; margin-bottom: 0.3rem;">Mercredi</h4>
-									<p style="color: #666; font-size: 0.95rem;">❄️ Hiver : En salle</p>
-									<p style="color: #666; font-size: 0.95rem;">☀️ Été : Sur le terrain
-									</p>
-								</div>
-								<div style="text-align: right;">
-									<div style="font-size: 1.4rem; font-weight: bold; color: #1B5E20;">🕒 18h30 – 20h00</div>
-								</div>
-							</div>
-						</div>
-
-						{# Vendredi - Adultes #}
-						<div style="background: linear-gradient(135deg, #FFF3E0, #ffffff); padding: 1.5rem; border-radius: 12px; border-left: 5px solid #F57C00;">
-							<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-								<div>
-									<h4 style="color:#F57C00; font-size:1.3rem; margin-bottom:1rem;">
-										Vendredi
-									</h4>
-
-								</div>
-								<div style="text-align: right;">
-									<div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
-										<span>❄️ Hiver
-										</span>
-										<strong style="color:#E65100;">18h30 – 20h00</strong>
-									</div>
-
-									<div style="display:flex; justify-content:space-between;">
-										<span>☀️ Été</span>
-										<strong style="color:#E65100;">17h30 – 19h00</strong>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
 			</div>
 
 			{# Section Banyuls-sur-Mer #}
 
 			<div style="
-																																																																																																																																																															background: linear-gradient(135deg, #E3F2FD, #F8FBFF);
-																																																																																																																																																											padding: 1.5rem;
-																																																																																																																																																											border-radius: 12px;
-																																																																																																																																																											margin-bottom: 4rem;
-																																																																																																																																																											border-left: 5px solid #1976D2;
-																																																																																																																																																											box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-																																																																																																																																																											">
-				<div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
-					<h3 style="margin:0; color:#1976D2; font-size:1.3rem;">
-						Section de Banyuls-sur-Mer
-					</h3>
-				</div>
-				<p style="margin:0; color:#444; font-size:1.05rem;">
-					Entraînement en salle tous les
-					<strong>jeudis</strong>
-					de
-					<strong style="color:#1976D2;">21h00 à 23h00</strong>.
-				</p>
+															background: linear-gradient(135deg, #E3F2FD, #F8FBFF);
+															border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; text-align: center; margin-bottom: 4rem;
+															">
+				<span style="font-weight: 700; color: #0D47A1;">📍 Section Banyuls-sur-Mer</span>
+				<span style="color: #0D47A1;">Jeudi · 🕒 21h00 – 23h00 · en salle</span>
 			</div>
-
 
 			{# Localisation #}
 			<div class="section-header" style="margin-top: 4rem;">

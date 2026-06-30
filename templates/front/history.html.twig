@@ -7,10 +7,11 @@
 	<section class="hero" style="min-height: 300px; display: flex; align-items: center;">
 		<div class="hero-content">
 			<div class="hero-text">
-				<h1>35 ans de
-					<span class="gradient-text">passion</span>
-				</h1>
-				<p>Découvrez l'histoire de la Compagnie des Archers des Albères depuis sa création en 1991.</p>
+				<h1>{{ history ? history.title : 'Notre histoire' }}</h1>
+				{% if history %}
+					<p class="lead" style="color:#2E7D32;">{{ history.yearsOfPassion }}
+						ans de passion</p>
+				{% endif %}
 			</div>
 		</div>
 	</section>
@@ -24,50 +25,22 @@
 				<div style="font-size: 4rem; margin-bottom: 1rem;">🏹</div>
 				<h2 style="color: #1B5E20; font-size: 2rem; margin-bottom: 1rem;">Depuis 1991 à Sorède</h2>
 				<p style="font-size: 1.2rem; color: #2E7D32; line-height: 1.8; max-width: 700px; margin: 0 auto;">
-					La Compagnie des Archers des Albères est née de la passion de quelques archers 
-																																																												                souhaitant partager leur amour du tir à l'arc dans une ambiance conviviale et familiale.
+					La Compagnie des Archers des Albères est née de la passion de quelques archers souhaitant partager leur amour du tir à l'arc dans une ambiance conviviale et familiale.
 				</p>
 			</div>
 
-			{# Timeline #}
+			{# Historique (texte saisi en back-office) #}
 			<div class="section-header">
-				<h2 class="section-title">Historique du club</h2>
+				<h2 class="section-title">Notre parcours</h2>
 			</div>
 
-			<div style="position: relative; padding-left: 3rem; margin-bottom: 4rem;">
-
-				<div style="position: relative; margin-bottom: 3rem;">
-					<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-						<p style="color: #666; line-height: 1.6;">
-							Depuis sa création, la Compagnie des Archers des Albères est active sur les communes des Albères-Côte Vermeille, dans le Département des Pyrénées Orientales. Ce club s'est inscrit d'emblée dans l'intercommunalité, avant même que cette notion existe. Il bénéficie depuis sa création de l’appui des mairies de Saint Génis des Fontaines et de Sorède, lesquelles mettent à sa disposition à titre gracieux, une salle communale permettant d’accueillir les archers pendant les mois les plus frais ainsi qu’un terrain en extérieur permettant le tir sur cible jusqu’à 70 mètres. Depuis 2007, à l'initiative de Philippe SCHATT, la section de Banyuls Sur Mer s'est développée, en bénéficiant de la salle communale «Bartissol».
-																																																								
-																					La Compagnie des Archers des Albères est une association loi 1901, dont le siège est domicilié auprès de la mairie de Sorède depuis 2013.
-																																																								
-																																																								C’est en 1991 qu’est fondée la Compagnie par Armand DU PLESSIS. Elle sera dirigée dès 1992 par André LLONG. Originaire de Sorède, ce dernier s’est attaché à en faire un club ouvert, accueillant, convivial et favorisant la diversité des pratiques (Tir à l’arc médiéval, Tir nature 2 et 3D, Tir en campagne). Passionné, André Llong a exercé les fonctions de président du Comité Départemental 66 FFTA jusqu’en 2007. Il était Chevalier de l’Ordre de la Chevalerie d’arc depuis 1994. Son engagement auprès des jeunes archers ainsi que ses efforts pour développer sa discipline lui ont permis de recevoir la médaille d’argent de la Jeunesse et des sports en 2007. Il nous a quitté prématurément en 2008.
-																																																								
-																																																								La présidence est à cette époque reprise par Edwige GIOT pour une période de cinq ans. Elle est alors épaulée par Monique LLONG restée membre du club, laquelle assume la tâche de Vice-Présidente jusqu'en 2013. Ces deux dernières s’investiront pour promouvoir la pratique du tir à l’arc dans le département et faire perdurer le souvenir d’André en organisant notamment les compétitions et trophées se déroulant dans le cadre historique du Fort de Bellegarde sur la commune du Perthus à la frontière avec l’Espagne. Ces compétitions sont à cette époque très appréciées des archers tant espagnols que français lesquels n’hésitent pas à parcourir de nombreux kilomètres pour y assister.
-																																																								
-																																																								En 2013, la présidence du club est reprise par Stéphane GOUPIL, lequel restera actif pendant une période de 10 ans. Très impliqué, il permettra au club de récupérer la place de deuxième club du département avec plus de soixante-dix adhérents. Si Jacques TORREDEME reste dans la mémoire du club comme étant le créateur des parcours nature situés sur les pentes des Albères, juste derrière « La Vallées des tortue », Stéphane GOUPIL aura eu le mérite de repenser deux magnifiques parcours alors que les parcours « historiques » avaient été délaissés car très endommagés à la suite d’une crue de la rivière de Sorède. De l’avis des archers nature, ces parcours sont parmi les plus beaux de la région Occitanie et constituent un réel atout pour le club.
-																																																								
-																																																								C’est à l’occasion de l’Assemblée Générale extraordinaire du 7.10.2022 que l’équipe actuelle s’est mise en place sous la présidence d’Alexis PELLEJA.
-																																																								
-																																																								Sylvie NAESSENS, Vice-présidente est également entraîneur au club. Elle s’est installée sur la commune de Bages (Pyrénées orientales) en 2015 et s’est immédiatement intégrée au sein de son nouveau club après avoir fait la connaissance de certains de ses membres lors de la fête médiévale. Elle est titulaire d’un diplôme « Entraîneur 1 », autrefois dénommé « initiateur » passé alors qu’elle était présidente du club de tir à l’arc d’Ambérieu en Bugey
-																																																								
-																																																								(Ain). Elle a rapidement pris en charge la formation des jeunes archers des Albères. Elle a été épaulée dans sa tâche en 2024/2025 par Nicole CHAMBLANC.
-																																																								
-																																																								Au cours de l’année 2025, la Mairie de Sorède a décidé de réaménager le site de la Vallées des tortues et du Mas Del Ca et proposé à la Compagnie de repenser les horaires et les tracés des parcours afin d’augmenter la sécurité de l’ensemble des usagers de la montagne. A la suite de cette demande municipale, les archers nature ont manifesté leur désapprobation quant à la mise en place de nouvelles règles d’usage, conduisant le comité directeur de la Compagnie à proposer une scission des activités du club. Abandonnant le tir nature, le comité directeur a cependant voté une motion permettant à ses anciens membres de récupérer l’ensemble de la ciblerie déjà en place sur les parcours.
-																																																								
-																																																								C’est également au mois de juin 2025 que la Mairie de Sorède, grâce à la forte implication d’Alexis PELLEJA, a mis à disposition du club un magnifique terrain clôturé permettant de tirer en toute sécurité. Situé sur le nouvel Ecoparc de la commune, le nouveau pas de tir a été équipé d’une pergola de 120 m2 dès l’année suivante. Cet important investissement a été financé par le club avec le soutien des entreprises Canopée de Pollestres et Spide Roussillon de Perpignan. Tout ceci n’a pu être possible que grâce au soutien indéfectible des bénévoles.
-																																																								
-																																																								Pour la rentrée de la saison 2025/2026, la formation des jeunes archers et des nouveaux membres du club a été reprise par Pascal JANNIC, Véronique NICOU et Didier NICOU, tous les trois titulaires d’un diplôme d’encadrant fédéral.
-																																																								
-																																																								On notera également que depuis la rentrée 2024, la Compagnie des Archers des Albères s’est engagée auprès des structures accueillant des personnes vieillissantes et handicapées (Mas les Embruns et EAM de Cerbère) pour leur permettre de pratiquer le tir à l’arc. Deux à trois sessions sont ainsi organisées chaque mois. 
-																																																																																				                        Les premiers entraînements se déroulent au stade municipal avec une dizaine d'adhérents.
-						</p>
-					</div>
+			{% if history and history.content %}
+				<div class="history-content">
+					{{ history.content|raw }}
 				</div>
-
-			</div>
+			{% else %}
+				<p style="color:#999; margin-bottom:4rem;">Le texte de l'histoire du club sera bientôt disponible.</p>
+			{% endif %}
 
 			{# Valeurs #}
 			<div class="section-header" style="margin-top: 5rem;">
