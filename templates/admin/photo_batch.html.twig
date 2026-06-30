@@ -1,0 +1,30 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}Ajouter des photos
+{% endblock %}
+
+{% block main %}
+	<form method="post" enctype="multipart/form-data">
+		<input type="hidden" name="_token" value="{{ csrf_token('photo_batch') }}">
+
+		<div class="mb-3">
+			<label class="form-label" for="album">Album</label>
+			<select name="album" id="album" class="form-select" required>
+				<option value="">— Choisir un album —</option>
+				{% for album in albums %}
+					<option value="{{ album.id }}">{{ album.title }}</option>
+				{% endfor %}
+			</select>
+		</div>
+
+		<div class="mb-3">
+			<label class="form-label" for="images">Photos</label>
+			<input type="file" name="images[]" id="images" class="form-control" multiple accept="image/jpeg,image/png,image/webp" required>
+			<small class="form-text text-muted">Sélection multiple (Ctrl/Cmd ou Maj pour choisir plusieurs fichiers).</small>
+		</div>
+
+		<button type="submit" class="btn btn-primary">
+			<i class="fa fa-upload"></i>
+			Importer</button>
+	</form>
+{% endblock %}
