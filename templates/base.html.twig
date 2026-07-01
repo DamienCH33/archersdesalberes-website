@@ -42,15 +42,15 @@
 				</div>
 
 				<nav class="sidebar-nav">
-					<a href="{{ path('app_home') }}" class="sidebar-link {{ app.request.get('_route') == 'app_home' ? 'active' : '' }}">Accueil</a>
-					<a href="{{ path('app_actualites') }}" class="sidebar-link {{ app.request.get('_route') == 'app_actualites' ? 'active' : '' }}">Actualités</a>
-					<a href="{{ path('app_adhesion') }}" class="sidebar-link {{ app.request.get('_route') == 'app_adhesion' ? 'active' : '' }}">Adhésion</a>
-					<a href="{{ path('app_horaires') }}" class="sidebar-link {{ app.request.get('_route') == 'app_horaires' ? 'active' : '' }}">Horaires &
-																																										Lieux</a>
-					<a href="{{ path('app_history') }}" class="sidebar-link {{ app.request.get('_route') == 'app_history' ? 'active' : '' }}">Histoire</a>
-					<a href="{{ path('app_gallery') }}" class="sidebar-link {{ app.request.get('_route') == 'app_gallery' ? 'active' : '' }}">Galerie photos</a>
-					<a href="{{ path('app_contact') }}" class="sidebar-link {{ app.request.get('_route') == 'app_contact' ? 'active' : '' }}">Nous
-																																																																																																																																																																														                    contacter</a>
+					<a href="{{ path('app_home') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}">Accueil</a>
+					<a href="{{ path('app_actualites') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_actualites' ? 'active' : '' }}">Actualités</a>
+					<a href="{{ path('app_adhesion') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_adhesion' ? 'active' : '' }}">Adhésion</a>
+					<a href="{{ path('app_horaires') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_horaires' ? 'active' : '' }}">Horaires &
+																																																Lieux</a>
+					<a href="{{ path('app_history') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_history' ? 'active' : '' }}">Histoire</a>
+					<a href="{{ path('app_gallery') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_gallery' ? 'active' : '' }}">Galerie photos</a>
+					<a href="{{ path('app_contact') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_contact' ? 'active' : '' }}">Nous
+																																																																																																																																																																																				                    contacter</a>
 				</nav>
 
 				<div class="sidebar-footer">
