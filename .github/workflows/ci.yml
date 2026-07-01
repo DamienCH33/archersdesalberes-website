@@ -1,0 +1,61 @@
+name: CI
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+
+jobs:
+    quality-and-tests:
+        runs-on: ubuntu-latest
+
+        services:
+            postgres:
+                image: postgres:16-alpine
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: postgres
+                    POSTGRES_DB: postgres
+                ports:
+                    - 5432:5432
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
+
+        env:
+            DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:5432/postgres?serverVersion=16&charset=utf8"
+            APP_ENV: test
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.4"
+                  extensions: ctype, iconv, pdo_pgsql, intl
+                  coverage: none
+
+            - name: Install dependencies
+              run: composer install --no-interaction --no-progress --prefer-dist
+
+            - name: Warm cache (dev — pour le conteneur PHPStan)
+              run: php bin/console cache:warmup --env=dev
+
+            - name: PHP-CS-Fixer (check)
+              run: vendor/bin/php-cs-fixer fix --dry-run --diff
+
+            - name: PHPStan
+              run: vendor/bin/phpstan analyse --no-progress
+
+            - name: Rector (dry-run)
+              run: vendor/bin/rector process --dry-run
+
+            - name: Prépare la base de test
+              run: |
+                  php bin/console doctrine:database:create --env=test --if-not-exists -n
+                  php bin/console doctrine:migrations:migrate --env=test -n --allow-no-migration
+
+            - name: PHPUnit
+              run: vendor/bin/phpunit
