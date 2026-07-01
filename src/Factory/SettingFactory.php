@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // src/Factory/SettingFactory.php
 
 namespace App\Factory;
@@ -26,7 +29,7 @@ final class SettingFactory extends PersistentProxyObjectFactory
     }
 
     /**
-     * Créer les paramètres par défaut du site
+     * Créer les paramètres par défaut du site.
      */
     public static function createDefaultSettings(): void
     {

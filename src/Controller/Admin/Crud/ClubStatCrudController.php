@@ -38,28 +38,28 @@ class ClubStatCrudController extends AbstractCrudController
             ->update(
                 Crud::PAGE_INDEX,
                 Action::NEW,
-                fn(Action $a) => $a->setLabel('Ajouter')->setIcon('fa fa-plus')
+                fn (Action $a): Action => $a->setLabel('Ajouter')->setIcon('fa fa-plus')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::EDIT,
-                fn(Action $a) => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
+                fn (Action $a): Action => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::DELETE,
-                fn(Action $a) => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
+                fn (Action $a): Action => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
             )
             ->disable(Action::SAVE_AND_CONTINUE)
             ->update(
                 Crud::PAGE_NEW,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Créer')
+                fn (Action $a): Action => $a->setLabel('Créer')
             )
             ->update(
                 Crud::PAGE_EDIT,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Enregistrer les modifications')
+                fn (Action $a): Action => $a->setLabel('Enregistrer les modifications')
             );
     }
 
@@ -85,7 +85,7 @@ class ClubStatCrudController extends AbstractCrudController
             ->setFormat('dd/MM/yyyy HH:mm');
     }
 
-    public function persistEntity($entityManager, $entityInstance): void
+    public function persistEntity(\Doctrine\ORM\EntityManagerInterface $entityManager, object $entityInstance): void
     {
         /** @var ClubStat $entityInstance */
         if (!$entityInstance->getStatKey()) {
@@ -95,7 +95,7 @@ class ClubStatCrudController extends AbstractCrudController
         parent::persistEntity($entityManager, $entityInstance);
     }
 
-    public function updateEntity($entityManager, $entityInstance): void
+    public function updateEntity(\Doctrine\ORM\EntityManagerInterface $entityManager, object $entityInstance): void
     {
         /** @var ClubStat $entityInstance */
         if (!$entityInstance->getStatKey()) {
@@ -109,6 +109,7 @@ class ClubStatCrudController extends AbstractCrudController
     {
         $key = strtolower($label);
         $key = preg_replace('/[^a-z0-9]+/', '_', $key);
-        return trim($key, '_');
+
+        return trim((string) $key, '_');
     }
 }

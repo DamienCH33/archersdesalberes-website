@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // src/Factory/ClubStatFactory.php
 
 namespace App\Factory;
@@ -26,7 +29,7 @@ final class ClubStatFactory extends PersistentProxyObjectFactory
     }
 
     /**
-     * Créer les statistiques par défaut du club
+     * Créer les statistiques par défaut du club.
      */
     public static function createDefaultStats(): void
     {

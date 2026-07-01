@@ -19,8 +19,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class CreateAdminCommand extends Command
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private UserPasswordHasherInterface $passwordHasher
+        private readonly EntityManagerInterface $entityManager,
+        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
         parent::__construct();
     }
@@ -36,6 +36,7 @@ class CreateAdminCommand extends Command
 
         if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $io->error('Email invalide.');
+
             return Command::FAILURE;
         }
 
@@ -44,8 +45,9 @@ class CreateAdminCommand extends Command
             ->getRepository(User::class)
             ->findOneBy(['email' => $email]);
 
-        if ($existingUser) {
+        if ($existingUser instanceof User) {
             $io->error('Un utilisateur avec cet email existe déjà.');
+
             return Command::FAILURE;
         }
 
@@ -56,6 +58,7 @@ class CreateAdminCommand extends Command
 
         if (!$password || strlen($password) < 6) {
             $io->error('Mot de passe trop court.');
+
             return Command::FAILURE;
         }
 

@@ -6,7 +6,7 @@ use App\Repository\TeamMemberRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TeamMemberRepository::class)]
-class TeamMember
+class TeamMember implements \Stringable
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -50,6 +50,7 @@ class TeamMember
     public function setFirstName(string $firstName): static
     {
         $this->firstName = $firstName;
+
         return $this;
     }
 
@@ -61,12 +62,13 @@ class TeamMember
     public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 
     public function getFullName(): string
     {
-        return $this->firstName . ' ' . $this->lastName;
+        return $this->firstName.' '.$this->lastName;
     }
 
     public function getRole(): ?string
@@ -77,6 +79,7 @@ class TeamMember
     public function setRole(string $role): static
     {
         $this->role = $role;
+
         return $this;
     }
 
@@ -88,6 +91,7 @@ class TeamMember
     public function setAvatar(?string $avatar): static
     {
         $this->avatar = $avatar;
+
         return $this;
     }
 
@@ -99,12 +103,13 @@ class TeamMember
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
     public function __toString(): string
     {
-        return $this->getFullName() . ' - ' . $this->role;
+        return $this->getFullName().' - '.$this->role;
     }
 
     public function getDisplayOrder(): int
@@ -115,6 +120,7 @@ class TeamMember
     public function setDisplayOrder(int $displayOrder): static
     {
         $this->displayOrder = $displayOrder;
+
         return $this;
     }
 }

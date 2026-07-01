@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // src/Form/LoginType.php
 
 namespace App\Form;

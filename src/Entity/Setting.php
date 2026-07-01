@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: SettingRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Setting
+class Setting implements \Stringable
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -54,6 +54,7 @@ class Setting
     public function setSettingKey(string $settingKey): static
     {
         $this->settingKey = $settingKey;
+
         return $this;
     }
 
@@ -65,6 +66,7 @@ class Setting
     public function setSettingValue(string $settingValue): static
     {
         $this->settingValue = $settingValue;
+
         return $this;
     }
 
@@ -76,6 +78,7 @@ class Setting
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -87,6 +90,7 @@ class Setting
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 

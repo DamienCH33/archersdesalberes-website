@@ -17,7 +17,7 @@ class TeamMemberRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve tous les membres de l'équipe pour affichage
+     * Trouve tous les membres de l'équipe pour affichage.
      *
      * @return TeamMember[]
      */
@@ -30,7 +30,7 @@ class TeamMemberRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve les membres par rôle
+     * Trouve les membres par rôle.
      *
      * @return TeamMember[]
      */
@@ -38,14 +38,14 @@ class TeamMemberRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('tm')
             ->where('LOWER(tm.role) LIKE LOWER(:role)')
-            ->setParameter('role', '%' . $role . '%')
+            ->setParameter('role', '%'.$role.'%')
             ->orderBy('tm.lastName', 'ASC')
             ->getQuery()
             ->getResult();
     }
 
     /**
-     * Trouve le président
+     * Trouve le président.
      */
     public function findPresident(): ?TeamMember
     {
@@ -57,7 +57,7 @@ class TeamMemberRepository extends ServiceEntityRepository
     }
 
     /**
-     * Compte le nombre de membres dans l'équipe
+     * Compte le nombre de membres dans l'équipe.
      */
     public function countMembers(): int
     {
@@ -68,7 +68,7 @@ class TeamMemberRepository extends ServiceEntityRepository
     }
 
     /**
-     * Recherche de membres par nom
+     * Recherche de membres par nom.
      *
      * @return TeamMember[]
      */
@@ -77,7 +77,7 @@ class TeamMemberRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('tm')
             ->where('LOWER(tm.firstName) LIKE LOWER(:query)')
             ->orWhere('LOWER(tm.lastName) LIKE LOWER(:query)')
-            ->setParameter('query', '%' . $query . '%')
+            ->setParameter('query', '%'.$query.'%')
             ->orderBy('tm.lastName', 'ASC')
             ->getQuery()
             ->getResult();

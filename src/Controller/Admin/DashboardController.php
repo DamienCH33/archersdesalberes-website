@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Repository\AlbumRepository;
@@ -20,21 +22,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(
-        private ArticleRepository $articleRepository,
-        private PartnerRepository $partnerRepository,
-        private PhotoRepository $photoRepository,
-        private AlbumRepository $albumRepository,
-        private UserRepository $userRepository
-    ) {}
+        private readonly ArticleRepository $articleRepository,
+        private readonly PartnerRepository $partnerRepository,
+        private readonly PhotoRepository $photoRepository,
+        private readonly AlbumRepository $albumRepository,
+        private readonly UserRepository $userRepository,
+    ) {
+    }
 
     public function index(): Response
     {
         $stats = [
             'articles' => $this->articleRepository->count([]),
             'partners' => $this->partnerRepository->count([]),
-            'photos'   => $this->photoRepository->count([]),
-            'albums'   => $this->albumRepository->count([]),
-            'admins'   => $this->userRepository->count([]),
+            'photos' => $this->photoRepository->count([]),
+            'albums' => $this->albumRepository->count([]),
+            'admins' => $this->userRepository->count([]),
         ];
 
         return $this->render('admin/dashboard.html.twig', [

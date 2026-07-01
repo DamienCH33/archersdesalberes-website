@@ -17,7 +17,7 @@ class ClubStatRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve toutes les statistiques pour affichage homepage
+     * Trouve toutes les statistiques pour affichage homepage.
      *
      * @return ClubStat[]
      */
@@ -30,7 +30,7 @@ class ClubStatRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve une statistique par sa clé
+     * Trouve une statistique par sa clé.
      */
     public function findOneByKey(string $key): ?ClubStat
     {
@@ -42,22 +42,23 @@ class ClubStatRepository extends ServiceEntityRepository
     }
 
     /**
-     * Récupère la valeur d'une statistique par sa clé
+     * Récupère la valeur d'une statistique par sa clé.
      */
     public function getValueByKey(string $key): ?int
     {
         $stat = $this->findOneByKey($key);
-        return $stat ? $stat->getStatValue() : null;
+
+        return $stat instanceof ClubStat ? $stat->getStatValue() : null;
     }
 
     /**
-     * Met à jour ou crée une statistique
+     * Met à jour ou crée une statistique.
      */
     public function upsertStat(string $key, int $value, string $label): ClubStat
     {
         $stat = $this->findOneByKey($key);
 
-        if (!$stat) {
+        if (!$stat instanceof ClubStat) {
             $stat = new ClubStat();
             $stat->setStatKey($key);
             $stat->setLabel($label);
@@ -73,7 +74,7 @@ class ClubStatRepository extends ServiceEntityRepository
     }
 
     /**
-     * Récupère toutes les stats sous forme de tableau clé => valeur
+     * Récupère toutes les stats sous forme de tableau clé => valeur.
      *
      * @return array<string, int>
      */

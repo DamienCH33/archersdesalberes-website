@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use App\Entity\Partner;
@@ -26,7 +28,7 @@ final class PartnerFactory extends PersistentProxyObjectFactory
     }
 
     /**
-     * Créer les partenaires par défaut
+     * Créer les partenaires par défaut.
      */
     public static function createDefaultPartners(): void
     {

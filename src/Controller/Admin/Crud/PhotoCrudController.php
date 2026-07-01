@@ -24,9 +24,10 @@ class PhotoCrudController extends AbstractCrudController
     public const UPLOAD_DIR = 'uploads/photos';
 
     public function __construct(
-        private EntityManagerInterface $em,
-        private AdminUrlGenerator $adminUrlGenerator,
-    ) {}
+        private readonly EntityManagerInterface $em,
+        private readonly AdminUrlGenerator $adminUrlGenerator,
+    ) {
+    }
 
     public static function getEntityFqcn(): string
     {
@@ -53,23 +54,23 @@ class PhotoCrudController extends AbstractCrudController
             ->update(
                 Crud::PAGE_INDEX,
                 Action::NEW,
-                fn(Action $a) => $a->setLabel('Ajouter des photos')->setIcon('fa fa-plus')
+                fn (Action $a): Action => $a->setLabel('Ajouter des photos')->setIcon('fa fa-plus')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::EDIT,
-                fn(Action $a) => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
+                fn (Action $a): Action => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::DELETE,
-                fn(Action $a) => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
+                fn (Action $a): Action => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
             )
             ->disable(Action::SAVE_AND_CONTINUE)
             ->update(
                 Crud::PAGE_EDIT,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Enregistrer les modifications')
+                fn (Action $a): Action => $a->setLabel('Enregistrer les modifications')
             );
     }
 
@@ -81,7 +82,7 @@ class PhotoCrudController extends AbstractCrudController
 
         yield ImageField::new('path', 'Photo')
             ->setBasePath(self::UPLOAD_DIR)
-            ->setUploadDir('public/' . self::UPLOAD_DIR)
+            ->setUploadDir('public/'.self::UPLOAD_DIR)
             ->setUploadedFileNamePattern('[year]-[month]-[day]-[randomhash].[extension]')
             ->setRequired(false)
             ->setHelp('Formats acceptés : JPG, PNG, WebP')
@@ -124,17 +125,17 @@ class PhotoCrudController extends AbstractCrudController
             $album = $this->em->getRepository(Album::class)->find($request->request->get('album'));
             $files = $request->files->get('images', []);
 
-            if (!$album) {
+            if (!$album instanceof Album) {
                 $this->addFlash('danger', 'Choisis un album.');
             } elseif (!$files) {
                 $this->addFlash('warning', 'Aucune photo sélectionnée.');
             } else {
-                $dir = $this->getParameter('kernel.project_dir') . '/public/' . self::UPLOAD_DIR;
+                $dir = $this->getParameter('kernel.project_dir').'/public/'.self::UPLOAD_DIR;
                 if (!is_dir($dir)) {
                     mkdir($dir, 0775, true);
                 }
 
-                $order = (int) $this->em->getRepository(Photo::class)->count(['album' => $album]);
+                $order = $this->em->getRepository(Photo::class)->count(['album' => $album]);
                 $added = 0;
 
                 foreach ($files as $file) {
@@ -159,7 +160,7 @@ class PhotoCrudController extends AbstractCrudController
                 }
 
                 $this->em->flush();
-                $this->addFlash('success', $added . ' photo(s) ajoutée(s) à l\'album « ' . $album->getTitle() . ' ».');
+                $this->addFlash('success', $added.' photo(s) ajoutée(s) à l\'album « '.$album->getTitle().' ».');
 
                 return $this->redirect(
                     $this->adminUrlGenerator->setController(self::class)->setAction(Action::INDEX)->generateUrl()
@@ -172,7 +173,7 @@ class PhotoCrudController extends AbstractCrudController
         ]);
     }
 
-    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    public function updateEntity(EntityManagerInterface $entityManager, object $entityInstance): void
     {
         if (
             $entityInstance instanceof Photo

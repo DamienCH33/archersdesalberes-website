@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Front;
 
+use App\Repository\AlbumRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\ClubStatRepository;
 use App\Repository\PartnerRepository;
+use App\Repository\PhotoRepository;
 use App\Repository\SettingRepository;
 use App\Repository\TeamMemberRepository;
-use App\Repository\AlbumRepository;
-use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -23,7 +25,7 @@ class HomeController extends AbstractController
         PartnerRepository $partnerRepo,
         SettingRepository $settingRepo,
         AlbumRepository $albumRepository,
-        PhotoRepository $photoRepository
+        PhotoRepository $photoRepository,
     ): Response {
         $statsArray = $statRepo->getAllAsArray();
 

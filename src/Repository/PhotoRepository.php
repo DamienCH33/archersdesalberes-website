@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\Photo;
 use App\Entity\Article;
+use App\Entity\Photo;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,7 +18,7 @@ class PhotoRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve toutes les photos d'un article, triées par ordre d'affichage
+     * Trouve toutes les photos d'un article, triées par ordre d'affichage.
      *
      * @return Photo[]
      */
@@ -34,7 +34,7 @@ class PhotoRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve les X premières photos d'un article (pour preview)
+     * Trouve les X premières photos d'un article (pour preview).
      *
      * @return Photo[]
      */
@@ -50,7 +50,7 @@ class PhotoRepository extends ServiceEntityRepository
     }
 
     /**
-     * Compte les photos d'un article
+     * Compte les photos d'un article.
      */
     public function countByArticle(Article $article): int
     {
@@ -63,7 +63,7 @@ class PhotoRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve le prochain ordre d'affichage pour un article
+     * Trouve le prochain ordre d'affichage pour un article.
      */
     public function getNextDisplayOrder(Article $article): int
     {
@@ -78,7 +78,7 @@ class PhotoRepository extends ServiceEntityRepository
     }
 
     /**
-     * Supprime toutes les photos d'un article
+     * Supprime toutes les photos d'un article.
      */
     public function deleteByArticle(Article $article): void
     {

@@ -23,7 +23,7 @@ class GalleryController extends AbstractController
     {
         $album = $albumRepository->findOnePublishedBySlug($slug);
 
-        if (!$album) {
+        if (!$album instanceof \App\Entity\Album) {
             throw $this->createNotFoundException('Cet album n\'existe pas ou n\'est pas publié.');
         }
 

@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TarifRepository::class)]
-class Tarif
+class Tarif implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -38,9 +38,11 @@ class Tarif
     {
         return $this->category;
     }
+
     public function setCategory(string $category): static
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -48,9 +50,11 @@ class Tarif
     {
         return $this->label;
     }
+
     public function setLabel(string $label): static
     {
         $this->label = $label;
+
         return $this;
     }
 
@@ -58,9 +62,11 @@ class Tarif
     {
         return $this->price;
     }
+
     public function setPrice(string $price): static
     {
         $this->price = $price;
+
         return $this;
     }
 
@@ -68,9 +74,11 @@ class Tarif
     {
         return $this->featured;
     }
+
     public function setFeatured(bool $featured): static
     {
         $this->featured = $featured;
+
         return $this;
     }
 
@@ -78,9 +86,11 @@ class Tarif
     {
         return $this->position;
     }
+
     public function setPosition(int $position): static
     {
         $this->position = $position;
+
         return $this;
     }
 

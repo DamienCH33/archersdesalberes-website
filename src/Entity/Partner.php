@@ -6,7 +6,7 @@ use App\Repository\PartnerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
-class Partner
+class Partner implements \Stringable
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -39,6 +39,7 @@ class Partner
     public function setName(string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -50,6 +51,7 @@ class Partner
     public function setLogo(string $logo): static
     {
         $this->logo = $logo;
+
         return $this;
     }
 
@@ -61,6 +63,7 @@ class Partner
     public function setWebsite(?string $website): static
     {
         $this->website = $website;
+
         return $this;
     }
 
@@ -68,6 +71,7 @@ class Partner
     {
         return $this->name ?? 'Partenaire';
     }
+
     public function getDisplayOrder(): int
     {
         return $this->displayOrder;
@@ -76,6 +80,7 @@ class Partner
     public function setDisplayOrder(int $displayOrder): static
     {
         $this->displayOrder = $displayOrder;
+
         return $this;
     }
 }

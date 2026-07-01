@@ -34,7 +34,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Trouve tous les admins actifs
+     * Trouve tous les admins actifs.
      *
      * @return User[]
      */
@@ -48,7 +48,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Trouve un admin par email
+     * Trouve un admin par email.
      */
     public function findOneByEmail(string $email): ?User
     {
@@ -60,7 +60,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Compte le nombre total d'admins
+     * Compte le nombre total d'admins.
      */
     public function countAdmins(): int
     {

@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: ClubStatRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class ClubStat
+class ClubStat implements \Stringable
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -54,6 +54,7 @@ class ClubStat
     public function setStatKey(string $statKey): static
     {
         $this->statKey = $statKey;
+
         return $this;
     }
 
@@ -65,6 +66,7 @@ class ClubStat
     public function setStatValue(int $statValue): static
     {
         $this->statValue = $statValue;
+
         return $this;
     }
 
@@ -76,6 +78,7 @@ class ClubStat
     public function setLabel(string $label): static
     {
         $this->label = $label;
+
         return $this;
     }
 
@@ -87,6 +90,7 @@ class ClubStat
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 

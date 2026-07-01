@@ -46,15 +46,15 @@ class PhotoBatchUploadController extends AbstractController
             /** @var UploadedFile[] */
             $files = $form->get('images')->getData();
 
-            $dir = $this->getParameter('kernel.project_dir') . '/public/uploads/photos';
+            $dir = $this->getParameter('kernel.project_dir').'/public/uploads/photos';
             if (!is_dir($dir)) {
                 mkdir($dir, 0775, true);
             }
 
             $count = 0;
             foreach ($files as $file) {
-                $safe = $slugger->slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
-                $name = $safe . '-' . uniqid() . '.' . $file->guessExtension();
+                $safe = $slugger->slug(pathinfo((string) $file->getClientOriginalName(), PATHINFO_FILENAME));
+                $name = $safe.'-'.uniqid().'.'.$file->guessExtension();
                 $file->move($dir, $name);
 
                 $photo = (new Photo())
@@ -65,7 +65,7 @@ class PhotoBatchUploadController extends AbstractController
             }
             $em->flush();
 
-            $this->addFlash('success', $count . ' photo(s) importée(s).');
+            $this->addFlash('success', $count.' photo(s) importée(s).');
 
             return $this->redirectToRoute('admin_photo_batch');
         }

@@ -17,7 +17,7 @@ class AlbumRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve tous les albums publiés
+     * Trouve tous les albums publiés.
      *
      * @return Album[]
      */
@@ -32,7 +32,7 @@ class AlbumRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve les derniers albums publiés
+     * Trouve les derniers albums publiés.
      *
      * @return Album[]
      */
@@ -48,7 +48,7 @@ class AlbumRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve un album publié par son slug
+     * Trouve un album publié par son slug.
      */
     public function findOnePublishedBySlug(string $slug): ?Album
     {
@@ -62,7 +62,7 @@ class AlbumRepository extends ServiceEntityRepository
     }
 
     /**
-     * Pagination des albums publiés
+     * Pagination des albums publiés.
      *
      * @return Album[]
      */
@@ -79,7 +79,7 @@ class AlbumRepository extends ServiceEntityRepository
     }
 
     /**
-     * Recherche d'albums par titre
+     * Recherche d'albums par titre.
      *
      * @return Album[]
      */
@@ -89,14 +89,14 @@ class AlbumRepository extends ServiceEntityRepository
             ->where('a.isPublished = :published')
             ->andWhere('LOWER(a.title) LIKE LOWER(:query)')
             ->setParameter('published', true)
-            ->setParameter('query', '%' . $query . '%')
+            ->setParameter('query', '%'.$query.'%')
             ->orderBy('a.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
     /**
-     * Compte les albums publiés
+     * Compte les albums publiés.
      */
     public function countPublished(): int
     {

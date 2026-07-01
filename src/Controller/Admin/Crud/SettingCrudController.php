@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Setting;
@@ -38,28 +40,28 @@ class SettingCrudController extends AbstractCrudController
             ->update(
                 Crud::PAGE_INDEX,
                 Action::NEW,
-                fn(Action $a) => $a->setLabel('Ajouter un paramètre')->setIcon('fa fa-plus')
+                fn (Action $a): Action => $a->setLabel('Ajouter un paramètre')->setIcon('fa fa-plus')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::EDIT,
-                fn(Action $a) => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
+                fn (Action $a): Action => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::DELETE,
-                fn(Action $a) => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
+                fn (Action $a): Action => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
             )
             ->disable(Action::SAVE_AND_CONTINUE)
             ->update(
                 Crud::PAGE_NEW,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Créer')
+                fn (Action $a): Action => $a->setLabel('Créer')
             )
             ->update(
                 Crud::PAGE_EDIT,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Enregistrer les modifications')
+                fn (Action $a): Action => $a->setLabel('Enregistrer les modifications')
             );
     }
 

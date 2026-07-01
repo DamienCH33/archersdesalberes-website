@@ -25,8 +25,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserCrudController extends AbstractCrudController
 {
     public function __construct(
-        private UserPasswordHasherInterface $passwordHasher
-    ) {}
+        private readonly UserPasswordHasherInterface $passwordHasher,
+    ) {
+    }
 
     public static function getEntityFqcn(): string
     {
@@ -53,28 +54,28 @@ class UserCrudController extends AbstractCrudController
             ->update(
                 Crud::PAGE_INDEX,
                 Action::NEW,
-                fn(Action $a) => $a->setLabel('Ajouter un administrateur')->setIcon('fa fa-plus')
+                fn (Action $a): Action => $a->setLabel('Ajouter un administrateur')->setIcon('fa fa-plus')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::EDIT,
-                fn(Action $a) => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
+                fn (Action $a): Action => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::DELETE,
-                fn(Action $a) => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
+                fn (Action $a): Action => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
             )
             ->disable(Action::SAVE_AND_CONTINUE)
             ->update(
                 Crud::PAGE_NEW,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Créer')
+                fn (Action $a): Action => $a->setLabel('Créer')
             )
             ->update(
                 Crud::PAGE_EDIT,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Enregistrer les modifications')
+                fn (Action $a): Action => $a->setLabel('Enregistrer les modifications')
             );
     }
 
@@ -114,17 +115,17 @@ class UserCrudController extends AbstractCrudController
             ->renderExpanded()
             ->renderAsBadges();
 
-        if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
+        if (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
             yield TextField::new('plainPassword', 'Mot de passe')
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
-                    'type'           => PasswordType::class,
-                    'first_options'  => ['label' => 'Mot de passe', 'attr' => ['placeholder' => 'Minimum 8 caractères']],
+                    'type' => PasswordType::class,
+                    'first_options' => ['label' => 'Mot de passe', 'attr' => ['placeholder' => 'Minimum 8 caractères']],
                     'second_options' => ['label' => 'Confirmer le mot de passe', 'attr' => ['placeholder' => 'Retapez le mot de passe']],
-                    'mapped'         => false,
+                    'mapped' => false,
                 ])
-                ->setRequired($pageName === Crud::PAGE_NEW)
-                ->setHelp($pageName === Crud::PAGE_EDIT
+                ->setRequired(Crud::PAGE_NEW === $pageName)
+                ->setHelp(Crud::PAGE_EDIT === $pageName
                     ? 'Laissez vide pour ne pas changer le mot de passe'
                     : 'Minimum 8 caractères');
         }
@@ -137,18 +138,20 @@ class UserCrudController extends AbstractCrudController
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
     {
         $formBuilder = parent::createNewFormBuilder($entityDto, $formOptions, $context);
+
         return $this->addPasswordEventListener($formBuilder);
     }
 
     public function createEditFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
     {
         $formBuilder = parent::createEditFormBuilder($entityDto, $formOptions, $context);
+
         return $this->addPasswordEventListener($formBuilder);
     }
 
     private function addPasswordEventListener(FormBuilderInterface $formBuilder): FormBuilderInterface
     {
-        return $formBuilder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+        return $formBuilder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
             $form = $event->getForm();
             if (!$form->isValid()) {
                 return;

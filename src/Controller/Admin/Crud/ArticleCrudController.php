@@ -46,28 +46,28 @@ class ArticleCrudController extends AbstractCrudController
             ->update(
                 Crud::PAGE_INDEX,
                 Action::NEW,
-                fn(Action $a) => $a->setLabel('Créer une actualité')->setIcon('fa fa-plus')
+                fn (Action $a): Action => $a->setLabel('Créer une actualité')->setIcon('fa fa-plus')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::EDIT,
-                fn(Action $a) => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
+                fn (Action $a): Action => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::DELETE,
-                fn(Action $a) => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
+                fn (Action $a): Action => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
             )
             ->disable(Action::SAVE_AND_CONTINUE)
             ->update(
                 Crud::PAGE_NEW,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Enregistrer')
+                fn (Action $a): Action => $a->setLabel('Enregistrer')
             )
             ->update(
                 Crud::PAGE_EDIT,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Enregistrer les modifications')
+                fn (Action $a): Action => $a->setLabel('Enregistrer les modifications')
             );
     }
 
@@ -89,19 +89,19 @@ class ArticleCrudController extends AbstractCrudController
 
         yield ChoiceField::new('category', 'Catégorie')
             ->setChoices([
-                '🏆 Podium'        => 'podium',
-                '🎉 Événement'     => 'evenement',
-                '📢 Vie du club'   => 'club',
-                'ℹ️ Information'   => 'info',
-                '📸 Album photos'  => 'photos',
+                '🏆 Podium' => 'podium',
+                '🎉 Événement' => 'evenement',
+                '📢 Vie du club' => 'club',
+                'ℹ️ Information' => 'info',
+                '📸 Album photos' => 'photos',
             ])
             ->setRequired(true)
             ->renderAsBadges([
-                'podium'    => 'success',
+                'podium' => 'success',
                 'evenement' => 'primary',
-                'club'      => 'info',
-                'info'      => 'warning',
-                'photos'    => 'secondary',
+                'club' => 'info',
+                'info' => 'warning',
+                'photos' => 'secondary',
             ]);
 
         // -------- Panneau 2 : Contenu --------
@@ -140,7 +140,7 @@ class ArticleCrudController extends AbstractCrudController
 
         yield AssociationField::new('createdBy', 'Auteur')
             ->hideOnForm()
-            ->formatValue(fn($value) => $value ? $value->getFullName() : 'Système');
+            ->formatValue(fn ($value) => $value ? $value->getFullName() : 'Système');
 
         yield DateTimeField::new('createdAt', 'Créé le')
             ->hideOnForm()

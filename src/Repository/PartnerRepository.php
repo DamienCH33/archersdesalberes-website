@@ -17,7 +17,7 @@ class PartnerRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve tous les partenaires pour affichage footer
+     * Trouve tous les partenaires pour affichage footer.
      *
      * @return Partner[]
      */
@@ -30,7 +30,7 @@ class PartnerRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve un partenaire par nom
+     * Trouve un partenaire par nom.
      */
     public function findOneByName(string $name): ?Partner
     {
@@ -42,7 +42,7 @@ class PartnerRepository extends ServiceEntityRepository
     }
 
     /**
-     * Compte le nombre de partenaires
+     * Compte le nombre de partenaires.
      */
     public function countPartners(): int
     {
@@ -53,7 +53,7 @@ class PartnerRepository extends ServiceEntityRepository
     }
 
     /**
-     * Recherche de partenaires par nom
+     * Recherche de partenaires par nom.
      *
      * @return Partner[]
      */
@@ -61,7 +61,7 @@ class PartnerRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->where('LOWER(p.name) LIKE LOWER(:query)')
-            ->setParameter('query', '%' . $query . '%')
+            ->setParameter('query', '%'.$query.'%')
             ->orderBy('p.name', 'ASC')
             ->getQuery()
             ->getResult();

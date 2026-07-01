@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
-class Photo
+class Photo implements \Stringable
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -52,6 +52,7 @@ class Photo
     public function setAlbum(?Album $album): static
     {
         $this->album = $album;
+
         return $this;
     }
 
@@ -63,6 +64,7 @@ class Photo
     public function setFilename(string $filename): static
     {
         $this->filename = $filename;
+
         return $this;
     }
 
@@ -74,6 +76,7 @@ class Photo
     public function setPath(string $path): static
     {
         $this->path = $path;
+
         return $this;
     }
 
@@ -85,6 +88,7 @@ class Photo
     public function setCaption(?string $caption): static
     {
         $this->caption = $caption;
+
         return $this;
     }
 
@@ -96,6 +100,7 @@ class Photo
     public function setDisplayOrder(int $displayOrder): static
     {
         $this->displayOrder = $displayOrder;
+
         return $this;
     }
 
@@ -107,11 +112,12 @@ class Photo
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
     public function __toString(): string
     {
-        return $this->filename;
+        return (string) $this->filename;
     }
 }

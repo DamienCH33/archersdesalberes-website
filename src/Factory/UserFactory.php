@@ -34,7 +34,7 @@ final class UserFactory extends PersistentProxyObjectFactory
     }
 
     /**
-     * Créer un admin
+     * Créer un admin.
      */
     public static function createAdmin(string $email, string $plainPassword): User
     {

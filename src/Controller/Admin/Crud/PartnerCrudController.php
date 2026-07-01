@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Partner;
@@ -39,28 +41,28 @@ class PartnerCrudController extends AbstractCrudController
             ->update(
                 Crud::PAGE_INDEX,
                 Action::NEW,
-                fn(Action $a) => $a->setLabel('Ajouter un partenaire')->setIcon('fa fa-plus')
+                fn (Action $a): Action => $a->setLabel('Ajouter un partenaire')->setIcon('fa fa-plus')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::EDIT,
-                fn(Action $a) => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
+                fn (Action $a): Action => $a->setLabel('Modifier')->setIcon('fa fa-pencil')
             )
             ->update(
                 Crud::PAGE_INDEX,
                 Action::DELETE,
-                fn(Action $a) => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
+                fn (Action $a): Action => $a->setLabel('Supprimer')->setIcon('fa fa-trash')
             )
             ->disable(Action::SAVE_AND_CONTINUE)
             ->update(
                 Crud::PAGE_NEW,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Ajouter')
+                fn (Action $a): Action => $a->setLabel('Ajouter')
             )
             ->update(
                 Crud::PAGE_EDIT,
                 Action::SAVE_AND_RETURN,
-                fn(Action $a) => $a->setLabel('Enregistrer les modifications')
+                fn (Action $a): Action => $a->setLabel('Enregistrer les modifications')
             );
     }
 
@@ -74,7 +76,7 @@ class PartnerCrudController extends AbstractCrudController
             ->setBasePath('uploads/partners')
             ->setUploadDir('public/uploads/partners')
             ->setUploadedFileNamePattern('[randomhash].[extension]')
-            ->setRequired($pageName === Crud::PAGE_NEW)
+            ->setRequired(Crud::PAGE_NEW === $pageName)
             ->hideOnIndex()
             ->setHelp('Logo du partenaire (format PNG ou JPG recommandé)');
 

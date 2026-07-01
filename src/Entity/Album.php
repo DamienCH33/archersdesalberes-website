@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
-class Album
+class Album implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -30,12 +30,7 @@ class Album
     #[ORM\Column]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\OneToMany(
-        mappedBy: 'album',
-        targetEntity: Photo::class,
-        cascade: ['persist', 'remove'],
-        orphanRemoval: true
-    )]
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album', cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\OrderBy(['displayOrder' => 'ASC'])]
     private Collection $photos;
 
@@ -58,6 +53,7 @@ class Album
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -69,6 +65,7 @@ class Album
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -80,6 +77,7 @@ class Album
     public function setCoverImage(?string $coverImage): self
     {
         $this->coverImage = $coverImage;
+
         return $this;
     }
 
@@ -91,6 +89,7 @@ class Album
     public function setIsPublished(bool $isPublished): self
     {
         $this->isPublished = $isPublished;
+
         return $this;
     }
 
@@ -102,6 +101,7 @@ class Album
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -125,10 +125,8 @@ class Album
 
     public function removePhoto(Photo $photo): self
     {
-        if ($this->photos->removeElement($photo)) {
-            if ($photo->getAlbum() === $this) {
-                $photo->setAlbum(null);
-            }
+        if ($this->photos->removeElement($photo) && $photo->getAlbum() === $this) {
+            $photo->setAlbum(null);
         }
 
         return $this;

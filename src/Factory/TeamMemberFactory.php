@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use App\Entity\TeamMember;
@@ -33,7 +35,7 @@ final class TeamMemberFactory extends PersistentProxyObjectFactory
     }
 
     /**
-     * Créer l'équipe du bureau par défaut
+     * Créer l'équipe du bureau par défaut.
      */
     public static function createDefaultTeam(): void
     {

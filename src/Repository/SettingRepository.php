@@ -1,4 +1,5 @@
 <?php
+
 // src/Repository/SettingRepository.php
 
 namespace App\Repository;
@@ -18,7 +19,7 @@ class SettingRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve un paramètre par sa clé
+     * Trouve un paramètre par sa clé.
      */
     public function findOneByKey(string $key): ?Setting
     {
@@ -30,28 +31,29 @@ class SettingRepository extends ServiceEntityRepository
     }
 
     /**
-     * Récupère la valeur d'un paramètre par sa clé
+     * Récupère la valeur d'un paramètre par sa clé.
      */
     public function getValueByKey(string $key, ?string $default = null): ?string
     {
         $setting = $this->findOneByKey($key);
-        return $setting ? $setting->getSettingValue() : $default;
+
+        return $setting instanceof Setting ? $setting->getSettingValue() : $default;
     }
 
     /**
-     * Met à jour ou crée un paramètre
+     * Met à jour ou crée un paramètre.
      */
     public function upsertSetting(string $key, string $value, ?string $description = null): Setting
     {
         $setting = $this->findOneByKey($key);
 
-        if (!$setting) {
+        if (!$setting instanceof Setting) {
             $setting = new Setting();
             $setting->setSettingKey($key);
         }
 
         $setting->setSettingValue($value);
-        if ($description !== null) {
+        if (null !== $description) {
             $setting->setDescription($description);
         }
         $setting->setUpdatedAt(new \DateTimeImmutable());
@@ -63,7 +65,7 @@ class SettingRepository extends ServiceEntityRepository
     }
 
     /**
-     * Récupère tous les paramètres sous forme de tableau clé => valeur
+     * Récupère tous les paramètres sous forme de tableau clé => valeur.
      *
      * @return array<string, string>
      */
@@ -80,7 +82,7 @@ class SettingRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve tous les paramètres triés par clé
+     * Trouve tous les paramètres triés par clé.
      *
      * @return Setting[]
      */
@@ -93,13 +95,13 @@ class SettingRepository extends ServiceEntityRepository
     }
 
     /**
-     * Supprime un paramètre par sa clé
+     * Supprime un paramètre par sa clé.
      */
     public function deleteByKey(string $key): bool
     {
         $setting = $this->findOneByKey($key);
 
-        if (!$setting) {
+        if (!$setting instanceof Setting) {
             return false;
         }
 
@@ -110,10 +112,10 @@ class SettingRepository extends ServiceEntityRepository
     }
 
     /**
-     * Vérifie si un paramètre existe
+     * Vérifie si un paramètre existe.
      */
     public function exists(string $key): bool
     {
-        return $this->findOneByKey($key) !== null;
+        return $this->findOneByKey($key) instanceof Setting;
     }
 }

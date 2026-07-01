@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // src/Controller/Front/PageController.php
 
 namespace App\Controller\Front;
@@ -42,7 +45,7 @@ class PageController extends AbstractController
         $limit = 10;
         $offset = ($page - 1) * $limit;
 
-        if ($category === 'all') {
+        if ('all' === $category) {
             $articles = $articleRepository->findBy(
                 ['isPublished' => true],
                 ['publishedAt' => 'DESC'],
@@ -84,7 +87,7 @@ class PageController extends AbstractController
     {
         $article = $articleRepository->findOneBy(['slug' => $slug, 'isPublished' => true]);
 
-        if (!$article) {
+        if (!$article instanceof \App\Entity\Article) {
             throw $this->createNotFoundException('Article non trouvé');
         }
 

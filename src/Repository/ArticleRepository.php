@@ -17,7 +17,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve tous les articles publiés, triés par date de publication décroissante
+     * Trouve tous les articles publiés, triés par date de publication décroissante.
      *
      * @return Article[]
      */
@@ -32,11 +32,11 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve les articles publiés par catégorie
+     * Trouve les articles publiés par catégorie.
      *
      * @return Article[]
      */
-    public function findPublishedByCategory(string $category, int $limit = null): array
+    public function findPublishedByCategory(string $category, ?int $limit = null): array
     {
         $qb = $this->createQueryBuilder('a')
             ->where('a.isPublished = :published')
@@ -53,7 +53,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve les X derniers articles publiés
+     * Trouve les X derniers articles publiés.
      *
      * @return Article[]
      */
@@ -69,7 +69,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve un article publié par son slug
+     * Trouve un article publié par son slug.
      */
     public function findOnePublishedBySlug(string $slug): ?Article
     {
@@ -83,7 +83,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouve tous les albums photos publiés
+     * Trouve tous les albums photos publiés.
      *
      * @return Article[]
      */
@@ -100,7 +100,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Recherche d'articles par titre
+     * Recherche d'articles par titre.
      *
      * @return Article[]
      */
@@ -110,14 +110,14 @@ class ArticleRepository extends ServiceEntityRepository
             ->where('a.isPublished = :published')
             ->andWhere('LOWER(a.title) LIKE LOWER(:query)')
             ->setParameter('published', true)
-            ->setParameter('query', '%' . $query . '%')
+            ->setParameter('query', '%'.$query.'%')
             ->orderBy('a.publishedAt', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
     /**
-     * Compte les articles publiés
+     * Compte les articles publiés.
      */
     public function countPublished(): int
     {
@@ -130,7 +130,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Compte les articles par catégorie
+     * Compte les articles par catégorie.
      */
     public function countByCategory(string $category): int
     {

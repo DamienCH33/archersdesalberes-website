@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // src/Controller/SecurityController.php
 
 namespace App\Controller;
@@ -14,7 +17,7 @@ class SecurityController extends AbstractController
     #[Route('/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()) {
+        if ($this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
             return $this->redirectToRoute('admin');
         }
 
