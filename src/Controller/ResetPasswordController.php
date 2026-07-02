@@ -157,4 +157,21 @@ class ResetPasswordController extends AbstractController
 
         return $this->redirectToRoute('app_check_email');
     }
+
+    /**
+     * Page de confirmation après une demande de réinitialisation.
+     */
+    #[Route('/check-email', name: 'app_check_email')]
+    public function checkEmail(): Response
+    {
+        // Génère un faux token si l'utilisateur n'existe pas ou accède directement à la page,
+        // pour ne pas révéler si un compte correspond à l'email saisi.
+        if (null === ($resetToken = $this->getTokenObjectFromSession())) {
+            $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
+        }
+
+        return $this->render('reset_password/check_email.html.twig', [
+            'resetToken' => $resetToken,
+        ]);
+    }
 }

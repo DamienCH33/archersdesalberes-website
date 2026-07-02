@@ -3,6 +3,12 @@ parameters:
     paths:
         - src
         - tests
+    ignoreErrors:
+        # Doctrine assigne $id par réflexion, le type union est nécessaire
+        - '#Property App\\Entity\\.*::\$id .* is never assigned#'
+        # QuestionHelper::ask() existe mais l'interface ne le déclare pas
+        - '#Call to an undefined method .*HelperInterface::ask\(\)#'
+        - '#Call to function method_exists\(\) with .*Dotenv.* will always evaluate to true#'
     symfony:
         containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
     treatPhpDocTypesAsCertain: false

@@ -54,7 +54,7 @@ class PhotoRepository extends ServiceEntityRepository
      */
     public function countByArticle(Article $article): int
     {
-        return $this->createQueryBuilder('p')
+        return (int) $this->createQueryBuilder('p')
             ->select('COUNT(p.id)')
             ->where('p.article = :article')
             ->setParameter('article', $article)
@@ -67,14 +67,14 @@ class PhotoRepository extends ServiceEntityRepository
      */
     public function getNextDisplayOrder(Article $article): int
     {
-        $result = $this->createQueryBuilder('p')
+        $max = $this->createQueryBuilder('p')
             ->select('MAX(p.displayOrder)')
             ->where('p.article = :article')
             ->setParameter('article', $article)
             ->getQuery()
             ->getSingleScalarResult();
 
-        return ($result ?? 0) + 1;
+        return (int) $max + 1;
     }
 
     /**

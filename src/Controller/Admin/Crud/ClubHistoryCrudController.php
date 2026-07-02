@@ -11,6 +11,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+/**
+ * @extends AbstractCrudController<ClubHistory>
+ */
 class ClubHistoryCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string

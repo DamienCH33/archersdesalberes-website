@@ -18,6 +18,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+/**
+ * @extends AbstractCrudController<Article>
+ */
 class ArticleCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string

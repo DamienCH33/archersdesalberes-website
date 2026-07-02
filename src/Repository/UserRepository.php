@@ -64,7 +64,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      */
     public function countAdmins(): int
     {
-        return $this->createQueryBuilder('u')
+        return (int) $this->createQueryBuilder('u')
             ->select('COUNT(u.id)')
             ->getQuery()
             ->getSingleScalarResult();

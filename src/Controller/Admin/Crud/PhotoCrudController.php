@@ -19,6 +19,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @extends AbstractCrudController<Photo>
+ */
 class PhotoCrudController extends AbstractCrudController
 {
     public const UPLOAD_DIR = 'uploads/photos';

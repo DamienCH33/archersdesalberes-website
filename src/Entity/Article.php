@@ -44,7 +44,7 @@ class Article implements \Stringable
     private ?User $createdBy = null;
 
     #[ORM\Column]
-    private \DateTimeImmutable $createdAt;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[Gedmo\Timestampable(on: 'update')]
     #[ORM\Column]
@@ -63,7 +63,7 @@ class Article implements \Stringable
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {
-        if (!isset($this->createdAt)) {
+        if (null === $this->createdAt) {
             $this->createdAt = new \DateTimeImmutable();
         }
     }

@@ -22,6 +22,9 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * @extends AbstractCrudController<User>
+ */
 class UserCrudController extends AbstractCrudController
 {
     public function __construct(
@@ -135,6 +138,9 @@ class UserCrudController extends AbstractCrudController
             ->setFormat('dd/MM/yyyy HH:mm');
     }
 
+    /**
+     * @return FormBuilderInterface<mixed>
+     */
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
     {
         $formBuilder = parent::createNewFormBuilder($entityDto, $formOptions, $context);
@@ -142,6 +148,9 @@ class UserCrudController extends AbstractCrudController
         return $this->addPasswordEventListener($formBuilder);
     }
 
+    /**
+     * @return FormBuilderInterface<mixed>
+     */
     public function createEditFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
     {
         $formBuilder = parent::createEditFormBuilder($entityDto, $formOptions, $context);
@@ -149,6 +158,11 @@ class UserCrudController extends AbstractCrudController
         return $this->addPasswordEventListener($formBuilder);
     }
 
+    /**
+     * @param FormBuilderInterface<mixed> $formBuilder
+     *
+     * @return FormBuilderInterface<mixed>
+     */
     private function addPasswordEventListener(FormBuilderInterface $formBuilder): FormBuilderInterface
     {
         return $formBuilder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {

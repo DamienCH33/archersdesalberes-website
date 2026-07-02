@@ -24,6 +24,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+    /**
+     * @var list<string>
+     */
     #[ORM\Column]
     private array $roles = ['ROLE_ADMIN'];
 
@@ -39,6 +42,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    /**
+     * @var Collection<int, Article>
+     */
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'createdBy')]
     private Collection $articles;
 
@@ -65,19 +71,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this;
     }
 
+    /**
+     * @return non-empty-string
+     */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        \assert('' !== $this->email);
+
+        return $this->email;
     }
 
+    /**
+     * @return list<string>
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
         $roles[] = 'ROLE_ADMIN';
 
-        return array_unique($roles);
+        return array_values(array_unique($roles));
     }
 
+    /**
+     * @param list<string> $roles
+     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -87,7 +104,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
     public function getPassword(): string
     {
-        return $this->password;
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): static

@@ -13,6 +13,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+/**
+ * @extends AbstractCrudController<Tarif>
+ */
 class TarifCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string

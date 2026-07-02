@@ -30,6 +30,9 @@ class Album implements \Stringable
     #[ORM\Column]
     private \DateTimeImmutable $createdAt;
 
+    /**
+     * @var Collection<int, Photo>
+     */
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album', cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\OrderBy(['displayOrder' => 'ASC'])]
     private Collection $photos;

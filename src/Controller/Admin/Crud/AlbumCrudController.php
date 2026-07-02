@@ -16,6 +16,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+/**
+ * @extends AbstractCrudController<Album>
+ */
 class AlbumCrudController extends AbstractCrudController
 {
     public const UPLOAD_DIR = 'uploads/albums';

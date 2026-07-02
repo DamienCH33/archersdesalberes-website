@@ -1,11 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}Email de réinitialisation envoyé - Archers des Albères
+{% endblock %}
+
+{% block body_class %}login-page
+{% endblock %}
 
 {% block body %}
-    <p>
-        If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
-        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
-    </p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+	<div class="login-wrapper">
+		<div style="width: 100%; max-width: 460px;">
+			<div class="login-card">
+
+				<div class="login-header">
+					<div class="login-logo">
+						<img src="{{ asset('images/logoarcherie-transparent.png') }}" alt="Logo Archers des Albères">
+					</div>
+					<span class="login-badge">📧 Email envoyé</span>
+					<h1 class="login-title">Email de réinitialisation envoyé</h1>
+				</div>
+
+				<div class="login-alert login-alert-success">
+					<span class="login-alert-icon">✓</span>
+					<span>
+						Si un compte correspond à cette adresse, un email contenant un lien
+						de réinitialisation vient d'être envoyé. Ce lien expirera dans
+						{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+					</span>
+				</div>
+
+				<p class="login-subtitle" style="text-align:center; margin:1rem 0;">
+					Pensez à vérifier vos spams si vous ne le recevez pas.
+				</p>
+
+				<a href="{{ path('app_login') }}" class="back-link">Retour à la connexion</a>
+			</div>
+		</div>
+	</div>
 {% endblock %}

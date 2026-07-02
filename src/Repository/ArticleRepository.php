@@ -121,7 +121,7 @@ class ArticleRepository extends ServiceEntityRepository
      */
     public function countPublished(): int
     {
-        return $this->createQueryBuilder('a')
+        return (int) $this->createQueryBuilder('a')
             ->select('COUNT(a.id)')
             ->where('a.isPublished = :published')
             ->setParameter('published', true)
@@ -134,7 +134,7 @@ class ArticleRepository extends ServiceEntityRepository
      */
     public function countByCategory(string $category): int
     {
-        return $this->createQueryBuilder('a')
+        return (int) $this->createQueryBuilder('a')
             ->select('COUNT(a.id)')
             ->where('a.isPublished = :published')
             ->andWhere('a.category = :category')
