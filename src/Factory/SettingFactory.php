@@ -7,12 +7,12 @@ declare(strict_types=1);
 namespace App\Factory;
 
 use App\Entity\Setting;
-use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Setting>
+ * @extends PersistentObjectFactory<Setting>
  */
-final class SettingFactory extends PersistentProxyObjectFactory
+final class SettingFactory extends PersistentObjectFactory
 {
     public static function class(): string
     {
@@ -67,7 +67,7 @@ final class SettingFactory extends PersistentProxyObjectFactory
         ];
 
         foreach ($settings as $setting) {
-            self::new()->create([
+            self::createOne([
                 'settingKey' => $setting['key'],
                 'settingValue' => $setting['value'],
                 'description' => $setting['description'],

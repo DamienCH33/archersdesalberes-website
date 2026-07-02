@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Factory;
 
 use App\Entity\Partner;
-use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Partner>
+ * @extends PersistentObjectFactory<Partner>
  */
-final class PartnerFactory extends PersistentProxyObjectFactory
+final class PartnerFactory extends PersistentObjectFactory
 {
     public static function class(): string
     {
@@ -40,7 +40,7 @@ final class PartnerFactory extends PersistentProxyObjectFactory
         ];
 
         foreach ($partners as $partner) {
-            self::new()->create([
+            self::createOne([
                 'name' => $partner['name'],
                 'displayOrder' => $partner['order'],
             ]);

@@ -3,12 +3,12 @@
 namespace App\Factory;
 
 use App\Entity\User;
-use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<User>
+ * @extends PersistentObjectFactory<User>
  */
-final class UserFactory extends PersistentProxyObjectFactory
+final class UserFactory extends PersistentObjectFactory
 {
     public static function class(): string
     {
@@ -31,19 +31,5 @@ final class UserFactory extends PersistentProxyObjectFactory
         return $this->with([
             'roles' => ['ROLE_ADMIN'],
         ]);
-    }
-
-    /**
-     * Créer un admin.
-     */
-    public static function createAdmin(string $email, string $plainPassword): User
-    {
-        return self::new()
-            ->admin()
-            ->with([
-                'email' => $email,
-                'password' => $plainPassword, // ⚠️ à hasher avant usage réel
-            ])
-            ->create();
     }
 }
