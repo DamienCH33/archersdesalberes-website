@@ -46,11 +46,11 @@
 					<a href="{{ path('app_actualites') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_actualites' ? 'active' : '' }}">Actualités</a>
 					<a href="{{ path('app_adhesion') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_adhesion' ? 'active' : '' }}">Adhésion</a>
 					<a href="{{ path('app_horaires') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_horaires' ? 'active' : '' }}">Horaires &
-																																																Lieux</a>
+																																																																								Lieux</a>
 					<a href="{{ path('app_history') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_history' ? 'active' : '' }}">Histoire</a>
 					<a href="{{ path('app_gallery') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_gallery' ? 'active' : '' }}">Galerie photos</a>
 					<a href="{{ path('app_contact') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_contact' ? 'active' : '' }}">Nous
-																																																																																																																																																																																				                    contacter</a>
+																																																																																																																																																																																																												                    contacter</a>
 				</nav>
 
 				<div class="sidebar-footer">
@@ -69,61 +69,117 @@
 			<main class="main-content"> {% block body %}{% endblock %}
 
 				{# FOOTER - Commun à toutes les pages #}
-				<footer class="footer">
-					<div class="footer-grid">
-						<div class="footer-info">
-							<h4>Archers des Albères</h4>
-							<p style="color:rgba(255,255,255,0.7)">Depuis 1991</p>
-							<p>Sorède</p>
-							<p>📧
-								{{ app.request.attributes.get('settings')['contact_email']|default('archersdesalberes@gmail.com') }}</p>
-							<p>📞
-								{{ app.request.attributes.get('settings')['contact_phone']|default('06 02 23 72 58') }}</p>
-							<p>
-								<a href="{{ asset('documents/statuts.pdf') }}" target="_blank">📄 Statuts de l'association</a>
-							</p>
-							<p>
-								<a href="https://www.facebook.com/Archers.de.sorede/" target="_blank" rel="noopener">📘 Facebook</a>
-							</p>
-						</div>
-						<div>
-							<h4>Liens rapides</h4>
-							<div class="footer-links">
-								<a href="{{ path('app_adhesion') }}">Adhérer</a>
-								<a href="{{ path('app_horaires') }}">Horaires</a>
-								<a href="{{ path('app_contact') }}">Contact</a>
-								<a href="{{ path('app_actualites') }}">Actualités</a>
+				<footer class="site-footer">
+					<div
+						class="site-footer-inner">
+
+						{# Colonne identité #}
+						<div class="footer-col footer-brand">
+							<div class="footer-brand-head">
+								<img src="{{ asset('images/logoarcherie-transparent.png') }}" alt="Logo Archers des Albères" class="footer-logo">
+								<span class="footer-brand-name">Archers des Albères</span>
+							</div>
+							<p class="footer-tagline">Club de tir à l'arc affilié FFTA · Depuis 1991</p>
+							<div class="footer-contact">
+								<a href="mailto:{{ app.request.attributes.get('settings')['contact_email']|default('archersdesalberes@gmail.com') }}">
+									<span class="footer-ico">📧</span>
+									{{ app.request.attributes.get('settings')['contact_email']|default('archersdesalberes@gmail.com') }}
+								</a>
+								<a href="tel:{{ app.request.attributes.get('settings')['contact_phone']|default('06 02 23 72 58')|replace({' ': ''}) }}">
+									<span class="footer-ico">📞</span>
+									{{ app.request.attributes.get('settings')['contact_phone']|default('06 02 23 72 58') }}
+								</a>
+								<span class="footer-loc">
+									<span class="footer-ico">📍</span>
+									Sorède, Pyrénées-Orientales</span>
 							</div>
 						</div>
-						<div>
-							<h4>Nos partenaires</h4>
-							<div class="partners">
+
+						{# Colonne navigation #}
+						<div class="footer-col">
+							<h4 class="footer-title">Navigation</h4>
+							<ul class="footer-list">
+								<li>
+									<a href="{{ path('app_adhesion') }}">Adhérer au club</a>
+								</li>
+								<li>
+									<a href="{{ path('app_horaires') }}">Horaires & lieux</a>
+								</li>
+								<li>
+									<a href="{{ path('app_actualites') }}">Actualités</a>
+								</li>
+								<li>
+									<a href="{{ path('app_gallery') }}">Galerie photos</a>
+								</li>
+								<li>
+									<a href="{{ path('app_contact') }}">Nous contacter</a>
+								</li>
+							</ul>
+						</div>
+
+						{# Colonne documents + réseaux #}
+						<div class="footer-col">
+							<h4 class="footer-title">Le club</h4>
+							<ul class="footer-list">
+								<li>
+									<a href="{{ path('app_history') }}">Notre histoire</a>
+								</li>
+								<li>
+									<a href="{{ asset('documents/statuts.pdf') }}" target="_blank" rel="noopener">📄 Statuts de l'association</a>
+								</li>
+							</ul>
+							<div class="footer-social">
+								<a href="https://www.facebook.com/Archers.de.sorede/" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook">
+									<span class="footer-ico">📘</span>
+									Facebook
+								</a>
+							</div>
+						</div>
+
+						{# Colonne partenaires #}
+						<div class="footer-col">
+							<h4 class="footer-title">Nos partenaires</h4>
+							<div class="footer-partners">
 								{% if partners is defined and partners|length > 0 %}
 									{% for partner in partners|slice(0, 4) %}
-										<div class="partner-box">
+										<div class="footer-partner-box">
 											{% if partner.logo %}
-												<img src="{{ asset('uploads/partners/' ~ partner.logo) }}" alt="{{ partner.name }}" style="width:100%;height:100%;object-fit:contain;">
+												<img src="{{ asset('uploads/partners/' ~ partner.logo) }}" alt="{{ partner.name }}">
 											{% else %}
-												<div class="partner-label">🏛️
-													{{ partner.name }}</div>
+												<span>🏛️
+													{{ partner.name }}</span>
 											{% endif %}
 										</div>
 									{% endfor %}
 								{% else %}
-									<div class="partner-box">🏛️ Mairie</div>
-									<div class="partner-box">🏢 Région</div>
-									<div class="partner-box">🎯 FFT Archerie</div>
-									<div class="partner-box">🏪 Commerces</div>
+									<div class="footer-partner-box">
+										<span>🏛️ Mairie</span>
+									</div>
+									<div class="footer-partner-box">
+										<span>🏢 Région</span>
+									</div>
+									<div class="footer-partner-box">
+										<span>🎯 FFTA</span>
+									</div>
+									<div class="footer-partner-box">
+										<span>🏪 Commerces</span>
+									</div>
 								{% endif %}
 							</div>
 						</div>
+
 					</div>
-					<div class="footer-bottom">
-						©
-						{{ 'now'|date('Y') }}
-						Compagnie des Archers des Albères • Tous droits réservés
+
+					<div class="site-footer-bottom">
+						<span>©
+							{{ 'now'|date('Y') }}
+							Compagnie des Archers des Albères — Tous droits réservés</span>
+						{% if not app.user %}
+							<a href="{{ path('app_login') }}" class="footer-admin-link">Espace membres</a>
+						{% endif %}
 					</div>
 				</footer>
+
 			</main>
 
 		</div>
