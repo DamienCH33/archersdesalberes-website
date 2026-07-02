@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur serveur - Compagnie des Archers des Albères
+{% endblock %}
+
+{% block body %}
+	<section class="hero error-hero">
+		<div class="hero-content error-content">
+			<div class="error-text">
+				<span class="error-code">500</span>
+				<h1>Une
+					<span class="gradient-text">erreur</span>
+					est survenue</h1>
+				<p>Un problème technique nous empêche d'afficher cette page.
+					Nos excuses pour la gêne. Réessayez dans quelques instants.</p>
+				<div class="error-actions">
+					<a href="{{ path('app_home') }}" class="btn-error-primary">Retour à l'accueil</a>
+				</div>
+			</div>
+			<div class="error-icon" aria-hidden="true">🏹</div>
+		</div>
+	</section>
+{% endblock %}

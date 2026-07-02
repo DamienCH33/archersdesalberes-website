@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès refusé - Compagnie des Archers des Albères
+{% endblock %}
+
+{% block body %}
+	<section class="hero error-hero">
+		<div class="hero-content error-content">
+			<div class="error-text">
+				<span class="error-code">403</span>
+				<h1>Accès
+					<span class="gradient-text">refusé</span>
+				</h1>
+				<p>Vous n'avez pas les droits nécessaires pour accéder à cette page.
+					Si vous êtes membre du bureau, connectez-vous à l'espace d'administration.</p>
+				<div class="error-actions">
+					<a href="{{ path('app_home') }}" class="btn-error-primary">Retour à l'accueil</a>
+					<a href="{{ path('app_login') }}" class="btn-error-secondary">Se connecter</a>
+				</div>
+			</div>
+			<div class="error-icon" aria-hidden="true">🔒</div>
+		</div>
+	</section>
+{% endblock %}
