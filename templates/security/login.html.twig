@@ -60,13 +60,18 @@
 
 				<div class="form-row">
 					{{ form_label(loginForm.password, 'Mot de passe') }}
-					<div class="input-wrapper">
+					<div class="input-wrapper password-wrapper">
 						{{ form_widget(loginForm.password, {
-							'attr': {
-								'autocomplete': 'current-password',
-								'placeholder': '••••••••'
-							}
-						}) }}
+        'attr': {
+            'autocomplete': 'current-password',
+            'placeholder': '••••••••',
+            'id': 'password-field'
+        }
+    }) }}
+
+						<button type="button" id="toggle-password" class="password-toggle" aria-label="Afficher le mot de passe">
+							👁️
+						</button>
 					</div>
 					{{ form_errors(loginForm.password) }}
 				</div>
@@ -84,7 +89,7 @@
 					'label': 'Se connecter',
 					'attr': {'class': 'login-submit'}
 				}) }}
-
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 				{{ form_end(loginForm) }}
 
 				{# Séparateur #}
@@ -107,4 +112,22 @@
 
 		</div>
 	</div>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+const field = document.querySelector('input[type="password"]');
+const button = document.getElementById('toggle-password');
+
+if (! field || ! button) {
+console.log('Champ ou bouton introuvable');
+return;
+}
+
+button.addEventListener('click', function () {
+field.type = field.type === 'password' ? 'text' : 'password';
+});
+});
+	</script>
 {% endblock %}

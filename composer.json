@@ -21,6 +21,7 @@
         "symfony/flex": "^2",
         "symfony/form": "7.4.*",
         "symfony/framework-bundle": "7.4.*",
+        "symfony/mailer": "7.4.*",
         "symfony/maker-bundle": "^1.67",
         "symfony/runtime": "7.4.*",
         "symfony/security-bundle": "7.4.*",
@@ -28,6 +29,7 @@
         "symfony/twig-bundle": "7.4.*",
         "symfony/validator": "7.4.*",
         "symfony/yaml": "7.4.*",
+        "symfonycasts/reset-password-bundle": "^1.25",
         "vich/uploader-bundle": "^2.9"
     },
     "config": {

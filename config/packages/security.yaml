@@ -23,7 +23,9 @@ security:
                 check_path: app_login
                 default_target_path: admin
                 always_use_default_target_path: true
+
                 enable_csrf: true
+                csrf_token_id: authenticate
 
                 username_parameter: email
                 password_parameter: password

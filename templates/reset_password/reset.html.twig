@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau mot de passe - Archers des Albères
+{% endblock %}
+
+{% block body_class %}login-page
+{% endblock %}
+
+{% block body %}
+	<div class="login-wrapper">
+		<div style="width: 100%; max-width: 460px;">
+			<div class="login-card">
+
+				<div class="login-header">
+					<div class="login-logo">
+						<img src="{{ asset('images/logoarcherie-transparent.png') }}" alt="Logo Archers des Albères">
+					</div>
+					<span class="login-badge">🔐 Sécurité</span>
+					<h1 class="login-title">Nouveau mot de passe</h1>
+					<p class="login-subtitle">Choisissez un mot de passe robuste</p>
+				</div>
+
+				{{ form_start(resetForm) }}
+				<div class="form-row">
+					{{ form_label(resetForm.plainPassword.first, 'Nouveau mot de passe') }}
+					<div class="input-wrapper">
+						{{ form_widget(resetForm.plainPassword.first, {
+							'attr': {
+								'autocomplete': 'new-password',
+								'autofocus': true,
+								'placeholder': '••••••••'
+							}
+						}) }}
+					</div>
+					{{ form_errors(resetForm.plainPassword.first) }}
+				</div>
+
+				<div class="form-row">
+					{{ form_label(resetForm.plainPassword.second, 'Confirmer le mot de passe') }}
+					<div class="input-wrapper">
+						{{ form_widget(resetForm.plainPassword.second, {
+							'attr': {
+								'autocomplete': 'new-password',
+								'placeholder': '••••••••'
+							}
+						}) }}
+					</div>
+					{{ form_errors(resetForm.plainPassword.second) }}
+				</div>
+
+				<button type="submit" class="login-submit">Enregistrer le mot de passe</button>
+				{{ form_end(resetForm) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

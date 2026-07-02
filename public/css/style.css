@@ -1587,7 +1587,20 @@ button.login-submit:active {
 .login-footer a:hover {
     text-decoration: underline;
 }
+.password-wrapper {
+    position: relative;
+}
 
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+}
 /* ==========================================================
    PAGES D'ERREUR (404 / 403 / 500)
    ========================================================== */
