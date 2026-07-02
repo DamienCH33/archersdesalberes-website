@@ -50,7 +50,7 @@ final class GalleryAlbumControllerTest extends WebTestCase
         $album = AlbumFactory::createOne(['isPublished' => true]);
         $photo = PhotoFactory::createOne(['album' => $album]);
 
-        $client->request('GET', '/photo/' . $photo->getId());
+        $client->request('GET', '/photo/'.$photo->getId());
 
         self::assertResponseIsSuccessful();
     }
@@ -61,7 +61,7 @@ final class GalleryAlbumControllerTest extends WebTestCase
         $album = AlbumFactory::new()->unpublished()->create();
         $photo = PhotoFactory::createOne(['album' => $album]);
 
-        $client->request('GET', '/photo/' . $photo->getId());
+        $client->request('GET', '/photo/'.$photo->getId());
 
         self::assertResponseStatusCodeSame(404);
     }

@@ -20,7 +20,7 @@ final class TarifFactory extends PersistentObjectFactory
         return [
             'category' => self::faker()->randomElement(['jeunes', 'adultes', 'famille']),
             'label' => self::faker()->words(3, true),
-            'price' => (string) self::faker()->numberBetween(80, 200) . '.00',
+            'price' => (string) self::faker()->numberBetween(80, 200).'.00',
             'featured' => false,
             'position' => self::faker()->numberBetween(0, 10),
         ];
