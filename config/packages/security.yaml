@@ -13,27 +13,24 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
         main:
             lazy: true
             provider: app_user_provider
-
             form_login:
                 login_path: app_login
                 check_path: app_login
                 default_target_path: admin
                 always_use_default_target_path: true
-
                 enable_csrf: true
                 csrf_token_id: authenticate
-
                 username_parameter: email
                 password_parameter: password
-
+            login_throttling:
+                max_attempts: 5
+                interval: "15 minutes"
             logout:
                 path: app_logout
                 target: app_home
-
             remember_me:
                 secret: "%kernel.secret%"
                 lifetime: 604800
@@ -42,6 +39,7 @@ security:
 
     access_control:
         - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/reset-password, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
 
 when@test:

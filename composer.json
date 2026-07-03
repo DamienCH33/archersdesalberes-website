@@ -23,6 +23,7 @@
         "symfony/framework-bundle": "7.4.*",
         "symfony/mailer": "7.4.*",
         "symfony/maker-bundle": "^1.67",
+        "symfony/rate-limiter": "7.4.*",
         "symfony/runtime": "7.4.*",
         "symfony/security-bundle": "7.4.*",
         "symfony/security-csrf": "7.4.*",

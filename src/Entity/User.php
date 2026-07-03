@@ -87,7 +87,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_ADMIN';
+        $roles[] = 'ROLE_USER';
 
         return array_values(array_unique($roles));
     }
@@ -140,7 +140,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
     public function getFullName(): string
     {
-        return $this->firstName.' '.$this->lastName;
+        return $this->firstName . ' ' . $this->lastName;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
