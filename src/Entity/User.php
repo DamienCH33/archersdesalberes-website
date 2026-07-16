@@ -140,7 +140,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
     public function getFullName(): string
     {
-        return $this->firstName . ' ' . $this->lastName;
+        return $this->firstName.' '.$this->lastName;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
