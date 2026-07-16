@@ -15,6 +15,10 @@ WORKDIR /app
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV APP_ENV=prod
 
+# Limites d'upload (photos multiples via le back-office)
+RUN printf "upload_max_filesize = 20M\npost_max_size = 100M\nmemory_limit = 256M\nmax_execution_time = 120\n" \
+    > "$PHP_INI_DIR/conf.d/uploads.ini"
+
 COPY composer.json composer.lock symfony.lock ./
 RUN composer install \
     --no-dev \
