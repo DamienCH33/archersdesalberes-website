@@ -1,6 +1,7 @@
 doctrine:
     dbal:
         url: "%env(resolve:DATABASE_URL)%"
+        server_version: "16"
         types:
             uuid: Symfony\Bridge\Doctrine\Types\UuidType
 
