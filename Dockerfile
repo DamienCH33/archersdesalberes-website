@@ -31,5 +31,6 @@ CMD set -e && \
     php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration && \
     php bin/console cache:clear --no-warmup --env=prod && \
     php bin/console cache:warmup --env=prod && \
+    php bin/console assets:install public --env=prod && \
     php bin/console asset-map:compile --env=prod && \
     exec frankenphp run --config /app/Caddyfile
