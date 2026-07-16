@@ -1,34 +1,60 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 		<title>
-			{% block title %}Compagnie des Archers des Albères
+			{% block meta_title %}La Compagnie des Archers des Albères - Club de tir à l'arc à Sorède
 			{% endblock %}
 		</title>
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🏹</text></svg>">
+		<meta name="description" content="{% block meta_description %}Club de tir à l'arc affilié FFTA à Sorède (Pyrénées-Orientales). Initiation, entraînements et compétitions pour tous les niveaux depuis 1991.{% endblock %}">
+
+		<link rel="canonical" href="{% block canonical %}{{ app.request.uri }}{% endblock %}">
+
+		<meta property="og:type" content="website">
+		<meta property="og:site_name" content="Archers des Albères">
+		<meta property="og:title" content="{{ block('meta_title') }}">
+		<meta property="og:description" content="{{ block('meta_description') }}">
+		<meta property="og:url" content="{{ app.request.uri }}">
+		<meta property="og:image" content="{% block og_image %}{{ absolute_url(asset('images/logoarcherie-transparent.png')) }}{% endblock %}">
+		<meta property="og:locale" content="fr_FR">
+
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:title" content="{{ block('meta_title') }}">
+		<meta name="twitter:description" content="{{ block('meta_description') }}">
+		<meta name="twitter:image" content="{{ block('og_image') }}">
+
+		<script type="application/ld+json">
+			{
+														"@context": "https://schema.org",
+														"@type": "SportsClub",
+														"name": "Compagnie des Archers des Albères",
+														"sport": "Tir à l'arc",
+														"description": "Club de tir à l'arc affilié à la Fédération Française de Tir à l'Arc (FFTA), situé à Sorède dans les Pyrénées-Orientales.",
+														"foundingDate": "1991",
+														"url": "{{ app.request.getSchemeAndHttpHost() }}",
+														"logo": "{{ absolute_url(asset('images/logoarcherie-transparent.png')) }}",
+														"address": {
+															"@type": "PostalAddress",
+															"addressLocality": "Sorède",
+															"postalCode": "66690",
+															"addressRegion": "Occitanie",
+															"addressCountry": "FR"
+														},
+														"memberOf": {
+															"@type": "SportsOrganization",
+															"name": "Fédération Française de Tir à l'Arc"
+														}
+													}
+		</script>
 
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 		{% endblock %}
-
-		{% block javascripts %}
-			{% block importmap %}
-				{{ importmap('app') }}
-			{% endblock %}
-		{% endblock %}
-
-		{% set frankenphpHotReload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
-		{% if frankenphpHotReload %}
-			<meta name="frankenphp-hot-reload:url" content="{{ frankenphpHotReload }}">
-			<script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
-			<script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
-		{% endif %}
 	</head>
 
-	<body>
+	<body class="{% block body_class %}{% endblock %}">
 		<div
 			class="page-container">
 
@@ -38,7 +64,7 @@
 					<div class="sidebar-logo-icon">
 						<img src="{{ asset('images/logoarcherie-transparent.png') }}" alt="Logo Archers">
 					</div>
-					<div class="sidebar-logo-text">Archers des Albères</div>
+					<div class="sidebar-logo-text">La Compagnie des Archers des Albères</div>
 				</div>
 
 				<nav class="sidebar-nav">
@@ -46,21 +72,26 @@
 					<a href="{{ path('app_actualites') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_actualites' ? 'active' : '' }}">Actualités</a>
 					<a href="{{ path('app_adhesion') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_adhesion' ? 'active' : '' }}">Adhésion</a>
 					<a href="{{ path('app_horaires') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_horaires' ? 'active' : '' }}">Horaires &
-																																																																								Lieux</a>
+																		Lieux</a>
 					<a href="{{ path('app_history') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_history' ? 'active' : '' }}">Histoire</a>
 					<a href="{{ path('app_gallery') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_gallery' ? 'active' : '' }}">Galerie photos</a>
 					<a href="{{ path('app_contact') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_contact' ? 'active' : '' }}">Nous
-																																																																																																																																																																																																												                    contacter</a>
+																		contacter</a>
 				</nav>
 
 				<div class="sidebar-footer">
 					{% if app.user %}
-						<a href="{{ path('admin') }}" class="btn-sidebar">Administration</a>
-						<a href="{{ path('app_logout') }}" class="btn-sidebar" style="margin-top: 0.5rem; background: transparent; border: 2px solid rgba(255,255,255,0.3);">
+						<a href="{{ path('admin') }}" class="sidebar-btn sidebar-btn-primary">
+							Administration
+						</a>
+						<a href="{{ path('app_logout') }}" class="sidebar-btn sidebar-btn-ghost">
 							Déconnexion
 						</a>
 					{% else %}
-						<a href="{{ path('app_login') }}" class="btn-sidebar">Se connecter</a>
+						<a href="{{ path('app_login') }}" class="sidebar-btn sidebar-btn-ghost">
+							<span class="sidebar-btn-ico">🔒</span>
+							Se connecter
+						</a>
 					{% endif %}
 				</div>
 			</aside>

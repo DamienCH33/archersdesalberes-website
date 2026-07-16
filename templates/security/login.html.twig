@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion - Administration - Archers des Albères
+{% block meta_title %}Connexion - Administration - Archers des Albères
 {% endblock %}
 
 {% block body_class %}login-page
@@ -8,8 +8,7 @@
 
 {% block body %}
 	<div class="login-wrapper">
-		<div style="width: 100%; max-width: 460px;">
-
+		<div class="login-inner">
 			<div
 				class="login-card">
 
@@ -23,7 +22,6 @@
 					<p class="login-subtitle">Réservé aux membres du bureau</p>
 				</div>
 
-				{# Alerte erreur #}
 				{% if error %}
 					<div class="login-alert login-alert-error">
 						<span class="login-alert-icon">⚠️</span>
@@ -31,7 +29,6 @@
 					</div>
 				{% endif %}
 
-				{# Alerte déjà connecté #}
 				{% if app.user %}
 					<div class="login-alert login-alert-success">
 						<span class="login-alert-icon">✓</span>
@@ -41,19 +38,12 @@
 					</div>
 				{% endif %}
 
-				{# Formulaire #}
 				{{ form_start(loginForm, {'attr': {'novalidate': 'novalidate'}}) }}
 
 				<div class="form-row">
 					{{ form_label(loginForm.email, 'Adresse email') }}
 					<div class="input-wrapper">
-						{{ form_widget(loginForm.email, {
-							'attr': {
-								'autocomplete': 'email',
-								'autofocus': true,
-								'placeholder': 'votre@email.com'
-							}
-						}) }}
+						{{ form_widget(loginForm.email, {'attr': {'autocomplete': 'email', 'autofocus': true, 'placeholder': 'votre@email.com'}}) }}
 					</div>
 					{{ form_errors(loginForm.email) }}
 				</div>
@@ -61,17 +51,8 @@
 				<div class="form-row">
 					{{ form_label(loginForm.password, 'Mot de passe') }}
 					<div class="input-wrapper password-wrapper">
-						{{ form_widget(loginForm.password, {
-        'attr': {
-            'autocomplete': 'current-password',
-            'placeholder': '••••••••',
-            'id': 'password-field'
-        }
-    }) }}
-
-						<button type="button" id="toggle-password" class="password-toggle" aria-label="Afficher le mot de passe">
-							👁️
-						</button>
+						{{ form_widget(loginForm.password, {'attr': {'autocomplete': 'current-password', 'placeholder': '••••••••', 'id': 'password-field'}}) }}
+						<button type="button" id="toggle-password" class="password-toggle" aria-label="Afficher le mot de passe">👁️</button>
 					</div>
 					{{ form_errors(loginForm.password) }}
 				</div>
@@ -81,53 +62,31 @@
 						{{ form_widget(loginForm.remember_me) }}
 						<span>Se souvenir de moi</span>
 					</label>
-					<a href="#" class="forgot-link">Mot de passe oublié ?</a>
+					<a href="{{ path('app_forgot_password_request') }}" class="forgot-link">Mot de passe oublié ?</a>
 				</div>
 
-				{# Bouton submit #}
-				{{ form_widget(loginForm.submit, {
-					'label': 'Se connecter',
-					'attr': {'class': 'login-submit'}
-				}) }}
-				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				{{ form_widget(loginForm.submit, {'label': 'Se connecter', 'attr': {'class': 'login-submit'}}) }}
+
 				{{ form_end(loginForm) }}
 
-				{# Séparateur #}
 				<div class="login-divider">
 					<span>ou</span>
 				</div>
 
-				{# Retour site #}
-				<a href="{{ path('app_home') }}" class="back-link">
-					Retour au site
-				</a>
+				<a href="{{ path('app_home') }}" class="back-link">Retour au site</a>
 			</div>
 
 			<div class="login-footer">
 				©
 				{{ 'now'|date('Y') }}
 				·
-				<a href="{{ path('app_home') }}">Archers des Albères</a>
+				<a href="{{ path('app_home') }}">La Compagnie des Archers des Albères</a>
 			</div>
-
 		</div>
 	</div>
 {% endblock %}
+
 {% block javascripts %}
 	{{ parent() }}
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-const field = document.querySelector('input[type="password"]');
-const button = document.getElementById('toggle-password');
-
-if (! field || ! button) {
-console.log('Champ ou bouton introuvable');
-return;
-}
-
-button.addEventListener('click', function () {
-field.type = field.type === 'password' ? 'text' : 'password';
-});
-});
-	</script>
+	<script src="{{ asset('js/login.js') }}" defer></script>
 {% endblock %}

@@ -1,0 +1,9 @@
+.git
+var/
+vendor/
+tests/
+compose.yaml
+.env.local
+.env.test
+.github/
+node_modules/

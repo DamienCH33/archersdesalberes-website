@@ -82,17 +82,19 @@ body:not(.ea-app) .sidebar {
     display: none !important;
 }
 
+/* Logo — icône compacte + titre long lisible sur 2 lignes */
 .sidebar-logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.7rem;
     margin-bottom: 3rem;
 }
 
 .sidebar-logo-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -106,9 +108,10 @@ body:not(.ea-app) .sidebar {
 }
 
 .sidebar-logo-text {
-    font-size: 1.1rem;
-    font-weight: 900;
-    line-height: 1.2;
+    font-size: 0.9rem;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: 0.2px;
 }
 
 .sidebar-nav {
@@ -142,23 +145,50 @@ body:not(.ea-app) .sidebar {
     margin-top: auto;
 }
 
-.btn-sidebar {
-    display: block;
-    background: var(--vert-clair);
-    color: var(--blanc);
-    text-align: center;
-    padding: 0.75rem;
-    border-radius: 8px;
+/* Boutons sidebar — discrets et modernes */
+.sidebar-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 0.9rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
     text-decoration: none;
-    font-weight: 700;
-    transition: all 0.3s;
+    transition: all 0.25s ease;
 }
 
-.btn-sidebar:hover {
-    background: var(--vert-principal);
-    transform: translateY(-2px);
+.sidebar-btn + .sidebar-btn {
+    margin-top: 0.5rem;
 }
 
+.sidebar-btn-ico {
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.sidebar-btn-primary {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--blanc);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-btn-primary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.sidebar-btn-ghost {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-btn-ghost:hover {
+    color: var(--blanc);
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.06);
+}
 /* ==========================================================
    HERO
    ========================================================== */
@@ -510,137 +540,27 @@ body:not(.ea-app) .section-subtitle {
     margin: 0 auto;
     padding: 3rem 4rem 0;
 }
-
-/* ==========================================================
-   STATS — site public
-   ========================================================== */
-.stats {
-    padding: 4rem;
-    background: var(--blanc);
-}
-
-.stats .container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-body:not(.ea-app) .stat-card {
-    background: linear-gradient(
-        135deg,
-        var(--vert-principal),
-        var(--vert-clair)
-    );
-    color: var(--blanc);
-    padding: 2.5rem 1.5rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(46, 125, 50, 0.25);
-    transition: all 0.3s;
+.password-wrapper {
     position: relative;
-    overflow: hidden;
 }
 
-body:not(.ea-app) .stat-card::before {
-    content: "";
+.password-toggle {
     position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.15) 0%,
-        transparent 70%
-    );
-    pointer-events: none;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    opacity: 0.6;
+    padding: 0.25rem;
+    transition: opacity 0.2s;
+    line-height: 1;
 }
 
-body:not(.ea-app) .stat-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 32px rgba(46, 125, 50, 0.35);
-}
-
-body:not(.ea-app) .stat-number {
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: var(--blanc);
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 1;
-}
-
-body:not(.ea-app) .stat-label {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 600;
-    position: relative;
-    z-index: 1;
-}
-
-/* ==========================================================
-   ÉQUIPE
-   ========================================================== */
-.equipe-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.equipe-card {
-    background: var(--blanc);
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: all 0.3s;
-}
-
-.equipe-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.equipe-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(
-        135deg,
-        var(--vert-principal),
-        var(--vert-clair)
-    );
-    flex-shrink: 0;
-    overflow: hidden;
-}
-
-.equipe-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.equipe-name {
-    font-weight: 800;
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-}
-
-.equipe-role {
-    color: var(--gris-texte);
-    font-size: 0.9rem;
+.password-toggle:hover {
+    opacity: 1;
 }
 
 /* ==========================================================
@@ -1600,6 +1520,10 @@ button.login-submit:active {
     background: transparent;
     cursor: pointer;
     font-size: 18px;
+}
+
+.login-page .site-footer {
+    display: none;
 }
 /* ==========================================================
    PAGES D'ERREUR (404 / 403 / 500)

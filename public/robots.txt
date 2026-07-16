@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /reset-password
+Disallow: /login
+Disallow: /logout
+
+Sitemap: https://VOTRE-DOMAINE/sitemap.xml
