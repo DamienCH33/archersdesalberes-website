@@ -45,7 +45,7 @@ class ResetPasswordControllerTest extends WebTestCase
         $messages = $this->getMailerMessages();
         self::assertCount(1, $messages);
 
-        self::assertEmailAddressContains($messages[0], 'from', 'noreply@archersdesalberes.fr');
+        self::assertEmailAddressContains($messages[0], 'from', 'archersdesalberes@gmail.com');
         self::assertEmailAddressContains($messages[0], 'to', 'me@example.com');
 
         self::assertResponseRedirects('/reset-password/check-email');
