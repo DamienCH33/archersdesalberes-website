@@ -74,17 +74,18 @@
 
 				{# Licence découverte #}
 				<div style="background: linear-gradient(135deg, #FFF3E0, #FFE0B2); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-					<h3 style="color: #F57C00; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;">Licence FFTA découverte</h3>
-					<p style="font-size: 0.95rem; color: #EF6C00; margin: 0 0 0.5rem;">(Avril – Septembre)</p>
+					<h3 style="color: #F57C00; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;">Découverte</h3>
 					<ul style="list-style: none; padding: 0; margin-top: 1.25rem; color: #F57C00;">
 						{% for t in tarifs|filter(t => t.category == 'decouverte') %}
-							<li style="font-size: 1rem; padding: 0.5rem 0;">{{ t.label }}
+							<li style="font-size: 1.5rem; font-weight: 700; padding: 0.5rem 0;">{{ t.label }}
 								:
 								{{ t.price|number_format(0, ',', ' ') }}
 								€</li>
 						{% endfor %}
+						<p style="font-size: 0.95rem; color: #EF6C00; margin: 0 0 0.5rem;">(Avril – Septembre)</p>
 					</ul>
 				</div>
+
 
 				{# Matériel #}
 				<div style="background: linear-gradient(135deg, #F3E5F5, #E1BEE7); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
