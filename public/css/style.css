@@ -299,21 +299,20 @@ body:not(.ea-app) .sidebar {
 .slider-wrapper {
     position: relative;
     width: 100%;
-    height: 480px;
+    height: 520px;
+    transition: height 0.5s ease;
     border-radius: 20px;
     overflow: hidden;
-    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    background: #1a1a1a;
     box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.2),
         0 0 0 1px rgba(46, 125, 50, 0.1);
 }
-
 .slider-track {
     display: flex;
     transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
     height: 100%;
 }
-
 .slide {
     min-width: 100%;
     height: 100%;
@@ -322,12 +321,26 @@ body:not(.ea-app) .sidebar {
     overflow: hidden;
 }
 
+.slide.is-portrait::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--slide-bg);
+    background-size: cover;
+    background-position: center;
+    filter: blur(30px) brightness(0.6);
+    transform: scale(1.15);
+    z-index: 0;
+}
+.slide.is-portrait img {
+    position: relative;
+    z-index: 1;
+}
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    transform: scale(1.05);
-    transition: transform 6s ease-out;
+    object-fit: cover;
+    object-position: center;
 }
 
 .slide.active img {
@@ -423,7 +436,6 @@ body:not(.ea-app) .sidebar {
 .slider-btn.next {
     right: 1.5rem;
 }
-
 /* Compteur */
 .slider-counter {
     position: absolute;
@@ -482,85 +494,48 @@ body:not(.ea-app) .sidebar {
 /* Barre de progression */
 .slider-progress {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.15);
+    bottom: 1.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 40px;
     z-index: 10;
 }
-
 .slider-progress-bar {
-    height: 100%;
-    width: 0%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
     background: linear-gradient(
         90deg,
         var(--vert-clair),
         var(--vert-principal)
     );
     box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    transition: opacity 0.3s ease;
 }
-
-/* ==========================================================
-   SECTIONS GÉNÉRIQUES
-   ========================================================== */
-.section {
-    padding: 4rem;
-    background: var(--blanc);
-}
-
-/* En-tête de section — site public */
-body:not(.ea-app) .section-header {
-    display: block;
-    text-align: center;
-    margin-bottom: 3rem;
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-body:not(.ea-app) .section-title {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: var(--noir);
-    margin-bottom: 0.75rem;
-    display: block;
-}
-
-body:not(.ea-app) .section-subtitle {
-    font-size: 1.1rem;
-    color: var(--gris-texte);
-    display: block;
-}
-
-/* ==========================================================
-   CONTENT WRAP — marges du contenu hors hero
-   ========================================================== */
-.content-wrap {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 4rem 0;
-}
-.password-wrapper {
-    position: relative;
-}
-
-.password-toggle {
+.slider-pause {
     position: absolute;
-    right: 0.75rem;
     top: 50%;
-    transform: translateY(-50%);
-    background: none;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
     border: none;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    color: #fff;
     cursor: pointer;
-    font-size: 1.1rem;
-    opacity: 0.6;
-    padding: 0.25rem;
-    transition: opacity 0.2s;
-    line-height: 1;
-}
-
-.password-toggle:hover {
-    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 11;
 }
 
 /* ==========================================================

@@ -26,7 +26,7 @@
 			<div class="slider-wrapper">
 				<div class="slider-track">
 					{% for photo in sliderPhotos %}
-						<div class="slide">
+						<div class="slide" style="--slide-bg: url('{{ asset('uploads/photos/' ~ photo.path) }}');">
 							<img src="{{ asset('uploads/photos/' ~ photo.path) }}" alt="{{ photo.caption ?? 'Photo du club' }}" loading="lazy">
 
 							<div class="slide-overlay">
@@ -52,20 +52,28 @@
 						<polyline points="9 18 15 12 9 6"></polyline>
 					</svg>
 				</button>
-
 				{# Compteur #}
 				<div class="slider-counter">
 					<span class="counter-current">1</span>
 					/
-					<span class="counter-total">5</span>
+					<span class="counter-total">{{ sliderPhotos|length }}</span>
 				</div>
 
 				{# Dots #}
 				<div class="slider-dots"></div>
 
-				{# Barre de progression #}
+				{# Barre de progression + bouton pause au survol #}
 				<div class="slider-progress">
 					<div class="slider-progress-bar"></div>
+					<button class="slider-pause" aria-label="Mettre en pause">
+						<svg class="icon-pause" viewbox="0 0 24 24" fill="currentColor" width="16" height="16">
+							<rect x="6" y="5" width="4" height="14" rx="1"></rect>
+							<rect x="14" y="5" width="4" height="14" rx="1"></rect>
+						</svg>
+						<svg class="icon-play" viewbox="0 0 24 24" fill="currentColor" width="16" height="16" style="display:none;">
+							<polygon points="8 5 19 12 8 19"></polygon>
+						</svg>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -80,11 +88,11 @@
 			</h2>
 			<p style="font-size: 1.2rem; color: #2E7D32; line-height: 1.8; text-align: center; margin-bottom: 1.5rem;">
 				La Compagnie des Archers des Albères est un club de tir à l'arc affilié à la
-																Fédération Française de Tir à l'Arc (FFTA), situé à Sorède dans les Pyrénées-Orientales.
+																																																				Fédération Française de Tir à l'Arc (FFTA), situé à Sorède dans les Pyrénées-Orientales.
 			</p>
 			<p style="font-size: 1.1rem; color: #2E7D32; line-height: 1.8; text-align: center;">
 				Depuis 1991, nous partageons notre passion du tir à l'arc dans une ambiance conviviale
-																et familiale, accueillant archers débutants et confirmés de tous âges.
+																																																				et familiale, accueillant archers débutants et confirmés de tous âges.
 			</p>
 		</div>
 
@@ -125,9 +133,9 @@
 				<h3 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.4rem;">Entraînements réguliers</h3>
 				<p style="color: #666; line-height: 1.6; margin-bottom: 1rem; flex: 1;">
 					Deux créneaux hebdomadaires pour les adultes pour progresser à votre rythme,
-																				encadrés par un encadrant club (anciennement encadrant fédéral). Un créneau
-																				hebdomadaire pour les jeunes débutants et un créneau pour les jeunes confirmés.
-																				Débutants et confirmés s'entraînent dans une ambiance conviviale.
+																																																																	encadrés par un encadrant club (anciennement encadrant fédéral). Un créneau
+																																																																	hebdomadaire pour les jeunes débutants et un créneau pour les jeunes confirmés.
+																																																																	Débutants et confirmés s'entraînent dans une ambiance conviviale.
 				</p>
 			</div>
 
@@ -136,7 +144,7 @@
 				<h3 style="color: #1976D2; margin-bottom: 1rem; font-size: 1.4rem;">Compétitions</h3>
 				<p style="color: #666; line-height: 1.6; margin-bottom: 1rem; flex: 1;">
 					Participez aux championnats départementaux, régionaux et nationaux organisés par la FFTA.
-																				Le club organise également ses propres tournois amicaux tout au long de l'année.
+																																																																	Le club organise également ses propres tournois amicaux tout au long de l'année.
 				</p>
 			</div>
 
@@ -145,7 +153,7 @@
 				<h3 style="color: #F57C00; margin-bottom: 1rem; font-size: 1.4rem;">Initiation et découverte</h3>
 				<p style="color: #666; line-height: 1.6; margin-bottom: 1rem; flex: 1;">
 					En début de saison, séances d'initiation gratuites pour découvrir le tir à l'arc.
-																				Tout le matériel est fourni, venez simplement avec votre bonne humeur !
+																																																																	Tout le matériel est fourni, venez simplement avec votre bonne humeur !
 				</p>
 			</div>
 
@@ -154,7 +162,7 @@
 				<h3 style="color: #7B1FA2; margin-bottom: 1rem; font-size: 1.4rem;">Événements conviviaux</h3>
 				<p style="color: #666; line-height: 1.6; flex: 1;">
 					Noël, galette des rois, carnaval, tir du roi… Le club organise régulièrement
-																				des moments de partage pour renforcer les liens entre archers.
+																																																																	des moments de partage pour renforcer les liens entre archers.
 				</p>
 			</div>
 
@@ -188,8 +196,8 @@
 			<h3 style="color: #2E7D32; margin-bottom: 1rem; font-size: 1.8rem;">Matériel fourni</h3>
 			<p style="color: #666; line-height: 1.8; max-width: 600px; margin: 0 auto;">
 				Le club met à disposition de ses adhérents tout le matériel nécessaire :
-																arcs de différentes puissances, flèches, carquois, protections (plastron, palette, bracelet).
-																Vous pouvez également utiliser votre propre matériel.
+																																																				arcs de différentes puissances, flèches, carquois, protections (plastron, palette, bracelet).
+																																																				Vous pouvez également utiliser votre propre matériel.
 			</p>
 		</div>
 	</div>
