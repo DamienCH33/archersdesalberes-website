@@ -102,7 +102,7 @@ class PhotoCrudController extends AbstractCrudController
             ->setHelp('Description affichée sous la photo (optionnel)')
             ->hideOnIndex();
 
-        yield IntegerField::new('displayOrder', 'Ordre d\'affichage')
+        yield IntegerField::new('displayOrder', 'Ordre dans le slider (0 = masqué)')
             ->setHelp('Plus le chiffre est petit, plus la photo apparaît tôt dans l\'album')
             ->setColumns(3)
             ->setFormTypeOption('attr', ['min' => 0]);

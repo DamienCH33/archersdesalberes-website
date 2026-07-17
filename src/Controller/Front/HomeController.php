@@ -31,8 +31,9 @@ class HomeController extends AbstractController
         $sliderPhotos = $photoRepository->createQueryBuilder('p')
             ->join('p.album', 'a')
             ->where('a.isPublished = true')
-            ->orderBy('p.createdAt', 'DESC')
-            ->setMaxResults(5)
+            ->andWhere('p.displayOrder > 0')
+            ->orderBy('p.displayOrder', 'ASC')
+            ->setMaxResults(10)
             ->getQuery()
             ->getResult();
 

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Twig;
 
 use App\Repository\PartnerRepository;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 
 class AppExtension
 {
