@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -32,8 +34,8 @@ class ChangePasswordFormType extends AbstractType
                         new NotBlank(message: 'Veuillez saisir un mot de passe'),
                         new Length(
                             min: 12,
-                            minMessage: 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
                             max: 4096,
+                            minMessage: 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
                         ),
                         new PasswordStrength(),
                         new NotCompromisedPassword(),

@@ -17,7 +17,7 @@ final class GalleryAlbumControllerTest extends WebTestCase
 
     public function testPublishedAlbumRenders(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         AlbumFactory::createOne(['slug' => 'sortie-2025', 'isPublished' => true]);
 
         $client->request('GET', '/gallery/sortie-2025');
@@ -27,7 +27,7 @@ final class GalleryAlbumControllerTest extends WebTestCase
 
     public function testUnpublishedAlbumReturns404(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         AlbumFactory::new()->unpublished()->create(['slug' => 'album-cache']);
 
         $client->request('GET', '/gallery/album-cache');
@@ -37,7 +37,7 @@ final class GalleryAlbumControllerTest extends WebTestCase
 
     public function testUnknownAlbumReturns404(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
 
         $client->request('GET', '/gallery/slug-inexistant');
 
@@ -46,7 +46,7 @@ final class GalleryAlbumControllerTest extends WebTestCase
 
     public function testPhotoInPublishedAlbumRenders(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         $album = AlbumFactory::createOne(['isPublished' => true]);
         $photo = PhotoFactory::createOne(['album' => $album]);
 
@@ -57,7 +57,7 @@ final class GalleryAlbumControllerTest extends WebTestCase
 
     public function testPhotoInUnpublishedAlbumReturns404(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         $album = AlbumFactory::new()->unpublished()->create();
         $photo = PhotoFactory::createOne(['album' => $album]);
 

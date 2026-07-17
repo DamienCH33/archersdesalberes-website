@@ -87,7 +87,7 @@ final class ArticleRepositoryTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $article = ArticleFactory::new()
+        ArticleFactory::new()
             ->with(['isPublished' => true, 'slug' => 'mon-article-test'])
             ->create();
 

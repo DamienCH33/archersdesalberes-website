@@ -63,7 +63,7 @@ class Article implements \Stringable
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {
-        if (null === $this->createdAt) {
+        if (!$this->createdAt instanceof \DateTimeImmutable) {
             $this->createdAt = new \DateTimeImmutable();
         }
     }

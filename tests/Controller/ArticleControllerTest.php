@@ -16,7 +16,7 @@ final class ArticleControllerTest extends WebTestCase
 
     public function testPublishedArticleRenders(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         ArticleFactory::createOne([
             'slug' => 'mon-article',
             'isPublished' => true,
@@ -29,7 +29,7 @@ final class ArticleControllerTest extends WebTestCase
 
     public function testUnpublishedArticleReturns404(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         ArticleFactory::createOne([
             'slug' => 'brouillon',
             'isPublished' => false,
@@ -42,7 +42,7 @@ final class ArticleControllerTest extends WebTestCase
 
     public function testUnknownArticleReturns404(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
 
         $client->request('GET', '/article/inexistant');
 
@@ -51,7 +51,7 @@ final class ArticleControllerTest extends WebTestCase
 
     public function testActualitesFilteredByCategory(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         ArticleFactory::new()->with(['isPublished' => true, 'category' => 'podium'])->many(3)->create();
         ArticleFactory::new()->with(['isPublished' => true, 'category' => 'club'])->many(2)->create();
 
@@ -62,7 +62,7 @@ final class ArticleControllerTest extends WebTestCase
 
     public function testActualitesPaginationSecondPage(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         ArticleFactory::new()->with(['isPublished' => true])->many(15)->create();
 
         $client->request('GET', '/actualites?page=2');

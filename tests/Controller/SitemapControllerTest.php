@@ -15,7 +15,7 @@ final class SitemapControllerTest extends WebTestCase
 
     public function testSitemapIsAccessibleAndXml(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         $client->request('GET', '/sitemap.xml');
 
         self::assertResponseIsSuccessful();
@@ -24,7 +24,7 @@ final class SitemapControllerTest extends WebTestCase
 
     public function testSitemapContainsStaticPages(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         $client->request('GET', '/sitemap.xml');
 
         $content = (string) $client->getResponse()->getContent();

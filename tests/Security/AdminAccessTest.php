@@ -16,7 +16,7 @@ final class AdminAccessTest extends WebTestCase
 
     public function testAnonymousIsRedirectedFromAdmin(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         $client->request('GET', '/admin');
 
         self::assertResponseRedirects();
@@ -24,7 +24,7 @@ final class AdminAccessTest extends WebTestCase
 
     public function testAnonymousIsRedirectedFromAdminEntityList(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         $client->request('GET', '/admin/article');
 
         self::assertResponseRedirects();
@@ -32,7 +32,7 @@ final class AdminAccessTest extends WebTestCase
 
     public function testAuthenticatedAdminReachesDashboard(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         $admin = UserFactory::new()->admin()->create();
 
         $client->loginUser($admin);
@@ -56,7 +56,7 @@ final class AdminAccessTest extends WebTestCase
     #[\PHPUnit\Framework\Attributes\DataProvider('adminEntityRoutes')]
     public function testAuthenticatedAdminReachesEntityList(string $url): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         $admin = UserFactory::new()->admin()->create();
 
         $client->loginUser($admin);

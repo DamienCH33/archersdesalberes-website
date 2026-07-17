@@ -10,7 +10,7 @@ final class ErrorPagesTest extends WebTestCase
 {
     public function testNotFoundPageReturns404(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         // Désactive le throw pour capturer la vraie réponse d'erreur.
         $client->catchExceptions(true);
 
@@ -21,7 +21,7 @@ final class ErrorPagesTest extends WebTestCase
 
     public function testNotFoundOnUnknownArticleSlug(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         $client->catchExceptions(true);
 
         $client->request('GET', '/article/slug-totalement-inconnu');

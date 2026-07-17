@@ -55,17 +55,12 @@ class ResetPasswordControllerTest extends WebTestCase
         self::assertPageTitleContains('Email de réinitialisation envoyé');
 
         // Récupération du lien de reset dans l'email
-        $email = $messages[0]->toString();
-        preg_match('#(/reset-password/reset/[a-zA-Z0-9]+)#', $email, $resetLink);
-
+        $email = quoted_printable_decode($messages[0]->toString());
+        preg_match('#/reset-password/reset/[a-zA-Z0-9\-_]+#', $email, $resetLink);
         self::assertNotEmpty($resetLink, 'Le lien de réinitialisation est introuvable dans l\'email.');
 
-        if (!isset($resetLink[1])) {
-            self::fail('Lien de réinitialisation introuvable dans l\'email.');
-        }
-
         // Le lien stocke le token en session puis redirige vers /reset-password/reset
-        $client->request('GET', $resetLink[1]);
+        $client->request('GET', $resetLink[0]);
         self::assertResponseRedirects('/reset-password/reset');
         $client->followRedirect();
 
