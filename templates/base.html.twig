@@ -27,26 +27,26 @@
 
 		<script type="application/ld+json">
 			{
-																				"@context": "https://schema.org",
-																				"@type": "SportsClub",
-																				"name": "Compagnie des Archers des Albères",
-																				"sport": "Tir à l'arc",
-																				"description": "Club de tir à l'arc affilié à la Fédération Française de Tir à l'Arc (FFTA), situé à Sorède dans les Pyrénées-Orientales.",
-																				"foundingDate": "1991",
-																				"url": "{{ app.request.getSchemeAndHttpHost() }}",
-																				"logo": "{{ absolute_url(asset('images/logoarcherie-transparent.png')) }}",
-																				"address": {
-																					"@type": "PostalAddress",
-																					"addressLocality": "Sorède",
-																					"postalCode": "66690",
-																					"addressRegion": "Occitanie",
-																					"addressCountry": "FR"
-																				},
-																				"memberOf": {
-																					"@type": "SportsOrganization",
-																					"name": "Fédération Française de Tir à l'Arc"
-																				}
-																			}
+																													"@context": "https://schema.org",
+																													"@type": "SportsClub",
+																													"name": "Compagnie des Archers des Albères",
+																													"sport": "Tir à l'arc",
+																													"description": "Club de tir à l'arc affilié à la Fédération Française de Tir à l'Arc (FFTA), situé à Sorède dans les Pyrénées-Orientales.",
+																													"foundingDate": "1991",
+																													"url": "{{ app.request.getSchemeAndHttpHost() }}",
+																													"logo": "{{ absolute_url(asset('images/logoarcherie-transparent.png')) }}",
+																													"address": {
+																														"@type": "PostalAddress",
+																														"addressLocality": "Sorède",
+																														"postalCode": "66690",
+																														"addressRegion": "Occitanie",
+																														"addressCountry": "FR"
+																													},
+																													"memberOf": {
+																														"@type": "SportsOrganization",
+																														"name": "Fédération Française de Tir à l'Arc"
+																													}
+																												}
 		</script>
 
 		{% block stylesheets %}
@@ -72,11 +72,11 @@
 					<a href="{{ path('app_actualites') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_actualites' ? 'active' : '' }}">Actualités</a>
 					<a href="{{ path('app_adhesion') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_adhesion' ? 'active' : '' }}">Adhésion</a>
 					<a href="{{ path('app_horaires') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_horaires' ? 'active' : '' }}">Horaires &
-																														Lieux</a>
+																																																Lieux</a>
 					<a href="{{ path('app_history') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_history' ? 'active' : '' }}">Histoire</a>
 					<a href="{{ path('app_gallery') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_gallery' ? 'active' : '' }}">Galerie photos</a>
 					<a href="{{ path('app_contact') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_contact' ? 'active' : '' }}">Nous
-																														contacter</a>
+																																																contacter</a>
 				</nav>
 
 				<div class="sidebar-footer">
@@ -171,8 +171,9 @@
 						<div class="footer-col">
 							<h4 class="footer-title">Nos partenaires</h4>
 							<div class="footer-partners">
-								{% if partners is defined and partners|length > 0 %}
-									{% for partner in partners|slice(0, 6) %}
+								{% set footerPartners = footer_partners() %}
+								{% if footerPartners|length > 0 %}
+									{% for partner in footerPartners|slice(0, 6) %}
 										<div class="footer-partner-box">
 											{% if partner.logo %}
 												<img src="{{ asset('uploads/partners/' ~ partner.logo) }}" alt="{{ partner.name }}">
