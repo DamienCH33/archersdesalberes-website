@@ -27,26 +27,26 @@
 
 		<script type="application/ld+json">
 			{
-																													"@context": "https://schema.org",
-																													"@type": "SportsClub",
-																													"name": "Compagnie des Archers des Albères",
-																													"sport": "Tir à l'arc",
-																													"description": "Club de tir à l'arc affilié à la Fédération Française de Tir à l'Arc (FFTA), situé à Sorède dans les Pyrénées-Orientales.",
-																													"foundingDate": "1991",
-																													"url": "{{ app.request.getSchemeAndHttpHost() }}",
-																													"logo": "{{ absolute_url(asset('images/logoarcherie-transparent.png')) }}",
-																													"address": {
-																														"@type": "PostalAddress",
-																														"addressLocality": "Sorède",
-																														"postalCode": "66690",
-																														"addressRegion": "Occitanie",
-																														"addressCountry": "FR"
-																													},
-																													"memberOf": {
-																														"@type": "SportsOrganization",
-																														"name": "Fédération Française de Tir à l'Arc"
-																													}
-																												}
+																																									"@context": "https://schema.org",
+																																									"@type": "SportsClub",
+																																									"name": "Compagnie des Archers des Albères",
+																																									"sport": "Tir à l'arc",
+																																									"description": "Club de tir à l'arc affilié à la Fédération Française de Tir à l'Arc (FFTA), situé à Sorède dans les Pyrénées-Orientales.",
+																																									"foundingDate": "1991",
+																																									"url": "{{ app.request.getSchemeAndHttpHost() }}",
+																																									"logo": "{{ absolute_url(asset('images/logoarcherie-transparent.png')) }}",
+																																									"address": {
+																																										"@type": "PostalAddress",
+																																										"addressLocality": "Sorède",
+																																										"postalCode": "66690",
+																																										"addressRegion": "Occitanie",
+																																										"addressCountry": "FR"
+																																									},
+																																									"memberOf": {
+																																										"@type": "SportsOrganization",
+																																										"name": "Fédération Française de Tir à l'Arc"
+																																									}
+																																								}
 		</script>
 
 		{% block stylesheets %}
@@ -57,7 +57,14 @@
 	<body class="{% block body_class %}{% endblock %}">
 		<div
 			class="page-container">
-
+			{# Bouton hamburger (mobile) #}
+			<button class="menu-toggle" aria-label="Ouvrir le menu">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+			{# Overlay sombre (mobile) #}
+			<div class="sidebar-overlay"></div>
 			{# SIDEBAR - Commune à toutes les pages #}
 			<aside class="sidebar">
 				<div class="sidebar-logo">
@@ -72,11 +79,11 @@
 					<a href="{{ path('app_actualites') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_actualites' ? 'active' : '' }}">Actualités</a>
 					<a href="{{ path('app_adhesion') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_adhesion' ? 'active' : '' }}">Adhésion</a>
 					<a href="{{ path('app_horaires') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_horaires' ? 'active' : '' }}">Horaires &
-																																																Lieux</a>
+																																																																								Lieux</a>
 					<a href="{{ path('app_history') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_history' ? 'active' : '' }}">Histoire</a>
 					<a href="{{ path('app_gallery') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_gallery' ? 'active' : '' }}">Galerie photos</a>
 					<a href="{{ path('app_contact') }}" class="sidebar-link {{ app.request.attributes.get('_route') == 'app_contact' ? 'active' : '' }}">Nous
-																																																contacter</a>
+																																																																								contacter</a>
 				</nav>
 
 				<div class="sidebar-footer">
@@ -216,6 +223,7 @@
 
 		</div>
 		{% block javascripts %}{% endblock %}
+		<script src="{{ asset('js/menu.js') }}" defer></script>
 	</body>
 
 </html>
