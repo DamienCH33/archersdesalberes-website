@@ -45,6 +45,8 @@ body:not(.ea-app) .page-container {
 
 body:not(.ea-app) .main-content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     background: var(--blanc);
     margin-left: var(--sidebar-width);
 }
@@ -199,6 +201,9 @@ body:not(.ea-app) .sidebar {
     background: var(--fond-hero);
     padding: 6rem 4rem;
     position: relative;
+}
+.hero + .section {
+    padding-top: 2.5rem;
 }
 
 .hero-content {
@@ -554,8 +559,23 @@ body:not(.ea-app) .sidebar {
 .galerie .section-title {
     color: var(--blanc) !important;
 }
-.galerie .section-subtitle {
-    color: rgba(255, 255, 255, 0.9) !important;
+.section-title {
+    color: var(--noir);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+.section-subtitle {
+    color: var(--vert-principal);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+.section-header {
+    margin-bottom: 2rem;
+}
+.section-subtitle {
+    color: var(--vert-principal);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
 }
 
 .galerie-grid {
@@ -909,6 +929,7 @@ body:not(.ea-app) .sidebar {
    FOOTER
    ========================================================== */
 .site-footer {
+    margin-top: auto;
     background: linear-gradient(160deg, #1b5e20 0%, #14481a 100%);
     color: rgba(255, 255, 255, 0.85);
     margin-top: 4rem;
