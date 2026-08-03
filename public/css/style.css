@@ -48,6 +48,11 @@ body:not(.ea-app) .main-content {
     background: var(--blanc);
     margin-left: var(--sidebar-width);
 }
+.content-wrap {
+
+
+    padding: 2rem 2.5rem 0;
+}
 
 /* ==========================================================
    SIDEBAR — site public
@@ -199,7 +204,7 @@ body:not(.ea-app) .sidebar {
 }
 
 .hero-content {
-    max-width: 1200px;
+
     display: grid;
     grid-template-columns: 1fr 250px;
     gap: 3rem;
@@ -556,8 +561,8 @@ body:not(.ea-app) .sidebar {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+
+
 }
 
 .galerie-item {
@@ -740,8 +745,8 @@ body:not(.ea-app) .sidebar {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
+
+
 }
 
 .actu-column {
@@ -913,8 +918,8 @@ body:not(.ea-app) .sidebar {
 }
 
 .site-footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
+
+
     padding: 3.5rem 4rem 2.5rem;
     display: grid;
     grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
@@ -1080,8 +1085,8 @@ body:not(.ea-app) .sidebar {
 /* Barre du bas */
 .site-footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.12);
-    max-width: 1200px;
-    margin: 0 auto;
+
+
     padding: 1.25rem 4rem;
     display: flex;
     align-items: center;
