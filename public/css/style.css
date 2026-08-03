@@ -320,7 +320,6 @@ body:not(.ea-app) .sidebar {
     position: relative;
     overflow: hidden;
 }
-
 .slide.is-portrait::before {
     content: "";
     position: absolute;
@@ -1206,6 +1205,21 @@ body:not(.ea-app) .sidebar {
 
 .login-logo img {
     width: 70px;
+    .slide.is-portrait::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: var(--slide-bg);
+        background-size: cover;
+        background-position: center;
+        filter: blur(30px) brightness(0.6);
+        transform: scale(1.15);
+        z-index: 0;
+    }
+    .slide.is-portrait img {
+        position: relative;
+        z-index: 1;
+    }
     height: 70px;
     object-fit: contain;
 }

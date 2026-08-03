@@ -43,19 +43,19 @@ document.addEventListener("DOMContentLoaded", function () {
             const applyFormat = () => {
                 const isPortrait =
                     activeImg.naturalHeight > activeImg.naturalWidth;
+                const isMobile = window.innerWidth <= 768;
                 if (isPortrait) {
-                    sliderWrapper.style.height = "650px";
+                    sliderWrapper.style.height = isMobile ? "480px" : "650px";
                     activeImg.style.objectFit = "contain";
                     activeSlide.classList.add("is-portrait");
                 } else {
-                    sliderWrapper.style.height = "520px";
+                    sliderWrapper.style.height = isMobile ? "240px" : "520px";
                     activeImg.style.objectFit = "cover";
                     activeSlide.classList.remove("is-portrait");
                 }
             };
             if (activeImg.complete) applyFormat();
-            else
-                activeImg.addEventListener("load", applyFormat, { once: true });
+            else activeImg.addEventListener("load", applyFormat, { once: true });
         }
         sliderTrack.style.transform = `translateX(${-currentSlide * 100}%)`;
 
@@ -90,10 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function startAutoSlide() {
-        autoSlideInterval = setInterval(
-            () => moveSlide(1),
-            AUTO_SLIDE_DURATION,
-        );
+        autoSlideInterval = setInterval(() => moveSlide(1), AUTO_SLIDE_DURATION);
         resetProgressBar();
     }
 
@@ -124,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Survol de la zone barre : la barre se change en bouton pause
     if (progressZone) {
         progressZone.addEventListener("mouseenter", () => {
             if (progressBar) progressBar.style.opacity = "0";
