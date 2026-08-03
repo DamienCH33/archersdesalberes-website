@@ -929,7 +929,7 @@ body:not(.ea-app) .sidebar {
    FOOTER
    ========================================================== */
 .site-footer {
-    margin-top: auto;
+    margin-top: auto !important;
     background: linear-gradient(160deg, #1b5e20 0%, #14481a 100%);
     color: rgba(255, 255, 255, 0.85);
     margin-top: 4rem;
