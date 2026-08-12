@@ -82,6 +82,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToRoute('Tarification', 'fa fa-euro-sign', 'admin_tarif_index');
         yield MenuItem::linkToRoute('Histoire du club', 'fa fa-book', 'admin_club_history_index');
         yield MenuItem::linkToRoute('Partenaires', 'fa fa-handshake', 'admin_partner_index');
+        yield MenuItem::linkToRoute('Documents PDF', 'fa fa-file-pdf', 'admin_document_index');
 
         yield MenuItem::section('Administration');
         yield MenuItem::linkToRoute('Administrateurs', 'fa fa-user-shield', 'admin_user_index');
