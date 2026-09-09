@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-// src/Controller/Front/PageController.php
-
 namespace App\Controller\Front;
 
 use App\Repository\ArticleRepository;
+use App\Repository\ScheduleRepository;
 use App\Repository\TarifRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,9 +24,11 @@ class PageController extends AbstractController
     }
 
     #[Route('/horaires', name: 'app_horaires')]
-    public function horaires(): Response
+    public function horaires(ScheduleRepository $scheduleRepository): Response
     {
-        return $this->render('front/horaires.html.twig');
+        return $this->render('front/horaires.html.twig', [
+            'schedulesByCategory' => $scheduleRepository->findAllGroupedByCategory(),
+        ]);
     }
 
     #[Route('/contact', name: 'app_contact')]

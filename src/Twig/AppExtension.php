@@ -32,6 +32,6 @@ class AppExtension
     {
         $filename = $this->documentRepository->getFilenameByKey($key);
 
-        return $filename !== null ? '/uploads/documents/'.$filename : null;
+        return null !== $filename ? '/uploads/documents/'.$filename : null;
     }
 }

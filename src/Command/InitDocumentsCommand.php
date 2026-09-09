@@ -43,7 +43,7 @@ class InitDocumentsCommand extends Command
 
         foreach (self::DOCUMENTS as $key => $label) {
             $existing = $this->documentRepository->findOneBy(['documentKey' => $key]);
-            if ($existing !== null) {
+            if (null !== $existing) {
                 $io->text(sprintf('• %s : déjà présent', $label));
                 continue;
             }

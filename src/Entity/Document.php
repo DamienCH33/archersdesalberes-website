@@ -65,6 +65,7 @@ class Document implements \Stringable
     public function setDocumentKey(string $documentKey): static
     {
         $this->documentKey = $documentKey;
+
         return $this;
     }
 
@@ -76,6 +77,7 @@ class Document implements \Stringable
     public function setLabel(string $label): static
     {
         $this->label = $label;
+
         return $this;
     }
 
@@ -87,6 +89,7 @@ class Document implements \Stringable
     public function setFilename(?string $filename): static
     {
         $this->filename = $filename;
+
         return $this;
     }
 
@@ -101,6 +104,7 @@ class Document implements \Stringable
         if ($file instanceof File) {
             $this->updatedAt = new \DateTimeImmutable();
         }
+
         return $this;
     }
 
@@ -112,6 +116,7 @@ class Document implements \Stringable
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 

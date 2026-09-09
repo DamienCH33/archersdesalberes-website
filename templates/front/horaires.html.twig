@@ -31,97 +31,65 @@
 				<p class="section-subtitle">{{ saison }}</p>
 			</div>
 
-			<div
-				style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; align-items: start;"
-			>
-
-				{# ===== Jeunes débutants — BLEU ===== #}
-				<div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
-					<div style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB); padding: 1.25rem; text-align: center;">
-						<h3 style="color: #0D47A1; font-size: 1.4rem; margin: 0;">Jeunes débutants</h3>
-					</div>
-					<div style="padding: 1.25rem; display: grid; gap: 1rem;">
-						<div style="border-left: 4px solid #1976D2; background: #F8FBFF; border-radius: 10px; padding: 1rem 1.25rem;">
-							<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
-								<span style="font-weight: 700; color: #0D47A1; font-size: 1.1rem;">Mercredi</span>
-								<span style="font-weight: 700; color: #0D47A1;">🕒 14h30 – 16h00</span>
+			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; align-items: start;">
+				{% set colors = {
+					'Jeunes débutants': { border: '#1976D2', dark: '#0D47A1', head: 'linear-gradient(135deg, #E3F2FD, #BBDEFB)', bg: '#F8FBFF' },
+					'Jeunes confirmés': { border: '#F57C00', dark: '#E65100', head: 'linear-gradient(135deg, #FFF3E0, #FFE0B2)', bg: '#FFFAF3' },
+					'Adultes':          { border: '#2E7D32', dark: '#1B5E20', head: 'linear-gradient(135deg, #E8F5E9, #C8E6C9)', bg: '#F5FBF6' }
+				} %}
+				{% for category, schedules in schedulesByCategory %}
+					{% if category != 'Section Banyuls-sur-Mer' %}
+						{% set c = colors[category] ?? colors['Adultes'] %}
+						<div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+							<div style="background: {{ c.head }}; padding: 1.25rem; text-align: center;">
+								<h3 style="color: {{ c.dark }}; font-size: 1.4rem; margin: 0;">{{ category }}</h3>
 							</div>
-							<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
-								<span>❄️ Hiver — en salle</span>
-								<span>☀️ Été — sur le terrain</span>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{# ===== Jeunes confirmés — AMBRE ===== #}
-				<div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
-					<div style="background: linear-gradient(135deg, #FFF3E0, #FFE0B2); padding: 1.25rem; text-align: center;">
-						<h3 style="color: #E65100; font-size: 1.4rem; margin: 0;">Jeunes confirmés</h3>
-					</div>
-					<div style="padding: 1.25rem; display: grid; gap: 1rem;">
-						<div style="border-left: 4px solid #F57C00; background: #FFFAF3; border-radius: 10px; padding: 1rem 1.25rem;">
-							<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
-								<span style="font-weight: 700; color: #E65100; font-size: 1.1rem;">Mercredi</span>
-								<span style="font-weight: 700; color: #E65100;">🕒 16h30 – 18h00</span>
-							</div>
-							<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
-								<span>❄️ Hiver — en salle</span>
-								<span>☀️ Été — sur le terrain</span>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{# ===== Adultes — VERT ===== #}
-				<div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
-					<div style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9); padding: 1.25rem; text-align: center;">
-						<h3 style="color: #1B5E20; font-size: 1.4rem; margin: 0;">Adultes</h3>
-					</div>
-					<div
-						style="padding: 1.25rem; display: grid; gap: 1rem;"
-					>
-						{# Mercredi #}
-						<div style="border-left: 4px solid #2E7D32; background: #F5FBF6; border-radius: 10px; padding: 1rem 1.25rem;">
-							<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
-								<span style="font-weight: 700; color: #1B5E20; font-size: 1.1rem;">Mercredi</span>
-								<span style="font-weight: 700; color: #1B5E20;">🕒 18h30 – 20h00</span>
-							</div>
-							<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
-								<span>❄️ Hiver — en salle</span>
-								<span>☀️ Été — sur le terrain</span>
+							<div style="padding: 1.25rem; display: grid; gap: 1rem;">
+								{% set daysSeen = [] %}
+								{% for schedule in schedules %}
+									{% set sameDay = schedules|filter(s => s.day == schedule.day) %}
+									{% if schedule.day not in daysSeen %}
+										{% set daysSeen = daysSeen|merge([schedule.day]) %}
+										<div style="border-left: 4px solid {{ c.border }}; background: {{ c.bg }}; border-radius: 10px; padding: 1rem 1.25rem;">
+											{% if sameDay|length > 1 %}
+												<div style="font-weight: 700; color: {{ c.dark }}; font-size: 1.1rem; margin-bottom: 0.75rem;">{{ schedule.day }}</div>
+												<div style="display: flex; flex-direction: column; gap: 0.75rem; color: #555; font-size: 0.95rem;">
+													{% for s in sameDay %}
+														{% set lieu = s.season == 'Été' ? s.summerLocation : s.winterLocation %}
+														<div style="display: flex; flex-direction: column; gap: 0.35rem;">
+															<span>{{ s.season == 'Hiver' ? '❄️' : (s.season == 'Été' ? '☀️' : '') }} {{ s.season }}{% if lieu %} — {{ lieu }}{% endif %}</span>
+															<strong style="color: {{ c.dark }};">🕒 {{ s.startTime|date('H') }}h{{ s.startTime|date('i') }} – {{ s.endTime|date('H') }}h{{ s.endTime|date('i') }}</strong>
+														</div>
+													{% endfor %}
+												</div>
+											{% else %}
+												<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+													<span style="font-weight: 700; color: {{ c.dark }}; font-size: 1.1rem;">{{ schedule.day }}</span>
+													<span style="font-weight: 700; color: {{ c.dark }};">🕒 {{ schedule.startTime|date('H') }}h{{ schedule.startTime|date('i') }} – {{ schedule.endTime|date('H') }}h{{ schedule.endTime|date('i') }}</span>
+												</div>
+												{% if schedule.winterLocation or schedule.summerLocation %}
+													<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
+														{% if schedule.winterLocation %}<span>❄️ Hiver — {{ schedule.winterLocation }}</span>{% endif %}
+														{% if schedule.summerLocation %}<span>☀️ Été — {{ schedule.summerLocation }}</span>{% endif %}
+													</div>
+												{% endif %}
+											{% endif %}
+										</div>
+									{% endif %}
+								{% endfor %}
 							</div>
 						</div>
-						{# Vendredi (horaires différents selon la saison) #}
-						<div style="border-left: 4px solid #2E7D32; background: #F5FBF6; border-radius: 10px; padding: 1rem 1.25rem;">
-							<div style="font-weight: 700; color: #1B5E20; font-size: 1.1rem; margin-bottom: 0.75rem;">Vendredi</div>
-							<div style="display: flex; flex-direction: column; gap: 0.5rem; color: #555; font-size: 0.95rem;">
-								<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
-									<span>❄️ Hiver — salle</span>
-									<strong style="color: #1B5E20;">🕒 20h30 – 22h00</strong>
-								</div>
-								<div style="display: flex; flex-direction: column; gap: 0.35rem; color: #555; font-size: 0.95rem;">
-									<span>☀️ Été — terrain</span>
-									<strong style="color: #1B5E20;">🕒 17h30 – 19h00</strong>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
+					{% endif %}
+				{% endfor %}
 			</div>
 
 			{# Section Banyuls-sur-Mer #}
-
-			<div
-				style="
-																				background: linear-gradient(135deg, #E3F2FD, #F8FBFF);
-																				border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; text-align: center; margin-bottom: 4rem;
-																				"
-			>
-				<span style="font-weight: 700; color: #0D47A1;">📍 Section Banyuls-sur-Mer</span>
-				<span style="color: #0D47A1;">Jeudi · 🕒 21h00 – 23h00 · en salle</span>
-			</div>
+			{% for schedule in schedulesByCategory['Section Banyuls-sur-Mer'] ?? [] %}
+				<div style="background: linear-gradient(135deg, #E3F2FD, #F8FBFF); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; text-align: center; margin-bottom: 4rem;">
+					<span style="font-weight: 700; color: #0D47A1;">📍 Section Banyuls-sur-Mer</span>
+					<span style="color: #0D47A1;">{{ schedule.day }} · 🕒 {{ schedule.startTime|date('H') }}h{{ schedule.startTime|date('i') }} – {{ schedule.endTime|date('H') }}h{{ schedule.endTime|date('i') }}{% if schedule.winterLocation %} · {{ schedule.winterLocation }}{% endif %}</span>
+				</div>
+			{% endfor %}
 
 			{# Localisation #}
 			<div class="section-header" style="margin-top: 4rem;">
