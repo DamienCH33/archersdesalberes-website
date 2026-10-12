@@ -65,3 +65,4 @@ Thumbs.db
 /phpunit.xml
 /.phpunit.cache/
 ###< phpunit/phpunit ###
+/graphify-out/
