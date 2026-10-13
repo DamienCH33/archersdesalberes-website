@@ -10,7 +10,7 @@
         "doctrine/doctrine-bundle": "^2.18",
         "doctrine/doctrine-migrations-bundle": "^3.7",
         "doctrine/orm": "^3.6",
-        "easycorp/easyadmin-bundle": "^5.0",
+        "easycorp/easyadmin-bundle": "^5.6.1",
         "knplabs/knp-paginator-bundle": "^6.10",
         "liip/imagine-bundle": "^2.17",
         "stof/doctrine-extensions-bundle": "^1.15",
