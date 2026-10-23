@@ -40,6 +40,9 @@ jobs:
             - name: Install dependencies
               run: composer install --no-interaction --no-progress --prefer-dist
 
+            - name: Audit des dépendances
+              run: composer audit --locked
+
             - name: Warm cache (dev — pour le conteneur PHPStan)
               run: php bin/console cache:warmup --env=dev
 
