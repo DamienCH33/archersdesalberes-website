@@ -107,6 +107,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return (string) $this->password;
     }
 
+    #[\Deprecated]
+    public function eraseCredentials(): void
+    {
+    }
+
     public function setPassword(string $password): static
     {
         $this->password = $password;
