@@ -1,0 +1,17 @@
+name: tmp-diag
+on:
+  push:
+    branches: [tmp-diag]
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: ctype, iconv, pdo_pgsql, intl
+          tools: composer
+      - run: composer install --no-interaction --no-scripts --no-progress
+      - run: APP_ENV=dev php bin/console cache:clear -vvv 2>&1 | tail -60 || true
+      - run: APP_ENV=test php bin/console lint:container 2>&1 | tail -30 || true
